@@ -10,6 +10,7 @@ const MEXICAN_STATES = Object.keys(mexicoData);
 interface FormData {
     company_name: string;
     address: string;
+    neighborhood: string;
     city: string;
     state: string;
     zip_code: string;
@@ -30,6 +31,7 @@ interface FormData {
 const initialFormState: FormData = {
     company_name: '',
     address: '',
+    neighborhood: '',
     city: '',
     state: '',
     zip_code: '',
@@ -186,8 +188,12 @@ export default function OilSkimmersForm() {
                                     <input required name="company_name" value={formData.company_name} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group col-span-2">
-                                    <label>Dirección (Calle, número y colonia) *</label>
-                                    <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Av. Universidad 123, Col. Centro" />
+                                    <label>Dirección (Calle y número) *</label>
+                                    <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Av. Universidad 123" />
+                                </div>
+                                <div className="form-group col-span-2">
+                                    <label>Colonia *</label>
+                                    <input required name="neighborhood" value={formData.neighborhood} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Centro" />
                                 </div>
                                 <div className="form-group">
                                     <label>Estado *</label>
