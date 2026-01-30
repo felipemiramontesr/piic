@@ -146,6 +146,15 @@ if ($admin_success) {
     echo json_encode(["status" => "success", "message" => "Mensaje enviado correctamente."]);
 } else {
     http_response_code(500);
-    echo json_encode(["status" => "error", "message" => "Error al enviar el mensaje."]);
+    $debug_info = "Detalles del error no disponibles.";
+    if (file_exists('smtp_debug.log')) {
+        $lines = file('smtp_debug.log');
+        $debug_info = implode("\n", array_slice($lines, -20));
+    }
+    echo json_encode([
+        "status" => "error",
+        "message" => "Error al enviar el mensaje. Revisar consola para detalles.",
+        "debug_log" => $debug_info
+    ]);
 }
 ?>
