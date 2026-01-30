@@ -79,12 +79,13 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           align-items: center;
         }
         .logo-image {
-            height: 45px;
+            height: 70px;
             width: auto;
-            transition: height 0.3s ease;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
         }
         .header-scrolled .logo-image {
-            height: 40px;
+            height: 55px;
         }
         .nav-list {
           display: flex;
