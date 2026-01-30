@@ -1,19 +1,26 @@
+import Header from './sections/Header'
+import Hero from './sections/Hero'
+import About from './sections/About'
+import Services from './sections/Services'
+import Features from './sections/Features'
+import Process from './sections/Process'
+import Contact from './sections/Contact'
+import Footer from './sections/Footer'
 import './App.css'
 
 function App() {
-    const handleExplore = () => {
-        alert('¡Bienvenido al futuro con React + TS!')
-    }
-
     return (
-        <div className="hero">
-            <div className="glass-card">
-                <h1>NEO-GENESIS</h1>
-                <p className="subtitle">La Próxima Evolución en Diseño Web. Tu proyecto React + TypeScript está listo.</p>
-                <button className="btn" onClick={handleExplore}>
-                    Explorar Futuro
-                </button>
-            </div>
+        <div className="app-wrapper">
+            <Header />
+            <main>
+                <Hero />
+                <About />
+                <Services />
+                <Features />
+                <Process />
+                <Contact />
+            </main>
+            <Footer />
         </div>
     )
 }
