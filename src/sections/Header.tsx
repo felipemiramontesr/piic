@@ -84,6 +84,10 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         .logo {
             position: relative;
+            width: 200px; /* Reserve space to prevent collapse */
+            height: 100%;
+            display: flex;
+            align-items: center; /* Center content vertically in the 100px bar */
         }
         .logo a {
             display: flex;
@@ -93,16 +97,15 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             position: absolute;
             height: 180px;
             width: auto;
-            top: 50%;
-            transform: translateY(-40%); /* Slightly down from purely centered (-50%) to avoid top clipping */
+            top: 0;
             left: 0;
             z-index: 2000;
             transition: all 0.3s ease;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); /* Stronger shadow for floating effect */
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
         }
         .header-scrolled .logo-image {
             height: 120px;
-            transform: translateY(-40%);
+            top: 0;
         }
         .nav-list {
           display: flex;
