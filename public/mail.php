@@ -76,7 +76,7 @@ $body = "
 // Headers
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= "From: Web PIIC <noreply@piic.com.mx>" . "\r\n";
+$headers .= "From: Web PIIC <ventas@piic.com.mx>" . "\r\n";
 $headers .= "Reply-To: $email" . "\r\n";
 
 // Send Email
