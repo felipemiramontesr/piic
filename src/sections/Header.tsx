@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           left: 0;
           width: 100%;
           height: 100px;
-          background-color: var(--color-primary);
+          background-color: #163b5c; /* Lighter than #0F2A44 for better visibility */
           color: var(--color-white);
           display: flex;
           align-items: center;
@@ -75,19 +75,20 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .header-scrolled {
           height: 80px;
           box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          background-color: #12304d;
         }
         .header-container {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          position: relative; /* Context for logo absolute potentially, but flow is better */
+          position: relative;
         }
         .logo {
             position: relative;
-            width: 200px; /* Reserve space to prevent collapse */
+            width: 200px;
             height: 100%;
             display: flex;
-            align-items: center; /* Center content vertically in the 100px bar */
+            align-items: center;
         }
         .logo a {
             display: flex;
@@ -97,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             position: absolute;
             height: 180px;
             width: auto;
-            top: 0;
+            top: -25px; /* Pull up to visually center relative to bar */
             left: 0;
             z-index: 2000;
             transition: all 0.3s ease;
@@ -105,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         .header-scrolled .logo-image {
             height: 120px;
-            top: 0;
+            top: -10px;
         }
         .nav-list {
           display: flex;
