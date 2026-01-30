@@ -80,10 +80,19 @@ $headers .= "From: Web PIIC <ventas@piic.com.mx>" . "\r\n";
 $headers .= "Reply-To: $email" . "\r\n";
 
 // Send Email
-if (mail($to, $subject, $body, $headers)) {
+$additional_parameters = "-fventas@piic.com.mx";
+$success = mail($to, $subject, $body, $headers, $additional_parameters);
+
+// Logging
+$logEntry = date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR'] . " - Success: " . ($success ? 'YES' : 'NO') . " - Email: $email\n";
+file_put_contents('mail_debug.log', $logEntry, FILE_APPEND);
+
+if ($success) {
     echo json_encode(["status" => "success", "message" => "Mensaje enviado correctamente."]);
 } else {
+    $error = error_get_last()['message'] ?? 'Unknown error';
+    file_put_contents('mail_error.log', date('Y-m-d H:i:s') . " - Error: $error\n", FILE_APPEND);
     http_response_code(500);
-    echo json_encode(["status" => "error", "message" => "Error al enviar el mensaje. Intente más tarde."]);
+    echo json_encode(["status" => "error", "message" => "Error al enviar el mensaje."]);
 }
 ?>
