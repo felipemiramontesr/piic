@@ -32,9 +32,11 @@ const Header: React.FC<HeaderProps> = ({ showCta = true }) => {
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </nav>
-        <div className="nav-cta">
-          <Button href="#contacto">Solicitar cotización</Button>
-        </div>
+        {showCta && (
+          <div className="nav-cta">
+            <Button href="#contacto">Solicitar cotización</Button>
+          </div>
+        )}
       </div>
 
       <style>{`
