@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface ServiceCardProps {
-    icon: string;
-    title: string;
-    description: string;
+  icon: string;
+  title: string;
+  description: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) => (
-    <div className="glass-card service-card">
-        <div className="service-icon">{icon}</div>
-        <h3>{title}</h3>
-        <p>{description}</p>
-        <style>{`
+  <div className="glass-card service-card">
+    <div className="service-icon">{icon}</div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <style>{`
       .service-card {
         text-align: center;
         height: 100%;
@@ -34,33 +34,33 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
         margin-bottom: 0;
       }
     `}</style>
-    </div>
+  </div>
 );
 
 const Services: React.FC = () => {
-    const serviceList = [
-        { icon: '🛡️', title: 'Seguridad industrial', description: 'Equipos de protección personal y sistemas de seguridad vial.' },
-        { icon: '🧹', title: 'Limpieza y sanitización', description: 'Productos químicos y herramientas para mantenimiento de higiene.' },
-        { icon: '📁', title: 'Papelería y suministros de oficina', description: 'Todo lo necesario para la administración diaria.' },
-        { icon: '💼', title: 'Insumos comerciales', description: 'Materiales diversos para la operación comercial.' },
-        { icon: '🔧', title: 'Operación y mantenimiento', description: 'Herramientas y refacciones críticas para sus equipos.' },
-    ];
+  const serviceList = [
+    { icon: '🛡️', title: 'Seguridad industrial', description: 'Equipos de protección personal y sistemas de seguridad vial.' },
+    { icon: '🧹', title: 'Limpieza y sanitización', description: 'Productos químicos y herramientas para mantenimiento de higiene.' },
+    { icon: '📁', title: 'Papelería y suministros de oficina', description: 'Todo lo necesario para la administración diaria.' },
+    { icon: '💼', title: 'Insumos comerciales', description: 'Materiales diversos para la operación comercial.' },
+    { icon: '🔧', title: 'Operación y mantenimiento', description: 'Herramientas y refacciones críticas para sus equipos.' },
+  ];
 
-    return (
-        <section id="servicios" className="section">
-            <div className="container">
-                <div className="section-header">
-                    <h2>Qué ofrecemos</h2>
-                    <p>Soluciones integrales diseñadas para el rigor del sector industrial.</p>
-                </div>
-                <div className="services-grid">
-                    {serviceList.map((service, index) => (
-                        <ServiceCard key={index} {...service} />
-                    ))}
-                </div>
-            </div>
+  return (
+    <section id="servicios" className="section">
+      <div className="container">
+        <div className="section-header">
+          <h2>Servicios</h2>
+          <p>Soluciones integrales diseñadas para el rigor del sector industrial.</p>
+        </div>
+        <div className="services-grid">
+          {serviceList.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .section-header {
           text-align: center;
           margin-bottom: 50px;
@@ -77,8 +77,8 @@ const Services: React.FC = () => {
           gap: 30px;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Services;
