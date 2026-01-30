@@ -94,10 +94,8 @@ if ($attachment) {
 $body .= "--$boundary--";
 
 // 5. Send
-$to = "ing.pedrofierro@piic.com.mx";
-// Fallback if not configured, send to default admin
-if (empty($to) || !filter_var($to, FILTER_VALIDATE_EMAIL))
-    $to = $smtp_user;
+// The form is filled BY the client (Pedro), so it should be sent TO the Admin (PIIC)
+$to = $smtp_user;
 
 $subject = "Cuestionario Oil Skimmers: $company_name";
 
