@@ -6,7 +6,13 @@ const Footer: React.FC = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-info">
-            <h2 className="footer-logo">PIIC</h2>
+            <div className="footer-logo-wrapper">
+              <svg className="footer-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" stroke-width="10" />
+                <path d="M50 5 A45 45 0 0 0 50 95 Z" fill="#F2B705" />
+              </svg>
+              <h2 className="footer-logo">PIIC</h2>
+            </div>
             <p>Proveedora de Insumos Industriales y Comerciales</p>
           </div>
           <div className="footer-contact">
@@ -35,10 +41,20 @@ const Footer: React.FC = () => {
           border-bottom: 1px solid rgba(255,255,255,0.1);
           padding-bottom: 40px;
         }
+        .footer-logo-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 10px;
+        }
+        .footer-logo-icon {
+          width: 32px;
+          height: 32px;
+        }
         .footer-logo {
           color: var(--color-white);
           font-size: 28px;
-          margin-bottom: 10px;
+          margin-bottom: 0;
         }
         .footer h3 {
           color: var(--color-white);

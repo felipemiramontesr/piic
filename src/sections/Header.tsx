@@ -22,6 +22,10 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
       <div className="container header-container">
         <div className="logo">
           <a href={simpleMode ? "https://piic.com.mx/" : "#inicio"}>
+            <svg className="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" stroke-width="10" />
+              <path d="M50 5 A45 45 0 0 0 50 95 Z" fill="#F2B705" />
+            </svg>
             <span className="logo-text">PIIC</span>
           </a>
         </div>
@@ -102,6 +106,21 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             letter-spacing: 2px;
             text-transform: uppercase;
             font-family: var(--font-main);
+            margin-left: 12px;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+        }
+        @media (max-width: 768px) {
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+            }
+            .logo-text {
+                font-size: 24px;
+                margin-left: 8px;
+            }
         }
         .nav-list {
           display: flex;
