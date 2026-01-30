@@ -332,7 +332,7 @@ export default function OilSkimmersForm() {
                         <section className="form-section">
                             <h3>7. Archivos de Apoyo</h3>
                             <p className="form-section-description">
-                                Adjuntar planos, dibujos o fotografías de su aplicación actual nos ayudará a comprender mejor sus necesidades y agilizar el proceso de cotización.
+                                Adjuntar planos, dibujos o fotografías de su proyecto actual nos ayudará a comprender mejor sus necesidades y agilizar el proceso de cotización.
                             </p>
                             <div
                                 className={`file-upload-box ${isDragging ? 'drag-active' : ''}`}
