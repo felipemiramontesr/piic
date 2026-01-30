@@ -53,11 +53,15 @@ const Contact: React.FC = () => {
             <div className="contact-details">
               <div className="detail-item">
                 <strong>📍 Ubicación</strong>
-                <p>Distrito Industrial, México</p>
+                <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
               </div>
               <div className="detail-item">
                 <strong>📧 Email</strong>
                 <p>contacto@piic.com.mx</p>
+              </div>
+              <div className="detail-item">
+                <strong>📞 Teléfono</strong>
+                <p><a href="tel:4929421780" style={{ color: 'inherit', textDecoration: 'none' }}>(492) 942 1780</a></p>
               </div>
             </div>
           </div>
@@ -85,7 +89,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+52 (000) 000-0000" />
+                    <input type="tel" id="phone" name="phone" placeholder="(492) 942 1780" />
                   </div>
                 </div>
                 <div className="form-group">

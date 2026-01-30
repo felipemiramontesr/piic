@@ -1,26 +1,27 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
-    return (
-        <footer className="footer">
-            <div className="container">
-                <div className="footer-grid">
-                    <div className="footer-info">
-                        <h2 className="footer-logo">PIIC</h2>
-                        <p>Proveedora de Insumos Industriales y Comerciales</p>
-                    </div>
-                    <div className="footer-contact">
-                        <h3>Contacto</h3>
-                        <p>Email: contacto@piic.com.mx</p>
-                        <p>Tel: +52 (000) 000-0000</p>
-                    </div>
-                </div>
-                <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} PIIC. Todos los derechos reservados.</p>
-                </div>
-            </div>
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-grid">
+          <div className="footer-info">
+            <h2 className="footer-logo">PIIC</h2>
+            <p>Proveedora de Insumos Industriales y Comerciales</p>
+          </div>
+          <div className="footer-contact">
+            <h3>Contacto</h3>
+            <p>Email: contacto@piic.com.mx</p>
+            <p>Tel: <a href="tel:4929421780" style={{ color: 'inherit', textDecoration: 'none' }}>(492) 942 1780</a></p>
+            <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} PIIC. Todos los derechos reservados.</p>
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .footer {
           background-color: var(--color-secondary);
           color: var(--color-white);
@@ -54,8 +55,8 @@ const Footer: React.FC = () => {
         }
         .footer-bottom p { margin: 0; }
       `}</style>
-        </footer>
-    );
+    </footer>
+  );
 };
 
 export default Footer;
