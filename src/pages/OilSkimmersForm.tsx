@@ -211,7 +211,7 @@ export default function OilSkimmersForm() {
                                         <option value="">
                                             {!formData.state ? 'Primero seleccione un estado' : 'Seleccione un municipio'}
                                         </option>
-                                        {formData.state && (mexicoData as any)[formData.state]?.map((city: string) => (
+                                        {formData.state && (mexicoData as Record<string, string[]>)[formData.state]?.map((city: string) => (
                                             <option key={city} value={city}>{city}</option>
                                         ))}
                                     </select>
