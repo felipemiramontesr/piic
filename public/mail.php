@@ -39,10 +39,15 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 require_once 'SimpleSMTP.php';
 
 // SMTP Credentials
-$smtp_host = 'smtp.hostinger.com';
-$smtp_port = 465;
-$smtp_user = 'ventas@piic.com.mx';
-$smtp_pass = 'Ventaspiic$101609';
+if (file_exists('config.php')) {
+    require_once 'config.php';
+} else {
+    // Fallback or error if config is missing (should not happen in prod if deployed correctly)
+    die(json_encode(["status" => "error", "message" => "Server configuration error."]));
+}
+
+// $smtp_host, $smtp_port, $smtp_user, $smtp_pass come from config.php
+
 
 $mailer = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
 
@@ -146,15 +151,6 @@ if ($admin_success) {
     echo json_encode(["status" => "success", "message" => "Mensaje enviado correctamente."]);
 } else {
     http_response_code(500);
-    $debug_info = "Detalles del error no disponibles.";
-    if (file_exists('smtp_debug.log')) {
-        $lines = file('smtp_debug.log');
-        $debug_info = implode("\n", array_slice($lines, -20));
-    }
-    echo json_encode([
-        "status" => "error",
-        "message" => "Error al enviar el mensaje. Revisar consola para detalles.",
-        "debug_log" => $debug_info
-    ]);
+    echo json_encode(["status" => "error", "message" => "Error al enviar el mensaje."]);
 }
 ?>
