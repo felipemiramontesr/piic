@@ -41,16 +41,26 @@ $fields = [
 $html_sales = "
 <html>
 <body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
-    <div style='max-width: 700px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
+    <div style='max-width: 1400px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
         
-        <div style='background-color: #0F2A44; padding: 30px; text-align: center;'>
-            <img src='https://piic.com.mx/logo.png' alt='PIIC' style='max-width: 150px; margin-bottom: 15px;'>
-            <h1 style='color: #ffffff; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px;'>Nueva Solicitud de Cotización (TEST)</h1>
-            <p style='color: #f2b705; margin: 5px 0 0; font-weight: bold;'>Cuestionario Técnico: Oil Skimmers</p>
-        </div>
+        <!-- Header Bar -->
+        <table width='100%' cellpadding='0' cellspacing='0' style='background-color: #0F2A44; padding: 20px 40px; border-bottom: 4px solid #f2b705;'>
+            <tr>
+                <td align='left' style='vertical-align: middle;'>
+                    <a href='https://piic.com.mx/' style='text-decoration: none; display: flex; align-items: center;'>
+                        <img src='https://piic.com.mx/logo.png' alt='PIIC' style='height: 40px; vertical-align: middle;'>
+                        <span style='color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-left: 15px; vertical-align: middle; text-transform: uppercase;'>PIIC</span>
+                    </a>
+                </td>
+                <td align='right' style='vertical-align: middle;'>
+                    <h1 style='color: #ffffff; margin: 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;'>Nueva Solicitud de Cotización (TEST)</h1>
+                    <p style='color: #f2b705; margin: 5px 0 0; font-weight: bold; font-size: 14px;'>Cuestionario Técnico: Oil Skimmers</p>
+                </td>
+            </tr>
+        </table>
 
-        <div style='padding: 30px;'>
-            <p style='color: #444; font-size: 16px; margin-bottom: 25px;'><strong>[MODO PRUEBA]</strong> Se ha recibido una solicitud simulada para verificar los estilos del reporte.</p>
+        <div style='padding: 40px;'>
+            <p style='color: #444; font-size: 16px; margin-bottom: 30px;'><strong>[MODO PRUEBA]</strong> Se ha recibido una solicitud simulada para verificar los estilos del reporte en formato ancho (1400px).</p>
 ";
 
 foreach ($fields as $section => $data) {
