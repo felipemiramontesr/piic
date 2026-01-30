@@ -138,25 +138,26 @@ export default function OilSkimmersForm() {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="oil-form-body">
+                        <p className="form-disclaimer">* Campos obligatorios</p>
 
                         {/* 1. Datos de la Empresa */}
                         <section className="form-section">
                             <h3>1. Datos de la Empresa</h3>
                             <div className="form-grid">
                                 <div className="form-group col-span-2">
-                                    <label>Nombre de la Compañía</label>
+                                    <label>Nombre de la Compañía *</label>
                                     <input required name="company_name" value={formData.company_name} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group col-span-2">
-                                    <label>Dirección</label>
+                                    <label>Dirección *</label>
                                     <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ciudad y Estado</label>
+                                    <label>Ciudad y Estado *</label>
                                     <input required name="city_state" value={formData.city_state} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Código Postal</label>
+                                    <label>Código Postal *</label>
                                     <input required name="zip_code" value={formData.zip_code} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                             </div>
@@ -167,20 +168,20 @@ export default function OilSkimmersForm() {
                             <h3>2. Datos de Contacto</h3>
                             <div className="form-grid">
                                 <div className="form-group col-span-2">
-                                    <label>Nombre del Contacto</label>
+                                    <label>Nombre del Contacto *</label>
                                     <input required name="contact_name" value={formData.contact_name} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group col-span-2">
-                                    <label>Email</label>
+                                    <label>Email *</label>
                                     <input required name="email" value={formData.email} onChange={handleChange} type="email" className="form-input" />
                                 </div>
                                 <div className="form-group">
                                     <label>Teléfono</label>
-                                    <input required name="phone" value={formData.phone} onChange={handleChange} type="tel" className="form-input" />
+                                    <input name="phone" value={formData.phone} onChange={handleChange} type="tel" className="form-input" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Teléfono Móvil</label>
-                                    <input name="mobile_phone" value={formData.mobile_phone} onChange={handleChange} type="tel" className="form-input" />
+                                    <label>Teléfono Móvil *</label>
+                                    <input required name="mobile_phone" value={formData.mobile_phone} onChange={handleChange} type="tel" className="form-input" />
                                 </div>
                             </div>
                         </section>
@@ -190,7 +191,7 @@ export default function OilSkimmersForm() {
                             <h3>3. Información del Aceite</h3>
                             <div className="form-grid">
                                 <div className="form-group col-span-2">
-                                    <label>¿El aceite flota?</label>
+                                    <label>¿El aceite flota? *</label>
                                     <div className="form-radio-group">
                                         <label className="radio-label">
                                             <input required type="radio" name="oil_floats" value="yes" checked={formData.oil_floats === 'yes'} onChange={handleChange} />
@@ -207,7 +208,7 @@ export default function OilSkimmersForm() {
                                 </div>
 
                                 <div className="form-group col-span-2">
-                                    <label>Nivel de viscosidad</label>
+                                    <label>Nivel de viscosidad *</label>
                                     <div className="form-radio-group">
                                         {['light', 'medium', 'heavy', 'other'].map((v) => (
                                             <label key={v} className="radio-label">
@@ -222,7 +223,7 @@ export default function OilSkimmersForm() {
                                 </div>
 
                                 <div className="form-group col-span-2">
-                                    <label>Cantidad estimada de aceite a remover (litros/día)</label>
+                                    <label>Cantidad estimada de aceite a remover (litros/día) *</label>
                                     <input required name="oil_amount" value={formData.oil_amount} onChange={handleChange} type="number" step="0.1" className="form-input" style={{ maxWidth: '50%' }} />
                                 </div>
                             </div>
@@ -233,7 +234,7 @@ export default function OilSkimmersForm() {
                             <section className="form-section">
                                 <h3>4. Información Eléctrica</h3>
                                 <div className="form-group">
-                                    <label>Voltaje disponible</label>
+                                    <label>Voltaje disponible *</label>
                                     <div className="form-radio-group">
                                         <label className="radio-label">
                                             <input required type="radio" name="voltage" value="120" checked={formData.voltage === '120'} onChange={handleChange} />
@@ -250,7 +251,7 @@ export default function OilSkimmersForm() {
                             <section className="form-section">
                                 <h3>5. Ubicación</h3>
                                 <div className="form-group">
-                                    <label>Entorno</label>
+                                    <label>Entorno *</label>
                                     <div className="form-radio-group">
                                         <label className="radio-label">
                                             <input required type="radio" name="location" value="interior" checked={formData.location === 'interior'} onChange={handleChange} />
@@ -267,7 +268,7 @@ export default function OilSkimmersForm() {
 
                         {/* 6. Tipo de Contenedor */}
                         <section className="form-section">
-                            <h3>6. Tipo de Contenedor</h3>
+                            <h3>6. Tipo de Contenedor *</h3>
                             <div className="form-radio-group">
                                 {['Laguna', 'Tanque', 'Acequia', 'Cisterna'].map((type) => (
                                     <label key={type} className="radio-label">

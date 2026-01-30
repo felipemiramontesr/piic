@@ -38,8 +38,18 @@
     margin: 0;
 }
 
-.oil-form-body {
-    padding: 40px;
+.form-disclaimer {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
 }
 
 .form-section {
