@@ -57,11 +57,11 @@ const Contact: React.FC = () => {
               </div>
               <div className="detail-item">
                 <strong>📧 Email</strong>
-                <p><a href="mailto:contacto@piic.com.mx" style={{ color: 'inherit', textDecoration: 'none' }}>contacto@piic.com.mx</a></p>
+                <p><a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a></p>
               </div>
               <div className="detail-item">
                 <strong>📞 Teléfono</strong>
-                <p><a href="tel:4929421780" style={{ color: 'inherit', textDecoration: 'none' }}>(492) 942 1780</a></p>
+                <p><a href="tel:4929421780">(492) 942 1780</a></p>
               </div>
             </div>
           </div>
@@ -122,6 +122,14 @@ const Contact: React.FC = () => {
         }
         .contact-details {
           margin-top: 40px;
+        }
+        .contact-details a {
+          color: inherit;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+        .contact-details a:hover {
+          color: var(--color-accent);
         }
         .detail-item {
           margin-bottom: 20px;

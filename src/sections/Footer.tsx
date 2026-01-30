@@ -11,8 +11,8 @@ const Footer: React.FC = () => {
           </div>
           <div className="footer-contact">
             <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@piic.com.mx" style={{ color: 'inherit', textDecoration: 'none' }}>contacto@piic.com.mx</a></p>
-            <p>Tel: <a href="tel:4929421780" style={{ color: 'inherit', textDecoration: 'none' }}>(492) 942 1780</a></p>
+            <p>Email: <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a></p>
+            <p>Tel: <a href="tel:4929421780">(492) 942 1780</a></p>
             <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
           </div>
         </div>
@@ -47,6 +47,14 @@ const Footer: React.FC = () => {
         .footer-contact p {
           color: rgba(255,255,255,0.7);
           margin-bottom: 10px;
+        }
+        .footer-contact a {
+          color: inherit;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+        .footer-contact a:hover {
+          color: var(--color-accent);
         }
         .footer-bottom {
           text-align: center;
