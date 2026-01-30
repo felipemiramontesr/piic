@@ -2,15 +2,10 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import Header from '../sections/Header';
 import Footer from '../sections/Footer';
+import mexicoData from '../data/mexico.json';
 import './OilSkimmersForm.css';
 
-const MEXICAN_STATES = [
-    "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua",
-    "Ciudad de México", "Coahuila", "Colima", "Durango", "Estado de México", "Guanajuato",
-    "Guerrero", "Hidalgo", "Jalisco", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca",
-    "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco",
-    "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"
-];
+const MEXICAN_STATES = Object.keys(mexicoData);
 
 interface FormData {
     company_name: string;
@@ -60,7 +55,14 @@ export default function OilSkimmersForm() {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(prev => {
+            const newState = { ...prev, [name]: value };
+            // Reset city if state changes
+            if (name === 'state') {
+                newState.city = '';
+            }
+            return newState;
+        });
     };
 
     const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -197,8 +199,22 @@ export default function OilSkimmersForm() {
                                     </select>
                                 </div>
                                 <div className="form-group">
-                                    <label>Ciudad *</label>
-                                    <input required name="city" value={formData.city} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Guadalupe" />
+                                    <label>Ciudad / Municipio *</label>
+                                    <select
+                                        required
+                                        name="city"
+                                        value={formData.city}
+                                        onChange={handleChange}
+                                        className="form-input"
+                                        disabled={!formData.state}
+                                    >
+                                        <option value="">
+                                            {!formData.state ? 'Primero seleccione un estado' : 'Seleccione un municipio'}
+                                        </option>
+                                        {formData.state && (mexicoData as any)[formData.state]?.map((city: string) => (
+                                            <option key={city} value={city}>{city}</option>
+                                        ))}
+                                    </select>
                                 </div>
                                 <div className="form-group col-span-2">
                                     <label>Código Postal *</label>
