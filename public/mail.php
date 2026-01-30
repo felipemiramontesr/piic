@@ -45,7 +45,7 @@ $subject_admin = "Nueva Solicitud Web: $name ($company)";
 $subject_client = "Hemos recibido tu solicitud - PIIC";
 
 // Logo URL (Must be accessible publicly)
-$logo_url = 'https://piic.com.mx/logo.svg';
+$logo_url = 'https://piic.com.mx/logo.png';
 
 // --- TEMPLATE GENERATOR ---
 function get_email_template($is_admin, $data, $logo_url)
