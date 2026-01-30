@@ -21,7 +21,8 @@ $fields = [
     'Datos de la Empresa' => [
         'Compañía' => $_POST['company_name'] ?? '',
         'Dirección' => $_POST['address'] ?? '',
-        'Ciudad' => $_POST['city_state'] ?? '',
+        'Ciudad' => $_POST['city'] ?? '',
+        'Estado' => $_POST['state'] ?? '',
         'CP' => $_POST['zip_code'] ?? '',
     ],
     'Contacto' => [

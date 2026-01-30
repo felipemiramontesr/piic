@@ -4,10 +4,19 @@ import Header from '../sections/Header';
 import Footer from '../sections/Footer';
 import './OilSkimmersForm.css';
 
+const MEXICAN_STATES = [
+    "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua",
+    "Ciudad de México", "Coahuila", "Colima", "Durango", "Estado de México", "Guanajuato",
+    "Guerrero", "Hidalgo", "Jalisco", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca",
+    "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco",
+    "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"
+];
+
 interface FormData {
     company_name: string;
     address: string;
-    city_state: string;
+    city: string;
+    state: string;
     zip_code: string;
     contact_name: string;
     email: string;
@@ -26,18 +35,19 @@ interface FormData {
 const initialFormState: FormData = {
     company_name: '',
     address: '',
-    city_state: '',
+    city: '',
+    state: '',
     zip_code: '',
     contact_name: '',
     email: '',
     phone: '',
     mobile_phone: '',
-    oil_floats: '', // No default
-    viscosity: '', // No default
+    oil_floats: '',
+    viscosity: '',
     viscosity_other: '',
     oil_amount: '',
-    voltage: '', // No default
-    location: '', // No default
+    voltage: '',
+    location: '',
     container_type: [],
     container_other: ''
 };
@@ -67,6 +77,31 @@ export default function OilSkimmersForm() {
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
+        }
+    };
+
+    const [isDragging, setIsDragging] = useState(false);
+
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(true);
+    };
+
+    const handleDragLeave = () => {
+        setIsDragging(false);
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            const droppedFile = e.dataTransfer.files[0];
+            const validTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+            if (validTypes.includes(droppedFile.type)) {
+                setFile(droppedFile);
+            } else {
+                alert('Solo se permiten archivos JPG, PNG o PDF.');
+            }
         }
     };
 
@@ -153,10 +188,19 @@ export default function OilSkimmersForm() {
                                     <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ciudad y Estado *</label>
-                                    <input required name="city_state" value={formData.city_state} onChange={handleChange} type="text" className="form-input" />
+                                    <label>Ciudad *</label>
+                                    <input required name="city" value={formData.city} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Guadalupe" />
                                 </div>
                                 <div className="form-group">
+                                    <label>Estado *</label>
+                                    <select required name="state" value={formData.state} onChange={handleChange} className="form-input">
+                                        <option value="">Seleccione un estado</option>
+                                        {MEXICAN_STATES.map(state => (
+                                            <option key={state} value={state}>{state}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="form-group col-span-2">
                                     <label>Código Postal *</label>
                                     <input required name="zip_code" value={formData.zip_code} onChange={handleChange} type="text" className="form-input" />
                                 </div>
@@ -287,16 +331,26 @@ export default function OilSkimmersForm() {
                         {/* 7. Archivos */}
                         <section className="form-section">
                             <h3>7. Archivos de Apoyo</h3>
-                            <label className="file-upload-box" style={{ display: 'block' }}>
-                                <div className="file-upload-text">Subir fotos, croquis o plano (Opcional)</div>
+                            <div
+                                className={`file-upload-box ${isDragging ? 'drag-active' : ''}`}
+                                onDragOver={handleDragOver}
+                                onDragLeave={handleDragLeave}
+                                onDrop={handleDrop}
+                            >
+                                <div className="file-upload-icon">📁</div>
+                                <div className="file-upload-text">Arrastra tus archivos aquí</div>
+                                <div className="file-upload-divider">o</div>
+                                <label className="btn-upload">
+                                    SELECCIONAR ARCHIVO
+                                    <input type="file" name="attachment" onChange={handleFileChange} className="hidden" accept=".jpg,.jpeg,.png,.pdf" style={{ display: 'none' }} />
+                                </label>
                                 <div className="file-upload-hint">Máx. 5MB (JPG, PNG, PDF)</div>
-                                <input type="file" name="attachment" onChange={handleFileChange} className="hidden" accept=".jpg,.jpeg,.png,.pdf" style={{ display: 'none' }} />
                                 {file && (
-                                    <div style={{ marginTop: '10px', color: '#0F2A44', fontWeight: 'bold' }}>
-                                        Archivo seleccionado: {file.name}
+                                    <div className="selected-file">
+                                        <span>✓</span> {file.name}
                                     </div>
                                 )}
-                            </label>
+                            </div>
                         </section>
 
                         <button type="submit" disabled={isSubmitting} className="btn-submit">
