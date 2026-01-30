@@ -164,7 +164,7 @@ export default function OilSkimmersForm() {
 
                 {status === 'success' ? (
                     <div className="success-message">
-                        <div className="success-icon">✓</div>
+                        <div className="success-icon"><i className="fa-solid fa-circle-check"></i></div>
                         <h2>¡Información Enviada!</h2>
                         <p>Gracias. La información técnica fue enviada correctamente. Un asesor se pondrá en contacto pronto.</p>
                         <button onClick={() => setStatus('idle')} className="btn-submit" style={{ maxWidth: '200px' }}>
@@ -177,7 +177,7 @@ export default function OilSkimmersForm() {
 
                         {/* 1. Datos de la Empresa */}
                         <section className="form-section">
-                            <h3>1. Datos de la Empresa</h3>
+                            <h3><i className="fa-solid fa-building section-icon"></i>1. Datos de la Empresa</h3>
                             <div className="form-grid">
                                 <div className="form-group col-span-2">
                                     <label>Nombre de la Compañía *</label>
@@ -209,7 +209,7 @@ export default function OilSkimmersForm() {
 
                         {/* 2. Datos de Contacto */}
                         <section className="form-section">
-                            <h3>2. Datos de Contacto</h3>
+                            <h3><i className="fa-solid fa-user-tie section-icon"></i>2. Datos de Contacto</h3>
                             <div className="form-grid">
                                 <div className="form-group col-span-2">
                                     <label>Nombre del Contacto *</label>
@@ -232,7 +232,7 @@ export default function OilSkimmersForm() {
 
                         {/* 3. Información del Aceite */}
                         <section className="form-section">
-                            <h3>3. Información del Aceite</h3>
+                            <h3><i className="fa-solid fa-droplet section-icon"></i>3. Información del Aceite</h3>
                             <div className="form-grid">
                                 <div className="form-group col-span-2">
                                     <label>¿El aceite flota? *</label>
@@ -276,7 +276,7 @@ export default function OilSkimmersForm() {
                         {/* 4. Información Eléctrica y 5. Ubicación */}
                         <div className="form-grid">
                             <section className="form-section">
-                                <h3>4. Información Eléctrica</h3>
+                                <h3><i className="fa-solid fa-plug-circle-bolt section-icon"></i>4. Información Eléctrica</h3>
                                 <div className="form-group">
                                     <label>Voltaje disponible *</label>
                                     <div className="form-radio-group">
@@ -293,7 +293,7 @@ export default function OilSkimmersForm() {
                             </section>
 
                             <section className="form-section">
-                                <h3>5. Ubicación</h3>
+                                <h3><i className="fa-solid fa-map-location-dot section-icon"></i>5. Ubicación</h3>
                                 <div className="form-group">
                                     <label>Entorno *</label>
                                     <div className="form-radio-group">
@@ -312,7 +312,7 @@ export default function OilSkimmersForm() {
 
                         {/* 6. Tipo de Contenedor */}
                         <section className="form-section">
-                            <h3>6. Tipo de Contenedor *</h3>
+                            <h3><i className="fa-solid fa-industry section-icon"></i>6. Tipo de Contenedor *</h3>
                             <div className="form-radio-group">
                                 {['Laguna', 'Tanque', 'Acequia', 'Cisterna'].map((type) => (
                                     <label key={type} className="radio-label">
@@ -330,7 +330,7 @@ export default function OilSkimmersForm() {
 
                         {/* 7. Archivos */}
                         <section className="form-section">
-                            <h3>7. Archivos de Apoyo</h3>
+                            <h3><i className="fa-solid fa-file-lines section-icon"></i>7. Archivos de Apoyo</h3>
                             <p className="form-section-description">
                                 Adjuntar planos, dibujos o fotografías de su proyecto actual nos ayudará a comprender mejor sus necesidades y agilizar el proceso de cotización.
                             </p>
@@ -352,7 +352,7 @@ export default function OilSkimmersForm() {
                                 <div className="file-upload-hint">Máx. 5MB (JPG, PNG, PDF)</div>
                                 {file && (
                                     <div className="selected-file">
-                                        <span>✓</span> {file.name}
+                                        <i className="fa-solid fa-circle-check"></i> {file.name}
                                     </div>
                                 )}
                             </div>

@@ -94,6 +94,22 @@
     border-left: 4px solid var(--color-accent);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.section-icon {
+    margin-right: 12px;
+    font-size: 20px;
+    color: var(--color-accent);
+}
+
+.selected-file i {
+    color: #059669;
+}
+
+.success-icon i {
+    font-size: 48px;
 }
 
 .form-grid {
