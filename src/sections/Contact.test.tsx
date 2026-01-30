@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import Contact from './Contact';
 
 // Mock global fetch
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn();
 
 describe('Contact Component', () => {
     beforeEach(() => {
@@ -24,7 +24,7 @@ describe('Contact Component', () => {
 
     it('handles successful form submission', async () => {
         // Mock successful API response
-        (global.fetch as any).mockResolvedValueOnce({
+        (globalThis.fetch as Mock).mockResolvedValueOnce({
             ok: true,
             json: async () => ({ status: 'success', message: 'Mensaje enviado' }),
         });
@@ -49,7 +49,7 @@ describe('Contact Component', () => {
         });
 
         // Verify API call payload
-        expect(global.fetch).toHaveBeenCalledWith('/mail.php', expect.objectContaining({
+        expect(globalThis.fetch).toHaveBeenCalledWith('/mail.php', expect.objectContaining({
             method: 'POST',
             body: expect.stringContaining('"name":"Juan Perez"'),
         }));
@@ -57,7 +57,7 @@ describe('Contact Component', () => {
 
     it('handles API errors correctly', async () => {
         // Mock error API response
-        (global.fetch as any).mockResolvedValueOnce({
+        (globalThis.fetch as Mock).mockResolvedValueOnce({
             ok: false,
             json: async () => ({ status: 'error', message: 'Error interno del servidor' }),
         });
@@ -81,7 +81,7 @@ describe('Contact Component', () => {
 
     it('handles network failures correctly', async () => {
         // Mock network error
-        (global.fetch as any).mockRejectedValueOnce(new Error('Network error'));
+        (globalThis.fetch as Mock).mockRejectedValueOnce(new Error('Network error'));
 
         render(<Contact />);
 
