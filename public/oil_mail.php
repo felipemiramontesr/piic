@@ -45,19 +45,71 @@ $fields = [
     ]
 ];
 
-// 2. Build HTML Body (Admin Report)
-$html_body = "<html><body style='font-family: Arial, sans-serif;'>";
-$html_body .= "<h2 style='color: #0F2A44;'>Nuevo Cuestionario: Oil Skimmers</h2>";
+// 2. Build HTML Body (Branded Admin Report)
+$html_body = "
+<html>
+<body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
+    <div style='max-width: 700px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
+        
+        <!-- Header -->
+        <div style='background-color: #0F2A44; padding: 30px; text-align: center;'>
+            <img src='https://piic.com.mx/logo.png' alt='PIIC' style='max-width: 150px; margin-bottom: 15px;'>
+            <h1 style='color: #ffffff; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px;'>Nueva Solicitud de Cotización</h1>
+            <p style='color: #f2b705; margin: 5px 0 0; font-weight: bold;'>Cuestionario Técnico: Oil Skimmers</p>
+        </div>
+
+        <div style='padding: 30px;'>
+            <p style='color: #444; font-size: 16px; margin-bottom: 25px;'>Se ha recibido una nueva solicitud técnica a través del portal <strong>piic.com.mx</strong>. A continuación los detalles:</p>
+";
 
 foreach ($fields as $section => $data) {
-    $html_body .= "<h3 style='background: #eee; padding: 5px;'>$section</h3><ul>";
+    $html_body .= "
+            <!-- Section: $section -->
+            <div style='margin-bottom: 30px;'>
+                <h3 style='color: #0F2A44; border-bottom: 2px solid #f2b705; padding-bottom: 8px; margin-bottom: 15px; font-size: 18px; text-transform: uppercase;'>
+                    <span style='background-color: #f2b705; color: #0F2A44; padding: 2px 8px; border-radius: 4px; margin-right: 10px;'>&bull;</span> $section
+                </h3>
+                <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse;'>
+    ";
+
     foreach ($data as $label => $val) {
         $clean_val = htmlspecialchars($val ?? '');
-        $html_body .= "<li><strong>$label:</strong> $clean_val</li>";
+        if (empty($clean_val))
+            $clean_val = "<span style='color: #999; font-style: italic;'>No proporcionado</span>";
+
+        $html_body .= "
+                    <tr>
+                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'>$label:</td>
+                        <td width='60%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #333; font-size: 15px;'>$clean_val</td>
+                    </tr>
+        ";
     }
-    $html_body .= "</ul>";
+
+    $html_body .= "
+                </table>
+            </div>";
 }
-$html_body .= "</body></html>";
+
+if ($attachment) {
+    $html_body .= "
+            <!-- Attachment Notice -->
+            <div style='background-color: #FFFBEB; border: 1px solid #FCD34D; padding: 15px; border-radius: 6px; display: flex; align-items: center; margin-top: 10px;'>
+                <div style='color: #B45309; font-weight: bold; font-size: 16px;'>
+                    📎 Archivo Adjunto: <span style='font-weight: normal; font-size: 14px;'>" . htmlspecialchars($attachment['name']) . "</span>
+                </div>
+            </div>
+    ";
+}
+
+$html_body .= "
+            <div style='margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 12px;'>
+                Este es un mensaje automático generado por el sistema de formularios de PIIC.<br>
+                &copy; " . date("Y") . " Proveedora de Insumos Industriales y Comerciales
+            </div>
+        </div>
+    </div>
+</body>
+</html>";
 
 // 3. Handle File Attachment
 $attachment = null;
