@@ -6,7 +6,7 @@ class SimpleSMTP
     private $username;
     private $password;
     private $connection;
-    private $debug = [];
+    public $log_file = 'smtp_debug.log';
 
     public function __construct($host, $port, $username, $password)
     {
@@ -18,48 +18,78 @@ class SimpleSMTP
 
     public function send($to, $subject, $body, $headers = "")
     {
+        $this->log("-----------------------------------");
+        $this->log("Starting email send to: $to");
+
         $this->connection = fsockopen("ssl://{$this->host}", $this->port, $errno, $errstr, 10);
         if (!$this->connection) {
-            $this->log("Connection failed: $errstr");
+            $this->log("Connection failed: $errno - $errstr");
             return false;
         }
 
-        $this->read();
-        $this->cmd("EHLO " . $_SERVER['SERVER_NAME']);
-        $this->cmd("AUTH LOGIN");
-        $this->cmd(base64_encode($this->username));
-        $this->cmd(base64_encode($this->password));
-        $this->cmd("MAIL FROM: <{$this->username}>");
-        $this->cmd("RCPT TO: <$to>");
-        $this->cmd("DATA");
+        // Read initial greeting (expect 220)
+        if (!$this->expect(220))
+            return false;
 
-        // Prepare content
+        // EHLO
+        if (!$this->cmd("EHLO " . $_SERVER['SERVER_NAME'], 250))
+            return false;
+
+        // AUTH LOGIN
+        if (!$this->cmd("AUTH LOGIN", 334))
+            return false;
+        if (!$this->cmd(base64_encode($this->username), 334))
+            return false;
+        // Verify password (expect 235 Authentication successful)
+        if (!$this->cmd(base64_encode($this->password), 235))
+            return false;
+
+        // MAIL FROM
+        if (!$this->cmd("MAIL FROM: <{$this->username}>", 250))
+            return false;
+
+        // RCPT TO
+        if (!$this->cmd("RCPT TO: <$to>", 250))
+            return false;
+
+        // DATA
+        if (!$this->cmd("DATA", 354))
+            return false;
+
+        // Content
         $content = "Subject: $subject\r\n";
         $content .= "To: $to\r\n";
-        // Headers already contain From, Reply-To, MIME, Content-Type
         $content .= $headers . "\r\n";
         $content .= $body . "\r\n";
-        $content .= ".";
+        $content .= "."; // End of message
 
-        $this->cmd($content);
-        $result = $this->cmd("QUIT");
+        // Final send (expect 250 OK)
+        if (!$this->cmd($content, 250))
+            return false;
+
+        // QUIT
+        $this->cmd("QUIT", 221);
 
         fclose($this->connection);
-
-        // Check if last command (QUIT or DATA end) was successful (250 or 221)
-        // Simplified check: if we got here without throwing, assume mostly ok, 
-        // but robust implementation checks codes. 
+        $this->log("Email sent successfully to: $to");
         return true;
     }
 
-    private function cmd($command)
+    private function cmd($command, $expectedCode)
     {
-        $this->log("CLIENT: " . substr($command, 0, 50) . "...");
+        // Mask password in logs
+        $logCommand = $command;
+        if (base64_encode($this->password) === $command) {
+            $logCommand = "[PASSWORD MASKED]";
+        }
+
+        $this->log("CLIENT: " . substr($logCommand, 0, 100));
         fputs($this->connection, $command . "\r\n");
-        return $this->read();
+
+        return $this->expect($expectedCode);
     }
 
-    private function read()
+    private function expect($code)
     {
         $response = "";
         while ($str = fgets($this->connection, 515)) {
@@ -67,14 +97,19 @@ class SimpleSMTP
             if (substr($str, 3, 1) == " ")
                 break;
         }
-        $this->log("SERVER: $response");
-        return $response;
+        $this->log("SERVER: " . trim($response));
+
+        $responseCode = substr($response, 0, 3);
+        if ($responseCode != $code) {
+            $this->log("ERROR: Expected $code, got $responseCode. Aborting.");
+            return false;
+        }
+        return true;
     }
 
     private function log($msg)
     {
-        $this->debug[] = $msg;
-        // Optional: file_put_contents('smtp_debug.log', date('H:i:s') . " $msg\n", FILE_APPEND);
+        file_put_contents($this->log_file, date('Y-m-d H:i:s') . " - " . $msg . "\n", FILE_APPEND);
     }
 }
 ?>
