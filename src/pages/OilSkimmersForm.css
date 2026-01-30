@@ -38,6 +38,10 @@
     margin: 0;
 }
 
+.oil-form-body {
+    padding: 40px;
+}
+
 .form-disclaimer {
     font-size: 14px;
     color: var(--color-text-secondary);
