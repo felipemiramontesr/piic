@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import Header from '../sections/Header';
 import Footer from '../sections/Footer';
@@ -54,15 +54,57 @@ export default function OilSkimmersForm() {
     const [file, setFile] = useState<File | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [coloniasList, setColoniasList] = useState<any[]>([]);
+    const [isLoadingColonias, setIsLoadingColonias] = useState(false);
+
+    // Fetch colonias when state and city change
+    useEffect(() => {
+        const fetchColonias = async () => {
+            if (formData.state && formData.city) {
+                setIsLoadingColonias(true);
+                try {
+                    const response = await fetch(`https://sepomex.icalialabs.com/api/v1/zip_codes?city=${encodeURIComponent(formData.city)}&state=${encodeURIComponent(formData.state)}`);
+                    const data = await response.json();
+                    if (data.zip_codes) {
+                        setColoniasList(data.zip_codes);
+                    }
+                } catch (error) {
+                    console.error('Error fetching colonias:', error);
+                } finally {
+                    setIsLoadingColonias(false);
+                }
+            } else {
+                setColoniasList([]);
+            }
+        };
+
+        fetchColonias();
+    }, [formData.state, formData.city]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => {
             const newState = { ...prev, [name]: value };
-            // Reset city if state changes
+
+            // Reset dependent fields
             if (name === 'state') {
                 newState.city = '';
+                newState.neighborhood = '';
+                newState.zip_code = '';
             }
+            if (name === 'city') {
+                newState.neighborhood = '';
+                newState.zip_code = '';
+            }
+
+            // Auto-fill zip code when colonia is selected
+            if (name === 'neighborhood') {
+                const selectedColonia = coloniasList.find(c => c.d_asenta === value);
+                if (selectedColonia) {
+                    newState.zip_code = selectedColonia.d_codigo;
+                }
+            }
+
             return newState;
         });
     };
@@ -191,10 +233,6 @@ export default function OilSkimmersForm() {
                                     <label>Dirección (Calle y número) *</label>
                                     <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Av. Universidad 123" />
                                 </div>
-                                <div className="form-group col-span-2">
-                                    <label>Colonia *</label>
-                                    <input required name="neighborhood" value={formData.neighborhood} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Centro" />
-                                </div>
                                 <div className="form-group">
                                     <label>Estado *</label>
                                     <select required name="state" value={formData.state} onChange={handleChange} className="form-input">
@@ -223,8 +261,41 @@ export default function OilSkimmersForm() {
                                     </select>
                                 </div>
                                 <div className="form-group col-span-2">
+                                    <label>Colonia / Asentamiento *</label>
+                                    <select
+                                        required
+                                        name="neighborhood"
+                                        value={formData.neighborhood}
+                                        onChange={handleChange}
+                                        className="form-input"
+                                        disabled={!formData.city || isLoadingColonias}
+                                    >
+                                        <option value="">
+                                            {!formData.city
+                                                ? 'Primero seleccione un municipio'
+                                                : isLoadingColonias
+                                                    ? 'Cargando colonias...'
+                                                    : 'Seleccione una colonia'}
+                                        </option>
+                                        {coloniasList.map((colonia, index) => (
+                                            <option key={`${colonia.d_asenta}-${index}`} value={colonia.d_asenta}>
+                                                {colonia.d_asenta}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="form-group col-span-2">
                                     <label>Código Postal *</label>
-                                    <input required name="zip_code" value={formData.zip_code} onChange={handleChange} type="text" className="form-input" />
+                                    <input
+                                        required
+                                        name="zip_code"
+                                        value={formData.zip_code}
+                                        onChange={handleChange}
+                                        type="text"
+                                        className="form-input"
+                                        placeholder="Se llenará automáticamente"
+                                        readOnly={!!formData.neighborhood && formData.zip_code !== ''}
+                                    />
                                 </div>
                             </div>
                         </section>
