@@ -8,7 +8,9 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) => (
   <div className="glass-card service-card">
-    <div className="service-icon">{icon}</div>
+    <div className="service-icon">
+      <i className={icon}></i>
+    </div>
     <h3>{title}</h3>
     <p>{description}</p>
     <style>{`
@@ -17,11 +19,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
         height: 100%;
       }
       .service-icon {
-        font-size: 40px;
+        font-size: 32px;
         margin-bottom: 20px;
-        display: inline-block;
-        padding: 15px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
         background-color: var(--color-bg);
+        color: var(--color-primary);
         border-radius: 50%;
       }
       .service-card h3 {
@@ -39,11 +45,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
 
 const Services: React.FC = () => {
   const serviceList = [
-    { icon: '🛡️', title: 'Seguridad industrial', description: 'Equipos de protección personal y sistemas de seguridad vial.' },
-    { icon: '🧹', title: 'Limpieza y sanitización', description: 'Productos químicos y herramientas para mantenimiento de higiene.' },
-    { icon: '📁', title: 'Papelería y suministros de oficina', description: 'Todo lo necesario para la administración diaria.' },
-    { icon: '💼', title: 'Insumos comerciales', description: 'Materiales diversos para la operación comercial.' },
-    { icon: '🔧', title: 'Operación y mantenimiento', description: 'Herramientas y refacciones críticas para sus equipos.' },
+    { icon: 'fa-solid fa-shield-halved', title: 'Seguridad industrial', description: 'Equipos de protección personal y sistemas de seguridad vial.' },
+    { icon: 'fa-solid fa-broom', title: 'Limpieza y sanitización', description: 'Productos químicos y herramientas para mantenimiento de higiene.' },
+    { icon: 'fa-solid fa-folder-open', title: 'Papelería y suministros de oficina', description: 'Todo lo necesario para la administración diaria.' },
+    { icon: 'fa-solid fa-briefcase', title: 'Insumos comerciales', description: 'Materiales diversos para la operación comercial.' },
+    { icon: 'fa-solid fa-screwdriver-wrench', title: 'Operación y mantenimiento', description: 'Herramientas y refacciones críticas para sus equipos.' },
   ];
 
   return (

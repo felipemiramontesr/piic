@@ -52,15 +52,24 @@ const Contact: React.FC = () => {
             <p>Estamos listos para atender las necesidades de su empresa con profesionalismo y rapidez.</p>
             <div className="contact-details">
               <div className="detail-item">
-                <strong>📍 Ubicación</strong>
+                <div className="detail-header">
+                  <i className="fa-solid fa-location-dot contact-icon"></i>
+                  <strong>Ubicación</strong>
+                </div>
                 <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
               </div>
               <div className="detail-item">
-                <strong>📧 Email</strong>
+                <div className="detail-header">
+                  <i className="fa-solid fa-envelope contact-icon"></i>
+                  <strong>Email</strong>
+                </div>
                 <p><a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a></p>
               </div>
               <div className="detail-item">
-                <strong>📞 Teléfono</strong>
+                <div className="detail-header">
+                  <i className="fa-solid fa-phone contact-icon"></i>
+                  <strong>Teléfono</strong>
+                </div>
                 <p><a href="tel:4929421780">(492) 942 1780</a></p>
               </div>
             </div>
@@ -136,8 +145,17 @@ const Contact: React.FC = () => {
         }
         .detail-item strong {
           display: block;
-          margin-bottom: 5px;
           color: var(--color-primary);
+        }
+        .detail-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 8px;
+        }
+        .contact-icon {
+          color: var(--color-accent);
+          font-size: 18px;
         }
         .contact-form-container {
           background-color: var(--color-white);

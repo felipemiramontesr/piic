@@ -1,34 +1,34 @@
 import React from 'react';
 
 const Features: React.FC = () => {
-    const featureList = [
-        { title: 'Atención personalizada', text: 'Entendemos los requerimientos específicos de cada cliente.' },
-        { title: 'Respuesta rápida', text: 'Sabemos que en la industria cada minuto cuenta.' },
-        { title: 'Proveedores confiables', text: 'Solo trabajamos con marcas de calidad comprobada.' },
-        { title: 'Calidad y cumplimiento', text: 'Garantizamos que lo que cotizamos es lo que entregamos.' },
-        { title: 'Relación a largo plazo', text: 'Buscamos ser socios comerciales, no solo proveedores.' },
-    ];
+  const featureList = [
+    { title: 'Atención personalizada', text: 'Entendemos los requerimientos específicos de cada cliente.' },
+    { title: 'Respuesta rápida', text: 'Sabemos que en la industria cada minuto cuenta.' },
+    { title: 'Proveedores confiables', text: 'Solo trabajamos con marcas de calidad comprobada.' },
+    { title: 'Calidad y cumplimiento', text: 'Garantizamos que lo que cotizamos es lo que entregamos.' },
+    { title: 'Relación a largo plazo', text: 'Buscamos ser socios comerciales, no solo proveedores.' },
+  ];
 
-    return (
-        <section id="por-que-piic" className="section section-dark">
-            <div className="container">
-                <div className="section-header-dark">
-                    <h2>Por qué elegirnos</h2>
-                </div>
-                <div className="features-grid">
-                    {featureList.map((feature, index) => (
-                        <div key={index} className="feature-item">
-                            <span className="feature-marker"></span>
-                            <div className="feature-content">
-                                <h3>{feature.title}</h3>
-                                <p>{feature.text}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  return (
+    <section id="por-que-piic" className="section section-dark">
+      <div className="container">
+        <div className="section-header-dark">
+          <h2>Por qué elegirnos</h2>
+        </div>
+        <div className="features-grid">
+          {featureList.map((feature, index) => (
+            <div key={index} className="feature-item">
+              <i className="fa-solid fa-circle-check feature-icon"></i>
+              <div className="feature-content">
+                <h3>{feature.title}</h3>
+                <p>{feature.text}</p>
+              </div>
             </div>
+          ))}
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .section-header-dark {
           text-align: center;
           margin-bottom: 60px;
@@ -42,13 +42,11 @@ const Features: React.FC = () => {
           display: flex;
           gap: 20px;
         }
-        .feature-marker {
+        .feature-icon {
           flex-shrink: 0;
-          width: 24px;
-          height: 24px;
-          background-color: var(--color-accent);
-          border-radius: 4px;
-          margin-top: 4px;
+          font-size: 24px;
+          color: var(--color-accent);
+          margin-top: 2px;
         }
         .feature-item h3 {
           margin-bottom: 10px;
@@ -60,8 +58,8 @@ const Features: React.FC = () => {
           margin: 0;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Features;

@@ -33,11 +33,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         {simpleMode ? (
           <div className="nav-simple">
             <a href="https://piic.com.mx/" className="simple-link">
-              <svg xmlns="http://www.w3.org/2000/svg" className="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
+              <i className="fa-solid fa-globe icon-globe"></i>
               Ver nuestro sitio web
             </a>
           </div>
@@ -150,8 +146,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             color: var(--color-accent);
         }
         .icon-globe {
-            width: 20px;
-            height: 20px;
+            font-size: 18px;
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }

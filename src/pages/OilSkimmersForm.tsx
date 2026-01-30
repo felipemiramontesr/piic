@@ -340,7 +340,9 @@ export default function OilSkimmersForm() {
                                 onDragLeave={handleDragLeave}
                                 onDrop={handleDrop}
                             >
-                                <div className="file-upload-icon">📁</div>
+                                <div className="file-upload-icon">
+                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                </div>
                                 <div className="file-upload-text">Arrastra tus archivos aquí</div>
                                 <div className="file-upload-divider">o</div>
                                 <label className="btn-upload">
