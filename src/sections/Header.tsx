@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
       <div className="container header-container">
         <div className="logo">
           <a href={simpleMode ? "https://piic.com.mx/" : "#inicio"}>
-            <img src="/logo.svg" alt="PIIC" className="logo-image" />
+            <span className="logo-text">PIIC</span>
           </a>
         </div>
 
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         .logo {
             position: relative;
-            width: 200px;
+            /* width: 200px;  Removed fixed width to fit text naturally */
             height: 100%;
             display: flex;
             align-items: center;
@@ -93,20 +93,15 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .logo a {
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
-        .logo-image {
-            position: absolute;
-            height: 180px;
-            width: auto;
-            top: -25px; /* Pull up to visually center relative to bar */
-            left: 0;
-            z-index: 2000;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
-        }
-        .header-scrolled .logo-image {
-            height: 120px;
-            top: -10px;
+        .logo-text {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--font-main);
         }
         .nav-list {
           display: flex;
