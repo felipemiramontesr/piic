@@ -57,10 +57,10 @@ function get_email_template($is_admin, $data, $logo_url)
   // Header Content
   $html = '
     <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-top: 5px solid ' . $accent_color . '; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-top: 5px solid ' . $header_bg . '; border-bottom: 5px solid ' . $header_bg . '; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
         <tr>
-          <td style="background-color: ' . $header_bg . '; text-align: center; padding: 25px;">
-            <img src="' . $logo_url . '" alt="PIIC" style="max-width: 140px; height: auto; display: block; margin: 0 auto;">
+          <td style="background-color: #ffffff; text-align: center; padding: 25px; border-bottom: 1px solid #eeeeee;">
+            <img src="' . $logo_url . '" alt="PIIC" style="max-width: 180px; height: auto; display: block; margin: 0 auto;">
           </td>
         </tr>
         <tr>
