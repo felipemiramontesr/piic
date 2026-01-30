@@ -3,9 +3,10 @@ import Button from '../components/Button';
 
 interface HeaderProps {
   showCta?: boolean;
+  simpleMode?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ showCta = true }) => {
+const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -20,22 +21,33 @@ const Header: React.FC<HeaderProps> = ({ showCta = true }) => {
     <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
       <div className="container header-container">
         <div className="logo">
-          <a href="#inicio">PIIC</a>
+          <a href={simpleMode ? "https://piic.com.mx/" : "#inicio"}>
+            <img src="/logo.svg" alt="PIIC" className="logo-image" />
+          </a>
         </div>
-        <nav className="nav">
-          <ul className="nav-list">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#quienes-somos">Quiénes Somos</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#por-que-piic">Por Qué PIIC</a></li>
-            <li><a href="#proceso">Proceso</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </nav>
-        {showCta && (
-          <div className="nav-cta">
-            <Button href="#contacto">Solicitar cotización</Button>
+
+        {simpleMode ? (
+          <div className="nav-simple">
+            <a href="https://piic.com.mx/" className="simple-link">Ver nuestro sitio web &rarr;</a>
           </div>
+        ) : (
+          <>
+            <nav className="nav">
+              <ul className="nav-list">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#por-que-piic">Por Qué PIIC</a></li>
+                <li><a href="#proceso">Proceso</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+              </ul>
+            </nav>
+            {showCta && (
+              <div className="nav-cta">
+                <Button href="#contacto">Solicitar cotización</Button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -63,9 +75,16 @@ const Header: React.FC<HeaderProps> = ({ showCta = true }) => {
           align-items: center;
         }
         .logo a {
-          font-size: 24px;
-          font-weight: 800;
-          letter-spacing: 1px;
+          display: flex;
+          align-items: center;
+        }
+        .logo-image {
+            height: 45px;
+            width: auto;
+            transition: height 0.3s ease;
+        }
+        .header-scrolled .logo-image {
+            height: 40px;
         }
         .nav-list {
           display: flex;
@@ -74,9 +93,24 @@ const Header: React.FC<HeaderProps> = ({ showCta = true }) => {
         .nav-list a {
           font-size: 15px;
           font-weight: 500;
+          color: var(--color-white);
+          text-decoration: none;
+          transition: color 0.3s ease;
         }
         .nav-list a:hover {
           color: var(--color-accent);
+        }
+        .simple-link {
+            color: var(--color-white);
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        .simple-link:hover {
+            color: var(--color-accent);
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }

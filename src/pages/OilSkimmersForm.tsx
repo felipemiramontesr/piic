@@ -119,7 +119,7 @@ export default function OilSkimmersForm() {
 
     return (
         <div className="oil-form-page">
-            <Header showCta={false} />
+            <Header simpleMode={true} />
 
             <div className="oil-form-container">
                 <div className="oil-form-header">
