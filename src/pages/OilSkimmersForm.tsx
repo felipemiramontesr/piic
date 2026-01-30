@@ -188,10 +188,6 @@ export default function OilSkimmersForm() {
                                     <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Ciudad *</label>
-                                    <input required name="city" value={formData.city} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Guadalupe" />
-                                </div>
-                                <div className="form-group">
                                     <label>Estado *</label>
                                     <select required name="state" value={formData.state} onChange={handleChange} className="form-input">
                                         <option value="">Seleccione un estado</option>
@@ -199,6 +195,10 @@ export default function OilSkimmersForm() {
                                             <option key={state} value={state}>{state}</option>
                                         ))}
                                     </select>
+                                </div>
+                                <div className="form-group">
+                                    <label>Ciudad *</label>
+                                    <input required name="city" value={formData.city} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Guadalupe" />
                                 </div>
                                 <div className="form-group col-span-2">
                                     <label>Código Postal *</label>
