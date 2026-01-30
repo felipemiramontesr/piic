@@ -37,7 +37,7 @@ const Contact: React.FC = () => {
         setStatus('error');
         setErrorMessage(result.message || 'Error al enviar el mensaje.');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setErrorMessage('Hubo un problema de conexión. Intente nuevamente.');
     }
