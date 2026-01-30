@@ -5,18 +5,18 @@ require_once 'SimpleSMTP.php';
 
 // Prevent direct access
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
-    exit;
+  http_response_code(405);
+  echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
+  exit;
 }
 
 // Get JSON input
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!$data) {
-    http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'Invalid JSON']);
-    exit;
+  http_response_code(400);
+  echo json_encode(['status' => 'error', 'message' => 'Invalid JSON']);
+  exit;
 }
 
 // Sanitize inputs
@@ -28,15 +28,15 @@ $message = nl2br(htmlspecialchars(strip_tags($data['message'] ?? '')));
 
 // Validate required fields
 if (empty($name) || empty($email) || empty($phone) || empty($message)) {
-    http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
-    exit;
+  http_response_code(400);
+  echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
+  exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
-    exit;
+  http_response_code(400);
+  echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
+  exit;
 }
 
 // Configuration
@@ -50,12 +50,12 @@ $logo_url = 'https://piic.com.mx/logo.svg';
 // --- TEMPLATE GENERATOR ---
 function get_email_template($is_admin, $data, $logo_url)
 {
-    $header_bg = '#0F2A44';
-    $accent_color = '#00C2CB';
-    $text_color = '#333333';
+  $header_bg = '#0F2A44';
+  $accent_color = '#00C2CB';
+  $text_color = '#333333';
 
-    // Header Content
-    $html = '
+  // Header Content
+  $html = '
     <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
       <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-top: 5px solid ' . $accent_color . '; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
         <tr>
@@ -66,8 +66,8 @@ function get_email_template($is_admin, $data, $logo_url)
         <tr>
           <td style="padding: 40px 30px; color: ' . $text_color . ';">';
 
-    if ($is_admin) {
-        $html .= '
+  if ($is_admin) {
+    $html .= '
             <h2 style="color: ' . $header_bg . '; margin-top: 0; font-size: 22px; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 25px;">Nueva Oportunidad de Negocio</h2>
             
             <table width="100%" cellpadding="10" cellspacing="0" style="background-color: #f8f9fa; border-left: 4px solid ' . $header_bg . '; width: 100%;">
@@ -83,20 +83,20 @@ function get_email_template($is_admin, $data, $logo_url)
                     ' . $data['message'] . '
                 </div>
             </div>';
-    } else {
-        // Client Auto-reply
-        $html .= '
-            <h2 style="color: ' . $header_bg . '; margin-top: 0; font-size: 24px;">¡Gracias por contactarnos, ' . $data['name'] . '!</h2>
+  } else {
+    // Client Auto-reply
+    $html .= '
+            <h2 style="color: ' . $header_bg . '; margin-top: 0; font-size: 24px;">¡Gracias por contactarnos,<br>' . $data['name'] . '!</h2>
             <p style="font-size: 16px; line-height: 1.6; color: #555;"> Hemos recibido tu solicitud correctamente.</p>
             <p style="font-size: 16px; line-height: 1.6; color: #555;">Nuestro equipo comercial analizará tus requerimientos y se pondrá en contacto contigo a la brevedad posible para brindarte la mejor solución industrial.</p>
             
             <div style="margin-top: 30px; padding: 20px; background-color: #f0fbff; border-radius: 4px; text-align: center;">
                 <p style="margin: 0; color: #0F2A44; font-weight: bold;">Tu solicitud ha sido registrada con éxito.</p>
             </div>';
-    }
+  }
 
-    // Footer
-    $html .= '
+  // Footer
+  $html .= '
           </td>
         </tr>
         <tr>
@@ -108,16 +108,16 @@ function get_email_template($is_admin, $data, $logo_url)
       </table>
     </div>';
 
-    return $html;
+  return $html;
 }
 
 // Prepare Data for Templates
 $template_data = [
-    'name' => $name,
-    'company' => $company,
-    'email' => $email,
-    'phone' => $phone,
-    'message' => $message
+  'name' => $name,
+  'company' => $company,
+  'email' => $email,
+  'phone' => $phone,
+  'message' => $message
 ];
 
 // 1. Send Admin Email
@@ -130,9 +130,9 @@ $headers_admin .= "MIME-Version: 1.0\r\n";
 $headers_admin .= "Content-Type: text/html; charset=UTF-8\r\n";
 
 if (!$mailer->send($to_admin, $subject_admin, $body_admin, $headers_admin)) {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Failed to send admin notification']);
-    exit;
+  http_response_code(500);
+  echo json_encode(['status' => 'error', 'message' => 'Failed to send admin notification']);
+  exit;
 }
 
 // 2. Send Client Auto-reply
