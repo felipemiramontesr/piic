@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from '../components/Button';
 
 const Contact: React.FC = () => {
-  const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -34,7 +33,6 @@ const Contact: React.FC = () => {
 
       if (response.ok && result.status === 'success') {
         setStatus('success');
-        setSubmitted(true);
       } else {
         setStatus('error');
         setErrorMessage(result.message || 'Error al enviar el mensaje.');
@@ -68,7 +66,7 @@ const Contact: React.FC = () => {
               <div className="success-message">
                 <h3>¡Mensaje enviado con éxito!</h3>
                 <p>Nos pondremos en contacto con usted a la brevedad posible.</p>
-                <Button onClick={() => { setStatus('idle'); setSubmitted(false); }}>Enviar otro mensaje</Button>
+                <Button onClick={() => { setStatus('idle'); }}>Enviar otro mensaje</Button>
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
