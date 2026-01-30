@@ -1,39 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 
-const Header: React.FC = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
+interface HeaderProps {
+  showCta?: boolean;
+}
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+const Header: React.FC<HeaderProps> = ({ showCta = true }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    return (
-        <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
-            <div className="container header-container">
-                <div className="logo">
-                    <a href="#inicio">PIIC</a>
-                </div>
-                <nav className="nav">
-                    <ul className="nav-list">
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#quienes-somos">Quiénes Somos</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#por-que-piic">Por Qué PIIC</a></li>
-                        <li><a href="#proceso">Proceso</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </nav>
-                <div className="nav-cta">
-                    <Button href="#contacto">Solicitar cotización</Button>
-                </div>
-            </div>
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-            <style>{`
+  return (
+    <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
+      <div className="container header-container">
+        <div className="logo">
+          <a href="#inicio">PIIC</a>
+        </div>
+        <nav className="nav">
+          <ul className="nav-list">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#por-que-piic">Por Qué PIIC</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+        <div className="nav-cta">
+          <Button href="#contacto">Solicitar cotización</Button>
+        </div>
+      </div>
+
+      <style>{`
         .header {
           position: fixed;
           top: 0;
@@ -76,8 +80,8 @@ const Header: React.FC = () => {
           .nav, .nav-cta { display: none; }
         }
       `}</style>
-        </header>
-    );
+    </header>
+  );
 };
 
 export default Header;
