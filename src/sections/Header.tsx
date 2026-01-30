@@ -82,27 +82,27 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           align-items: center;
           position: relative; /* Context for logo absolute potentially, but flow is better */
         }
+        .logo {
+            position: relative;
+        }
         .logo a {
-          display: flex;
-          align-items: center;
+            display: flex;
+            align-items: center;
         }
         .logo-image {
-            height: 180px; /* Requested size */
+            position: absolute;
+            height: 180px;
             width: auto;
+            top: 50%;
+            transform: translateY(-40%); /* Slightly down from purely centered (-50%) to avoid top clipping */
+            left: 0;
+            z-index: 2000;
             transition: all 0.3s ease;
-            filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
-            /* Hanging effect: Push down to align top-ish with header and hang out bottom */
-            /* Header content is centered. 100px height. Center line 50. */
-            /* Logo 180px. Center line 90. Difference 40. */
-            /* Default transform centers it, so top is -40px. We need +40px to start at 0? */
-            /* Let's adjust margin-top. */
-            margin-top: 50px; 
-            position: relative;
-            z-index: 1001;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); /* Stronger shadow for floating effect */
         }
         .header-scrolled .logo-image {
-            height: 140px; /* Slightly smaller on scroll but still hanging */
-            margin-top: 40px;
+            height: 120px;
+            transform: translateY(-40%);
         }
         .nav-list {
           display: flex;
