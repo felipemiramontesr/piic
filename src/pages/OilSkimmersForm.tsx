@@ -26,6 +26,7 @@ interface FormData {
     location: string;
     container_type: string[];
     container_other: string;
+    neighborhood_other: string;
 }
 
 interface SepomexZipCode {
@@ -56,7 +57,8 @@ const initialFormState: FormData = {
     voltage: '',
     location: '',
     container_type: [],
-    container_other: ''
+    container_other: '',
+    neighborhood_other: ''
 };
 
 export default function OilSkimmersForm() {
@@ -109,9 +111,13 @@ export default function OilSkimmersForm() {
 
             // Auto-fill zip code when colonia is selected
             if (name === 'neighborhood') {
-                const selectedColonia = coloniasList.find(c => c.d_asenta === value);
-                if (selectedColonia) {
-                    newState.zip_code = selectedColonia.d_codigo;
+                if (value === 'Otra') {
+                    newState.zip_code = '';
+                } else {
+                    const selectedColonia = coloniasList.find(c => c.d_asenta === value);
+                    if (selectedColonia) {
+                        newState.zip_code = selectedColonia.d_codigo;
+                    }
                 }
             }
 
@@ -270,27 +276,32 @@ export default function OilSkimmersForm() {
                                         ))}
                                     </select>
                                 </div>
-                                <div className="form-group col-span-2">
+                                <div className="form-group">
                                     <label>Colonia / Asentamiento *</label>
-                                    <div className="input-with-list">
-                                        <input
-                                            required
-                                            name="neighborhood"
-                                            value={formData.neighborhood}
-                                            onChange={handleChange}
-                                            list="colonias-datalist"
-                                            className="form-input"
-                                            placeholder={isLoadingColonias ? "Cargando sugerencias..." : "Escriba o seleccione su colonia"}
-                                        />
-                                        <datalist id="colonias-datalist">
-                                            {coloniasList.map((colonia, index) => (
-                                                <option key={`${colonia.d_asenta}-${index}`} value={colonia.d_asenta} />
-                                            ))}
-                                        </datalist>
-                                        {!isLoadingColonias && formData.city && coloniasList.length === 0 && (
-                                            <span className="input-hint">No se encontraron sugerencias, puede escribirla manualmente.</span>
+                                    <select
+                                        required
+                                        name="neighborhood"
+                                        value={formData.neighborhood}
+                                        onChange={handleChange}
+                                        className="form-input"
+                                        disabled={!formData.city || isLoadingColonias}
+                                    >
+                                        <option value="">
+                                            {!formData.city
+                                                ? 'Primero seleccione un municipio'
+                                                : isLoadingColonias
+                                                    ? 'Cargando colonias...'
+                                                    : 'Seleccione una colonia'}
+                                        </option>
+                                        {coloniasList.map((colonia, index) => (
+                                            <option key={`${colonia.d_asenta}-${index}`} value={colonia.d_asenta}>
+                                                {colonia.d_asenta}
+                                            </option>
+                                        ))}
+                                        {!isLoadingColonias && formData.city && (
+                                            <option value="Otra">-- Otra (Especificar) --</option>
                                         )}
-                                    </div>
+                                    </select>
                                 </div>
                                 <div className="form-group">
                                     <label>Código Postal *</label>
@@ -302,8 +313,24 @@ export default function OilSkimmersForm() {
                                         type="text"
                                         className="form-input"
                                         placeholder="Ej. 12345"
+                                        readOnly={formData.neighborhood !== '' && formData.neighborhood !== 'Otra'}
                                     />
                                 </div>
+
+                                {formData.neighborhood === 'Otra' && (
+                                    <div className="form-group col-span-2">
+                                        <label>Especifique su Colonia *</label>
+                                        <input
+                                            required
+                                            name="neighborhood_other"
+                                            value={formData.neighborhood_other}
+                                            onChange={handleChange}
+                                            type="text"
+                                            className="form-input"
+                                            placeholder="Escriba el nombre de su colonia"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </section>
 

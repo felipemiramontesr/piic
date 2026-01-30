@@ -21,7 +21,7 @@ $fields = [
     'Datos de la Empresa' => [
         'Compañía' => $_POST['company_name'] ?? '',
         'Dirección (Calle y No.)' => $_POST['address'] ?? '',
-        'Colonia' => $_POST['neighborhood'] ?? '',
+        'Colonia' => (($_POST['neighborhood'] ?? '') === 'Otra' ? ($_POST['neighborhood_other'] ?? '') : ($_POST['neighborhood'] ?? '')),
         'Ciudad' => $_POST['city'] ?? '',
         'Estado' => $_POST['state'] ?? '',
         'CP' => $_POST['zip_code'] ?? '',
