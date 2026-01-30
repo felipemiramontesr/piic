@@ -79,6 +79,13 @@
     padding-bottom: 0;
 }
 
+.form-section-description {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
 .form-section h3 {
     color: var(--color-primary);
     font-size: 18px;
