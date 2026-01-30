@@ -53,6 +53,42 @@ describe('Contact Component', () => {
             method: 'POST',
             body: expect.stringContaining('"name":"Juan Perez"'),
         }));
+
+        // Verify consent is transmitted
+        expect(globalThis.fetch).toHaveBeenCalledWith('/mail.php', expect.objectContaining({
+            body: expect.stringContaining('"consent":false'), // Default unchecked
+        }));
+    });
+
+    it('transmits consent when checkbox is checked', async () => {
+        (globalThis.fetch as Mock).mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({ status: 'success', message: 'Mensaje enviado' }),
+        });
+
+        render(<Contact />);
+
+        // Fill minimum required fields
+        fireEvent.change(screen.getByLabelText(/Nombre/i), { target: { value: 'Consent User' } });
+        fireEvent.change(screen.getByLabelText(/Empresa/i), { target: { value: 'Consent Corp' } });
+        fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'consent@corp.com' } });
+        fireEvent.change(screen.getByLabelText(/Mensaje/i), { target: { value: 'Checking consent' } });
+
+        // Check the consent box
+        const consentCheckbox = screen.getByLabelText(/Deseo que me contacten/i);
+        fireEvent.click(consentCheckbox);
+
+        // Submit
+        fireEvent.click(screen.getByRole('button', { name: /Enviar solicitud/i }));
+
+        await waitFor(() => {
+            expect(screen.getByText(/¡Mensaje enviado con éxito!/i)).toBeInTheDocument();
+        });
+
+        // Verify payload explicitly contains consent: true
+        expect(globalThis.fetch).toHaveBeenCalledWith('/mail.php', expect.objectContaining({
+            body: expect.stringContaining('"consent":true'),
+        }));
     });
 
     it('handles API errors correctly', async () => {
