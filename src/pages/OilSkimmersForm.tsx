@@ -272,29 +272,27 @@ export default function OilSkimmersForm() {
                                 </div>
                                 <div className="form-group col-span-2">
                                     <label>Colonia / Asentamiento *</label>
-                                    <select
-                                        required
-                                        name="neighborhood"
-                                        value={formData.neighborhood}
-                                        onChange={handleChange}
-                                        className="form-input"
-                                        disabled={!formData.city || isLoadingColonias}
-                                    >
-                                        <option value="">
-                                            {!formData.city
-                                                ? 'Primero seleccione un municipio'
-                                                : isLoadingColonias
-                                                    ? 'Cargando colonias...'
-                                                    : 'Seleccione una colonia'}
-                                        </option>
-                                        {coloniasList.map((colonia, index) => (
-                                            <option key={`${colonia.d_asenta}-${index}`} value={colonia.d_asenta}>
-                                                {colonia.d_asenta}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <div className="input-with-list">
+                                        <input
+                                            required
+                                            name="neighborhood"
+                                            value={formData.neighborhood}
+                                            onChange={handleChange}
+                                            list="colonias-datalist"
+                                            className="form-input"
+                                            placeholder={isLoadingColonias ? "Cargando sugerencias..." : "Escriba o seleccione su colonia"}
+                                        />
+                                        <datalist id="colonias-datalist">
+                                            {coloniasList.map((colonia, index) => (
+                                                <option key={`${colonia.d_asenta}-${index}`} value={colonia.d_asenta} />
+                                            ))}
+                                        </datalist>
+                                        {!isLoadingColonias && formData.city && coloniasList.length === 0 && (
+                                            <span className="input-hint">No se encontraron sugerencias, puede escribirla manualmente.</span>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="form-group col-span-2">
+                                <div className="form-group">
                                     <label>Código Postal *</label>
                                     <input
                                         required
@@ -303,8 +301,7 @@ export default function OilSkimmersForm() {
                                         onChange={handleChange}
                                         type="text"
                                         className="form-input"
-                                        placeholder="Se llenará automáticamente"
-                                        readOnly={!!formData.neighborhood && formData.zip_code !== ''}
+                                        placeholder="Ej. 12345"
                                     />
                                 </div>
                             </div>
