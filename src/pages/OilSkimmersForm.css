@@ -2,7 +2,6 @@
     background-color: var(--color-bg);
     min-height: 100vh;
     padding-top: 140px;
-    /* Account for fixed header */
     padding-bottom: 80px;
     padding-left: 20px;
     padding-right: 20px;
@@ -15,7 +14,6 @@
     background-color: var(--color-white);
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(15, 42, 68, 0.1);
-    /* Shadow with primary color tint */
     overflow: hidden;
     border: 1px solid var(--color-border);
 }
@@ -36,7 +34,6 @@
 
 .oil-form-header p {
     color: #E5E7EB;
-    /* Light gray */
     font-size: 16px;
     margin: 0;
 }
