@@ -18,7 +18,7 @@ require_once 'SimpleSMTP.php';
 $smtp_host = 'smtp.hostinger.com';
 $smtp_port = 465;
 $smtp_user = 'ventas@piic.com.mx';
-$smtp_pass = 'Ventas$101609'; // Single quotes are important for $
+$smtp_pass = 'Ventaspiic$101609'; // Single quotes are important for $
 
 echo "Configuration:\n";
 echo "Host: $smtp_host\n";

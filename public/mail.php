@@ -42,7 +42,7 @@ require_once 'SimpleSMTP.php';
 $smtp_host = 'smtp.hostinger.com';
 $smtp_port = 465;
 $smtp_user = 'ventas@piic.com.mx';
-$smtp_pass = 'Ventas$101609';
+$smtp_pass = 'Ventaspiic$101609';
 
 $mailer = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
 
