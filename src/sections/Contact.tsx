@@ -2,74 +2,113 @@ import React, { useState } from 'react';
 import Button from '../components/Button';
 
 const Contact: React.FC = () => {
-    const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setSubmitted(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setErrorMessage('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      company: formData.get('company'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      message: formData.get('message'),
+      consent: formData.get('consent') === 'on'
     };
 
-    return (
-        <section id="contacto" className="section">
-            <div className="container">
-                <div className="contact-grid">
-                    <div className="contact-info">
-                        <h2>Hablemos de su próximo requerimiento</h2>
-                        <p>Estamos listos para atender las necesidades de su empresa con profesionalismo y rapidez.</p>
-                        <div className="contact-details">
-                            <div className="detail-item">
-                                <strong>📍 Ubicación</strong>
-                                <p>Distrito Industrial, México</p>
-                            </div>
-                            <div className="detail-item">
-                                <strong>📧 Email</strong>
-                                <p>contacto@piic.com.mx</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="contact-form-container">
-                        {submitted ? (
-                            <div className="success-message">
-                                <h3>¡Mensaje enviado con éxito!</h3>
-                                <p>Nos pondremos en contacto con usted a la brevedad posible.</p>
-                                <Button onClick={() => setSubmitted(false)}>Enviar otro mensaje</Button>
-                            </div>
-                        ) : (
-                            <form className="contact-form" onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label htmlFor="name">Nombre</label>
-                                    <input type="text" id="name" required placeholder="Su nombre completo" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="company">Empresa</label>
-                                    <input type="text" id="company" required placeholder="Nombre de su empresa" />
-                                </div>
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="email">Email</label>
-                                        <input type="email" id="email" required placeholder="correo@empresa.com" />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="phone">Teléfono</label>
-                                        <input type="tel" id="phone" placeholder="+52 (000) 000-0000" />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="message">Mensaje / Requerimiento</label>
-                                    <textarea id="message" rows={4} placeholder="Detalle su solicitud aquí..."></textarea>
-                                </div>
-                                <div className="form-checkbox">
-                                    <input type="checkbox" id="consent" />
-                                    <label htmlFor="consent">Deseo que me contacten para cotización</label>
-                                </div>
-                                <Button className="submit-btn" variant="primary">Enviar solicitud</Button>
-                            </form>
-                        )}
-                    </div>
-                </div>
-            </div>
+    try {
+      const response = await fetch('/mail.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-            <style>{`
+      const result = await response.json();
+
+      if (response.ok && result.status === 'success') {
+        setStatus('success');
+        setSubmitted(true);
+      } else {
+        setStatus('error');
+        setErrorMessage(result.message || 'Error al enviar el mensaje.');
+      }
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage('Hubo un problema de conexión. Intente nuevamente.');
+    }
+  };
+
+  return (
+    <section id="contacto" className="section">
+      <div className="container">
+        <div className="contact-grid">
+          <div className="contact-info">
+            <h2>Hablemos de su próximo requerimiento</h2>
+            <p>Estamos listos para atender las necesidades de su empresa con profesionalismo y rapidez.</p>
+            <div className="contact-details">
+              <div className="detail-item">
+                <strong>📍 Ubicación</strong>
+                <p>Distrito Industrial, México</p>
+              </div>
+              <div className="detail-item">
+                <strong>📧 Email</strong>
+                <p>contacto@piic.com.mx</p>
+              </div>
+            </div>
+          </div>
+          <div className="contact-form-container">
+            {status === 'success' ? (
+              <div className="success-message">
+                <h3>¡Mensaje enviado con éxito!</h3>
+                <p>Nos pondremos en contacto con usted a la brevedad posible.</p>
+                <Button onClick={() => { setStatus('idle'); setSubmitted(false); }}>Enviar otro mensaje</Button>
+              </div>
+            ) : (
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="name">Nombre</label>
+                  <input type="text" id="name" name="name" required placeholder="Su nombre completo" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="company">Empresa</label>
+                  <input type="text" id="company" name="company" required placeholder="Nombre de su empresa" />
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="correo@empresa.com" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+52 (000) 000-0000" />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message">Mensaje / Requerimiento</label>
+                  <textarea id="message" name="message" rows={4} placeholder="Detalle su solicitud aquí..." required></textarea>
+                </div>
+                <div className="form-checkbox">
+                  <input type="checkbox" id="consent" name="consent" />
+                  <label htmlFor="consent">Deseo que me contacten para cotización</label>
+                </div>
+                {status === 'error' && <p className="error-text" style={{ color: 'red', marginBottom: '15px' }}>{errorMessage}</p>}
+                <Button className="submit-btn" variant="primary">
+                  {status === 'submitting' ? 'Enviando...' : 'Enviar solicitud'}
+                </Button>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
         .contact-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -158,8 +197,8 @@ const Contact: React.FC = () => {
           .form-row { grid-template-columns: 1fr; }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Contact;
