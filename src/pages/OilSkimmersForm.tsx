@@ -28,6 +28,16 @@ interface FormData {
     container_other: string;
 }
 
+interface SepomexZipCode {
+    id: number;
+    d_codigo: string;
+    d_asenta: string;
+    d_tipo_asenta: string;
+    d_mnpio: string;
+    d_estado: string;
+    d_ciudad?: string;
+}
+
 const initialFormState: FormData = {
     company_name: '',
     address: '',
@@ -54,7 +64,7 @@ export default function OilSkimmersForm() {
     const [file, setFile] = useState<File | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-    const [coloniasList, setColoniasList] = useState<any[]>([]);
+    const [coloniasList, setColoniasList] = useState<SepomexZipCode[]>([]);
     const [isLoadingColonias, setIsLoadingColonias] = useState(false);
 
     // Fetch colonias when state and city change
