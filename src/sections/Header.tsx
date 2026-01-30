@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           left: 0;
           width: 100%;
           height: 100px;
-          background-color: #163b5c; /* Lighter than #0F2A44 for better visibility */
+          background-color: var(--color-primary); /* Match form header color */
           color: var(--color-white);
           display: flex;
           align-items: center;
