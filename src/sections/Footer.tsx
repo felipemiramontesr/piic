@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="footer-contact">
             <h3>Contacto</h3>
-            <p>Email: contacto@piic.com.mx</p>
+            <p>Email: <a href="mailto:contacto@piic.com.mx" style={{ color: 'inherit', textDecoration: 'none' }}>contacto@piic.com.mx</a></p>
             <p>Tel: <a href="tel:4929421780" style={{ color: 'inherit', textDecoration: 'none' }}>(492) 942 1780</a></p>
             <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
           </div>

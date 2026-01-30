@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
               </div>
               <div className="detail-item">
                 <strong>📧 Email</strong>
-                <p>contacto@piic.com.mx</p>
+                <p><a href="mailto:contacto@piic.com.mx" style={{ color: 'inherit', textDecoration: 'none' }}>contacto@piic.com.mx</a></p>
               </div>
               <div className="detail-item">
                 <strong>📞 Teléfono</strong>
