@@ -17,13 +17,27 @@ const Hero: React.FC = () => {
 
             <style>{`
         .hero-section {
-          background-color: var(--color-primary);
+          position: relative;
+          background-image: linear-gradient(rgba(15, 42, 68, 0.9), rgba(15, 42, 68, 0.75)), url('/assets/hero-bg.png');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
           color: var(--color-white);
           min-height: 100vh;
           display: flex;
           align-items: center;
           padding-top: 80px;
           text-align: left;
+        }
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle at 20% 50%, rgba(242, 183, 5, 0.05), transparent 40%);
+          pointer-events: none;
         }
         .hero-container {
           display: flex;
