@@ -11,7 +11,7 @@
 }
 
 .oil-form-container {
-    max-width: 800px;
+    max-width: 1200px;
     width: calc(100% - 40px);
     margin: 0 auto 80px;
     background-color: var(--color-white);
