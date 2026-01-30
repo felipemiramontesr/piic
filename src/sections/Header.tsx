@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           top: 0;
           left: 0;
           width: 100%;
-          height: 80px;
+          height: 100px;
           background-color: var(--color-primary);
           color: var(--color-white);
           display: flex;
@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           transition: all 0.3s ease;
         }
         .header-scrolled {
-          height: 70px;
+          height: 80px;
           box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .header-container {
@@ -79,13 +79,13 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           align-items: center;
         }
         .logo-image {
-            height: 70px;
+            height: 90px;
             width: auto;
             transition: all 0.3s ease;
             filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
         }
         .header-scrolled .logo-image {
-            height: 55px;
+            height: 70px;
         }
         .nav-list {
           display: flex;
