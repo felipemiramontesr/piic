@@ -28,7 +28,14 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
 
         {simpleMode ? (
           <div className="nav-simple">
-            <a href="https://piic.com.mx/" className="simple-link">Ver nuestro sitio web &rarr;</a>
+            <a href="https://piic.com.mx/" className="simple-link">
+              <svg xmlns="http://www.w3.org/2000/svg" className="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Ver nuestro sitio web
+            </a>
           </div>
         ) : (
           <>
@@ -73,19 +80,29 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           display: flex;
           justify-content: space-between;
           align-items: center;
+          position: relative; /* Context for logo absolute potentially, but flow is better */
         }
         .logo a {
           display: flex;
           align-items: center;
         }
         .logo-image {
-            height: 90px;
+            height: 180px; /* Requested size */
             width: auto;
             transition: all 0.3s ease;
             filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
+            /* Hanging effect: Push down to align top-ish with header and hang out bottom */
+            /* Header content is centered. 100px height. Center line 50. */
+            /* Logo 180px. Center line 90. Difference 40. */
+            /* Default transform centers it, so top is -40px. We need +40px to start at 0? */
+            /* Let's adjust margin-top. */
+            margin-top: 50px; 
+            position: relative;
+            z-index: 1001;
         }
         .header-scrolled .logo-image {
-            height: 70px;
+            height: 140px; /* Slightly smaller on scroll but still hanging */
+            margin-top: 40px;
         }
         .nav-list {
           display: flex;
@@ -102,16 +119,21 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           color: var(--color-accent);
         }
         .simple-link {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between icon and text */
             color: var(--color-white);
             font-weight: 600;
             font-size: 15px;
-            text-decoration: none;
-            border-bottom: 2px solid var(--color-accent);
-            padding-bottom: 2px;
+            text-decoration: none; /* No underline */
             transition: all 0.3s ease;
         }
         .simple-link:hover {
             color: var(--color-accent);
+        }
+        .icon-globe {
+            width: 20px;
+            height: 20px;
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }
