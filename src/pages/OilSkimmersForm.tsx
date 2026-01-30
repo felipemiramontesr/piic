@@ -32,12 +32,12 @@ const initialFormState: FormData = {
     email: '',
     phone: '',
     mobile_phone: '',
-    oil_floats: 'yes',
-    viscosity: 'medium',
+    oil_floats: '', // No default
+    viscosity: '', // No default
     viscosity_other: '',
     oil_amount: '',
-    voltage: '120',
-    location: 'interior',
+    voltage: '', // No default
+    location: '', // No default
     container_type: [],
     container_other: ''
 };
@@ -72,6 +72,13 @@ export default function OilSkimmersForm() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        // Custom validation: At least one container type
+        if (formData.container_type.length === 0) {
+            alert('Por favor seleccione al menos un tipo de contenedor.');
+            return;
+        }
+
         setIsSubmitting(true);
         setStatus('idle');
 
@@ -186,11 +193,11 @@ export default function OilSkimmersForm() {
                                     <label>¿El aceite flota?</label>
                                     <div className="form-radio-group">
                                         <label className="radio-label">
-                                            <input type="radio" name="oil_floats" value="yes" checked={formData.oil_floats === 'yes'} onChange={handleChange} />
+                                            <input required type="radio" name="oil_floats" value="yes" checked={formData.oil_floats === 'yes'} onChange={handleChange} />
                                             Sí
                                         </label>
                                         <label className="radio-label">
-                                            <input type="radio" name="oil_floats" value="no" checked={formData.oil_floats === 'no'} onChange={handleChange} />
+                                            <input required type="radio" name="oil_floats" value="no" checked={formData.oil_floats === 'no'} onChange={handleChange} />
                                             No
                                         </label>
                                     </div>
@@ -204,13 +211,13 @@ export default function OilSkimmersForm() {
                                     <div className="form-radio-group">
                                         {['light', 'medium', 'heavy', 'other'].map((v) => (
                                             <label key={v} className="radio-label">
-                                                <input type="radio" name="viscosity" value={v} checked={formData.viscosity === v} onChange={handleChange} />
+                                                <input required type="radio" name="viscosity" value={v} checked={formData.viscosity === v} onChange={handleChange} />
                                                 {v === 'other' ? 'Otro' : v === 'light' ? 'Ligero' : v === 'medium' ? 'Medio' : 'Pesado'}
                                             </label>
                                         ))}
                                     </div>
                                     {formData.viscosity === 'other' && (
-                                        <input type="text" name="viscosity_other" placeholder="Especifique..." value={formData.viscosity_other} onChange={handleChange} className="form-input" style={{ marginTop: '10px' }} />
+                                        <input required type="text" name="viscosity_other" placeholder="Especifique..." value={formData.viscosity_other} onChange={handleChange} className="form-input" style={{ marginTop: '10px' }} />
                                     )}
                                 </div>
 
@@ -229,11 +236,11 @@ export default function OilSkimmersForm() {
                                     <label>Voltaje disponible</label>
                                     <div className="form-radio-group">
                                         <label className="radio-label">
-                                            <input type="radio" name="voltage" value="120" checked={formData.voltage === '120'} onChange={handleChange} />
+                                            <input required type="radio" name="voltage" value="120" checked={formData.voltage === '120'} onChange={handleChange} />
                                             120 V
                                         </label>
                                         <label className="radio-label">
-                                            <input type="radio" name="voltage" value="240" checked={formData.voltage === '240'} onChange={handleChange} />
+                                            <input required type="radio" name="voltage" value="240" checked={formData.voltage === '240'} onChange={handleChange} />
                                             240 V
                                         </label>
                                     </div>
@@ -246,11 +253,11 @@ export default function OilSkimmersForm() {
                                     <label>Entorno</label>
                                     <div className="form-radio-group">
                                         <label className="radio-label">
-                                            <input type="radio" name="location" value="interior" checked={formData.location === 'interior'} onChange={handleChange} />
+                                            <input required type="radio" name="location" value="interior" checked={formData.location === 'interior'} onChange={handleChange} />
                                             Interior
                                         </label>
                                         <label className="radio-label">
-                                            <input type="radio" name="location" value="exterior" checked={formData.location === 'exterior'} onChange={handleChange} />
+                                            <input required type="radio" name="location" value="exterior" checked={formData.location === 'exterior'} onChange={handleChange} />
                                             Exterior
                                         </label>
                                     </div>
