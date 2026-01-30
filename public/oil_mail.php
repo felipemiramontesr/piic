@@ -162,32 +162,41 @@ if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $headers_client = "From: PIIC <$smtp_user>\r\n";
     $headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-    $client_body = '
+    $client_body = "
     <html>
-    <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-top: 5px solid #0F2A44; border-bottom: 5px solid #0F2A44; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <tr>
-                <td style="background-color: #ffffff; text-align: center; padding: 25px; border-bottom: 1px solid #eeeeee;">
-                    <img src="https://piic.com.mx/logo.png" alt="PIIC" style="max-width: 180px; height: auto; display: block; margin: 0 auto;">
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 40px 30px; color: #333333;">
-                    <h2 style="color: #0F2A44; margin-top: 0; font-size: 24px;">¡Gracias por contactarnos,<br>' . htmlspecialchars($contact_name) . '!</h2>
-                    <p style="font-size: 16px; line-height: 1.6; color: #555;">
-                        Hemos recibido exitosamente la información técnica de tu aplicación de <strong>Oil Skimmers</strong>.
+    <body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
+        <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
+            
+            <!-- Header -->
+            <div style='background-color: #0F2A44; padding: 30px; text-align: center;'>
+                <img src='https://piic.com.mx/logo.png' alt='PIIC' style='max-width: 150px; margin-bottom: 15px;'>
+                <h1 style='color: #ffffff; margin: 0; font-size: 22px; text-transform: uppercase;'>¡Solicitud Recibida!</h1>
+            </div>
+
+            <div style='padding: 30px;'>
+                <h2 style='color: #0F2A44; margin-top: 0;'>¡Gracias por contactarnos, " . htmlspecialchars($contact_name) . "!</h2>
+                <p style='color: #444; font-size: 16px; line-height: 1.6;'>
+                    Hemos recibido exitosamente la información técnica de tu aplicación para <strong>Oil Skimmers</strong>.
+                </p>
+                
+                <div style='background-color: #f8fafc; border-left: 4px solid #f2b705; padding: 15px; margin: 25px 0;'>
+                    <p style='margin: 0; color: #334155; font-size: 15px;'>
+                        Nuestro equipo de ingeniería analizará los datos proporcionados para determinar la mejor solución técnica para tu proceso. Un asesor experto se pondrá en contacto contigo a la brevedad.
                     </p>
-                    <p style="font-size: 16px; line-height: 1.6; color: #555;">
-                        Nuestro equipo de ingeniería analizará los datos proporcionados para determinar la mejor solución técnica para tu proceso. Un asesor se pondrá en contacto contigo a la brevedad.
-                    </p>
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; font-size: 14px; color: #999;">
-                        &copy; ' . date("Y") . ' Proveedora de Insumos Industriales y Comerciales
-                    </div>
-                </td>
-            </tr>
-        </table>
+                </div>
+
+                <p style='color: #666; font-size: 14px;'>
+                    Si tienes alguna duda inmediata, puedes responder directamente a este correo.
+                </p>
+
+                <div style='margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 12px;'>
+                    &copy; " . date("Y") . " Proveedora de Insumos Industriales y Comerciales<br>
+                    <a href='https://piic.com.mx' style='color: #0F2A44; text-decoration: none; font-weight: bold;'>piic.com.mx</a>
+                </div>
+            </div>
+        </div>
     </body>
-    </html>';
+    </html>";
 
     // We don't fail if client email fails, just best effort
     $mailer->send($email, $subject_client, $client_body, $headers_client);
