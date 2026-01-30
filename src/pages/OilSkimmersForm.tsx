@@ -186,8 +186,8 @@ export default function OilSkimmersForm() {
                                     <input required name="company_name" value={formData.company_name} onChange={handleChange} type="text" className="form-input" />
                                 </div>
                                 <div className="form-group col-span-2">
-                                    <label>Dirección *</label>
-                                    <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" />
+                                    <label>Dirección (Calle, número y colonia) *</label>
+                                    <input required name="address" value={formData.address} onChange={handleChange} type="text" className="form-input" placeholder="Ej. Av. Universidad 123, Col. Centro" />
                                 </div>
                                 <div className="form-group">
                                     <label>Estado *</label>
