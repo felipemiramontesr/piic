@@ -1,21 +1,32 @@
 .oil-form-page {
     background-color: var(--color-bg);
     min-height: 100vh;
-    padding-top: 140px;
-    padding-bottom: 80px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    margin: 0;
+    padding: 140px 0 0;
     font-family: var(--font-main);
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 .oil-form-container {
     max-width: 800px;
-    margin: 0 auto 60px;
+    width: calc(100% - 40px);
+    margin: 0 auto 80px;
     background-color: var(--color-white);
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(15, 42, 68, 0.1);
     overflow: hidden;
     border: 1px solid var(--color-border);
+    flex-shrink: 0;
+}
+
+.oil-form-page .footer {
+    width: 100%;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .oil-form-header {
