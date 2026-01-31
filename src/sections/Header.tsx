@@ -208,19 +208,20 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .mobile-menu {
           position: fixed;
           top: 0;
-          right: -100%;
+          right: 0;
           width: 100%;
           height: 100vh;
           background-color: rgba(15, 42, 68, 0.98);
           backdrop-filter: blur(10px);
           z-index: 999;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translateX(100%);
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           display: flex;
           justify-content: flex-end;
           visibility: hidden;
         }
         .mobile-menu.open {
-          right: 0;
+          transform: translateX(0);
           visibility: visible;
         }
         .mobile-menu-content {
