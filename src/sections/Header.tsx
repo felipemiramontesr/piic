@@ -297,7 +297,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             28.58% { transform: translateX(0); }
             100% { transform: translateX(0); }
         }
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
           .nav, .nav-cta { display: none; }
           .menu-trigger { display: block; }
         }
