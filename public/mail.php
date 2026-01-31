@@ -189,13 +189,10 @@ if (!$mailer->send($to_admin, $subject_admin, $body_admin, $headers_admin)) {
 }
 
 // 2. Send Client Auto-reply
-$mailer_client = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
-$headers_client = "MIME-Version: 1.0\r\n";
+$headers_client = "From: PIIC <$smtp_user>\r\n";
 $headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers_client .= "From: Proveedora de Insumos Industriales <$smtp_user>\r\n";
-$headers_client .= "Reply-To: $smtp_user\r\n";
 
-$mailer_client->send($email, $subject_client, $body_client, $headers_client);
+$mailer->send($email, $subject_client, $body_client, $headers_client);
 
 // Success Response
 http_response_code(200);

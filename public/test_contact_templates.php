@@ -121,16 +121,19 @@ if ($action === 'both') {
     $ok_admin = $mailer->send($test_admin_email, "TEST: Reporte Contacto Homologado", $preview_admin, $h_admin);
 
     // Small pause to prevent SMTP race conditions
-    usleep(500000); // 0.5s
+    usleep(800000); // 0.8s
 
     // Client headers
-    $h_client = $base_headers . "From: Proveedora de Insumos Industriales <$smtp_user>\r\n";
-    $ok_client = $mailer->send($test_client_email, "TEST: Confirmación Contacto Homologada", $preview_client, $h_client);
+    $h_client = "From: PIIC <$smtp_user>\r\n";
+    $h_client .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $ok_client = $mailer->send($test_client_email, "TEST: Confirmacion Contacto PIIC", $preview_client, $h_client);
 
     if ($ok_admin && $ok_client) {
         $status = "<div style='background:#dcfce7; color:#166534; padding:20px; border-radius:8px; margin-bottom:20px;'>✅ ¡Correos enviados con éxito a <b>$test_admin_email</b> e <b>$test_client_email</b>!</div>";
     } else {
-        $status = "<div style='background:#fee2e2; color:#991b1b; padding:20px; border-radius:8px; margin-bottom:20px;'>❌ Error al enviar los correos. Verifique su configuración SMTP.</div>";
+        $error_msg = $ok_admin ? "" : "Error en envío Admin. ";
+        $error_msg .= $ok_client ? "" : "Error en envío Cliente (Gmail). ";
+        $status = "<div style='background:#fee2e2; color:#991b1b; padding:20px; border-radius:8px; margin-bottom:20px;'>❌ $error_msg Verifique el archivo <b>smtp_debug.log</b> en el servidor.</div>";
     }
 }
 ?>
