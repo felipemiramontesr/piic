@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CookieBanner: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
+    const [isVisible, setIsVisible] = useState(() => {
         const consent = localStorage.getItem('piic_cookie_consent');
-        if (!consent) {
-            setIsVisible(true);
-        }
-    }, []);
+        return !consent;
+    });
 
     const handleAccept = () => {
         localStorage.setItem('piic_cookie_consent', 'true');
