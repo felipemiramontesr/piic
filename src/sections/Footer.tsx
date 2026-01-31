@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
               </svg>
               <h2 className="footer-logo">PIIC</h2>
             </div>
-            <p>Proveedora de Insumos Industriales y Comerciales</p>
+            <p className="footer-description">Proveedora de Insumos Industriales y Comerciales</p>
           </div>
           <div className="footer-contact">
             <h3>Contacto</h3>
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
             <p>
               <a href="tel:4929421780">(492) 942 1780</a>
             </p>
-            <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
+            <p className="footer-address">Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
           </div>
         </div>
         <div className="footer-bottom">
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
       <style>{`
         .footer {
           background-color: var(--color-secondary);
-          color: var(--color-accent);
+          color: var(--color-white);
           padding: 60px 0 30px;
         }
         .footer-grid {
@@ -65,20 +65,26 @@ const Footer: React.FC = () => {
           height: 32px;
         }
         .footer-logo {
-          color: var(--color-accent);
+          color: var(--color-white);
           font-size: 28px;
           margin-bottom: 0;
         }
+        .footer-description {
+          color: var(--color-white);
+        }
         .footer h3 {
-          color: var(--color-accent);
+          color: var(--color-white);
           margin-bottom: 20px;
         }
         .footer-contact p {
-          color: var(--color-accent);
           margin-bottom: 10px;
+          color: var(--color-white);
+        }
+        .footer-address {
+          color: var(--color-white);
         }
         .footer-contact a {
-          color: inherit;
+          color: var(--color-accent);
           text-decoration: none;
           display: inline-block;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -96,7 +102,7 @@ const Footer: React.FC = () => {
         }
         .footer-bottom p { margin: 0; }
         .footer-policy-link {
-          color: inherit;
+          color: var(--color-accent);
           text-decoration: underline;
           display: inline-block;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
