@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
                   <i className="fa-solid fa-location-dot contact-icon"></i>
                   <strong>Ubicación</strong>
                 </div>
-                <p>Av. Barones, 209, Colonia Las Americas, Guadalupe, Zacatecas</p>
+                <p>Av. Barones, 209, Colonia Las Americas, Guadalupe, Zacatecas.</p>
               </div>
               <div className="detail-item">
                 <div className="detail-header">
