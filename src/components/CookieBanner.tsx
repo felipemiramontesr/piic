@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const CookieBanner: React.FC = () => {
+  const location = useLocation();
+  const isPolicyPage = location.pathname === '/politicas';
+
   const [isVisible, setIsVisible] = useState(() => {
     const consent = localStorage.getItem('piic_cookie_consent');
     return !consent;
@@ -18,7 +21,7 @@ const CookieBanner: React.FC = () => {
     <div className="cookie-banner">
       <div className="cookie-container">
         <div className="cookie-text">
-          Utilizamos cookies propias y de terceros. Al continuar navegando, acepta nuestra{' '}
+          Utilizamos cookies propias y de terceros. Al continuar navegando, acepta {isPolicyPage ? 'esta' : 'nuestra'}{' '}
           <Link to="/politicas" className="cookie-link">
             política de uso, tratamiento de información y cookies
           </Link>.

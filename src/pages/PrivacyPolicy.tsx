@@ -33,7 +33,7 @@ const PrivacyPolicy: React.FC = () => {
 
       <main className="privacy-container">
         <div className="privacy-hero">
-          <h1>Centro de Privacidad y Legal</h1>
+          <h1>Política de uso, tratamiento de información y cookies</h1>
           <p>Transparencia en el uso y protección de sus datos personales bajo la normativa mexicana.</p>
           <p className="last-update">Última actualización: Enero 2026. PIIC - Zacatecas, México.</p>
         </div>
