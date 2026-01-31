@@ -22,9 +22,13 @@ const CookieBanner: React.FC = () => {
       <div className="cookie-container">
         <div className="cookie-text">
           Utilizamos cookies propias y de terceros. Al continuar navegando, acepta {isPolicyPage ? 'esta' : 'nuestra'}{' '}
-          <Link to="/politicas" className="cookie-link">
-            política de uso, tratamiento de información y cookies
-          </Link>.
+          {isPolicyPage ? (
+            <span className="cookie-copy-text">política de uso, tratamiento de información y cookies</span>
+          ) : (
+            <Link to="/politicas" className="cookie-link">
+              política de uso, tratamiento de información y cookies
+            </Link>
+          )}.
         </div>
         <button className="cookie-button" onClick={handleAccept}>
           ACEPTAR
@@ -68,6 +72,10 @@ const CookieBanner: React.FC = () => {
 
         .cookie-link:hover {
           opacity: 0.8;
+        }
+        
+        .cookie-copy-text {
+          font-weight: 700;
         }
 
         .cookie-button {
