@@ -3,16 +3,27 @@ import React from 'react';
 const Features: React.FC = () => {
   const featureList = [
     {
+      icon: 'fa-solid fa-user-tie',
       title: 'Atención personalizada',
       text: 'Entendemos los requerimientos específicos de cada cliente.',
     },
-    { title: 'Respuesta rápida', text: 'Sabemos que en la industria cada minuto cuenta.' },
-    { title: 'Proveedores confiables', text: 'Solo trabajamos con marcas de calidad comprobada.' },
     {
+      icon: 'fa-solid fa-clock-rotate-left',
+      title: 'Respuesta rápida',
+      text: 'Sabemos que en la industria cada minuto cuenta.',
+    },
+    {
+      icon: 'fa-solid fa-building-shield',
+      title: 'Proveedores confiables',
+      text: 'Solo trabajamos con marcas de calidad comprobada.',
+    },
+    {
+      icon: 'fa-solid fa-clipboard-check',
       title: 'Calidad y cumplimiento',
       text: 'Garantizamos que lo que cotizamos es lo que entregamos.',
     },
     {
+      icon: 'fa-solid fa-handshake-angle',
       title: 'Relación a largo plazo',
       text: 'Buscamos ser socios comerciales, no solo proveedores.',
     },
@@ -27,7 +38,7 @@ const Features: React.FC = () => {
         <div className="features-grid">
           {featureList.map((feature, index) => (
             <div key={index} className="feature-item">
-              <i className="fa-solid fa-circle-check feature-icon"></i>
+              <i className={`${feature.icon} feature-icon`}></i>
               <div className="feature-content">
                 <h3>{feature.title}</h3>
                 <p>{feature.text}</p>
