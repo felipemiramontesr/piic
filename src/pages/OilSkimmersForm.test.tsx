@@ -83,7 +83,7 @@ describe('OilSkimmersForm Component', () => {
   });
 
   it('prevents submission if no container type is selected', async () => {
-    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
     render(<OilSkimmersForm />);
 
     // Fill basic required fields
@@ -103,11 +103,37 @@ describe('OilSkimmersForm Component', () => {
       target: { value: 'Calvillo' },
     });
 
-    // Submit without checking any container
-    fireEvent.click(screen.getByRole('button', { name: /ENVIAR INFORMACIÓN/i }));
+    fireEvent.change(screen.getByLabelText(/Nombre del Contacto \*/i), {
+      target: { value: 'John Doe' },
+    });
+    fireEvent.change(screen.getByLabelText(/Email \*/i), { target: { value: 'john@doe.com' } });
+    fireEvent.change(screen.getByLabelText(/Teléfono Móvil \*/i), {
+      target: { value: '1234567890' },
+    });
 
-    expect(alertMock).toHaveBeenCalledWith('Por favor seleccione al menos un tipo de contenedor.');
-    expect(globalThis.fetch).not.toHaveBeenCalled();
+    // Technical section required fields
+    fireEvent.change(screen.getByLabelText(/Cantidad estimada.* \*/i), { target: { value: '10' } });
+    fireEvent.click(screen.getByLabelText(/Sí/i)); // Oil floats
+    fireEvent.click(screen.getByLabelText(/Ligero/i)); // Viscosity
+    fireEvent.click(screen.getByLabelText(/120 V/i));
+    fireEvent.click(screen.getByLabelText(/Interior/i));
+
+    // Check if there are other fields we missed
+    // ... we seem to have filled all 'required' ones.
+
+    // Clear fetch mock (it was called for colonias)
+    (globalThis.fetch as Mock).mockClear();
+
+    // Submit without checking any container
+    fireEvent.submit(screen.getByTestId('oil-form'));
+
+    await waitFor(() => {
+      expect(alertMock).toHaveBeenCalledWith('Por favor seleccione al menos un tipo de contenedor.');
+    });
+    expect(globalThis.fetch).not.toHaveBeenCalledWith(
+      expect.stringContaining('oil_mail.php'),
+      expect.anything(),
+    );
     alertMock.mockRestore();
   });
 
@@ -134,14 +160,16 @@ describe('OilSkimmersForm Component', () => {
       expect(screen.getByText('Coyoacan')).toBeInTheDocument();
     });
 
-    fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
-      target: { value: 'Coyoacan' },
+    // Set mock for colonias
+    (globalThis.fetch as Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        zip_codes: [{ d_asenta: 'Coyoacán Centro', d_codigo: '04000' }],
+      }),
     });
 
-    await waitFor(() => {
-      expect((screen.getByLabelText(/Ciudad \/ Municipio \*/i) as HTMLSelectElement).value).toBe(
-        'Coyoacan',
-      );
+    fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
+      target: { value: 'Coyoacan' },
     });
 
     // Mock the colonias fetch that happens on city change

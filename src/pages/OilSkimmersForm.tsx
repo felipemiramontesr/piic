@@ -259,7 +259,7 @@ export default function OilSkimmersForm() {
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="oil-form-body">
+          <form onSubmit={handleSubmit} data-testid="oil-form" className="oil-form-body">
             <p className="form-disclaimer">* Campos obligatorios</p>
 
             {/* 1. Datos de la Empresa */}

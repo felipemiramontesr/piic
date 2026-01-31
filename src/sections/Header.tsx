@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         <div className="logo">
           <a href={simpleMode ? 'https://piic.com.mx/' : '#inicio'}>
             <svg className="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" stroke-width="10" />
+              <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" strokeWidth="10" />
               <path d="M50 5 A45 45 0 0 0 50 95 Z" fill="#F2B705" />
             </svg>
             <span className="logo-text">PIIC</span>
