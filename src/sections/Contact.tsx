@@ -98,49 +98,64 @@ const Contact: React.FC = () => {
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Nombre</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    placeholder="Su nombre completo"
-                  />
+                  <div className="form-input-wrapper">
+                    <i className="fa-solid fa-user input-icon"></i>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Su nombre completo"
+                    />
+                  </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="company">Empresa</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    required
-                    placeholder="Nombre de su empresa"
-                  />
+                  <div className="form-input-wrapper">
+                    <i className="fa-solid fa-building input-icon"></i>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      required
+                      placeholder="Nombre de su empresa"
+                    />
+                  </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="correo@empresa.com"
-                    />
+                    <div className="form-input-wrapper">
+                      <i className="fa-solid fa-at input-icon"></i>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="correo@empresa.com"
+                      />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" placeholder="(492) 942 1780" />
+                    <div className="form-input-wrapper">
+                      <i className="fa-solid fa-phone-flip input-icon"></i>
+                      <input type="tel" id="phone" name="phone" placeholder="(492) 942 1780" />
+                    </div>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="message">Mensaje / Requerimiento</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    placeholder="Detalle su solicitud aquí..."
-                    required
-                  ></textarea>
+                  <div className="form-input-wrapper">
+                    <i className="fa-solid fa-pen-nib input-icon textarea-icon"></i>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      placeholder="Detalle su solicitud aquí..."
+                      required
+                    ></textarea>
+                  </div>
                 </div>
                 <div className="form-checkbox">
                   <input type="checkbox" id="consent" name="consent" />
@@ -221,11 +236,34 @@ const Contact: React.FC = () => {
         }
         input, textarea {
           width: 100%;
-          padding: 12px;
+          padding: 12px 12px 12px 40px;
           border: 1px solid var(--color-input-border);
           border-radius: 4px;
           font-family: var(--font-main);
           font-size: 15px;
+          transition: all 0.3s ease;
+        }
+        .form-input-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        .input-icon {
+          position: absolute;
+          left: 15px;
+          color: var(--color-text-secondary);
+          opacity: 0.6;
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+        .textarea-icon {
+          top: 15px;
+          transform: none;
+        }
+        input:focus + .input-icon, 
+        textarea:focus + .input-icon {
+          color: var(--color-primary);
+          opacity: 1;
         }
         input:focus, textarea:focus {
           outline: none;
