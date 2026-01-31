@@ -97,9 +97,12 @@ const Footer: React.FC = () => {
         .footer-nav-list {
           list-style: none;
           padding: 0;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px 30px;
         }
         .footer-nav-list li {
-          margin-bottom: 12px;
+          margin-bottom: 0;
         }
         .footer-nav-list a {
           color: var(--color-accent);
