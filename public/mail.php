@@ -40,90 +40,143 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Configuration
-$to_admin = $smtp_user; // Send to self (authenticated user)
+$to_admin = $smtp_user;
 $subject_admin = "Nueva Solicitud Web: $name ($company)";
 $subject_client = "Hemos recibido tu solicitud - PIIC";
 
-// Logo URL (Must be accessible publicly)
-$logo_url = 'https://piic.com.mx/logo.png';
+// Branding Constants (CSS/VML)
+$logo_css_vml = "
+    <!--[if mso]>
+    <v:oval xmlns:v='urn:schemas-microsoft-com:vml' fillcolor='#F2B705' stroked='t' strokecolor='#F2B705' style='width:30pt;height:30pt;vertical-align:middle;'>
+        <v:fill type='gradient' color2='#0F2A44' angle='90' />
+    </v:oval>
+    <![endif]-->
+    <div style='display: inline-block; width: 40px; height: 40px; border: 4px solid #F2B705; border-radius: 50%; background: linear-gradient(to right, #F2B705 50%, #0F2A44 50%); vertical-align: middle; box-sizing: border-box;'></div>
+";
 
-// --- TEMPLATE GENERATOR ---
-function get_email_template($is_admin, $data, $logo_url)
-{
-  $header_bg = '#0F2A44';
-  $accent_color = '#00C2CB';
-  $text_color = '#333333';
+// Section Icons
+$icon_data = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:4px; position:relative; margin-right:12px; vertical-align:middle; overflow:hidden;'>
+                <div style='position:absolute; top:0; left:7px; width:10px; height:4px; background-color:#0F2A44; border-radius:0 0 2px 2px;'></div>
+                <div style='position:absolute; top:8px; left:4px; width:16px; height:2px; background-color:#0F2A44; opacity:0.8;'></div>
+                <div style='position:absolute; top:13px; left:4px; width:16px; height:2px; background-color:#0F2A44; opacity:0.8;'></div>
+                <div style='position:absolute; top:18px; left:4px; width:10px; height:2px; background-color:#0F2A44; opacity:0.8;'></div>
+              </div>";
 
-  // Header Content
-  $html = '
-    <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-top: 5px solid ' . $header_bg . '; border-bottom: 5px solid ' . $header_bg . '; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-        <tr>
-          <td style="background-color: #ffffff; text-align: center; padding: 25px; border-bottom: 1px solid #eeeeee;">
-            <img src="' . $logo_url . '" alt="PIIC" style="max-width: 180px; height: auto; display: block; margin: 0 auto;">
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 40px 30px; color: ' . $text_color . ';">';
+$icon_user = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:50%; position:relative; margin-right:12px; vertical-align:middle; overflow:hidden;'>
+                <div style='position:absolute; top:4px; left:7px; width:10px; height:10px; background-color:#0F2A44; border-radius:50%;'></div>
+                <div style='position:absolute; bottom:-4px; left:2px; width:20px; height:12px; background-color:#0F2A44; border-radius:10px 10px 0 0;'></div>
+              </div>";
 
-  if ($is_admin) {
-    $html .= '
-            <h2 style="color: ' . $header_bg . '; margin-top: 0; font-size: 22px; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 25px;">Nueva Oportunidad de Negocio</h2>
-            
-            <table width="100%" cellpadding="10" cellspacing="0" style="background-color: #f8f9fa; border-left: 4px solid ' . $header_bg . '; width: 100%;">
-                <tr><td style="padding: 8px 15px;"><strong style="color: ' . $header_bg . '; width: 100px; display: inline-block;">NOMBRE:</strong> ' . $data['name'] . '</td></tr>
-                <tr><td style="padding: 8px 15px;"><strong style="color: ' . $header_bg . '; width: 100px; display: inline-block;">EMPRESA:</strong> ' . $data['company'] . '</td></tr>
-                <tr><td style="padding: 8px 15px;"><strong style="color: ' . $header_bg . '; width: 100px; display: inline-block;">EMAIL:</strong> <a href="mailto:' . $data['email'] . '" style="color: ' . $accent_color . '; text-decoration: none;">' . $data['email'] . '</a></td></tr>
-                <tr><td style="padding: 8px 15px;"><strong style="color: ' . $header_bg . '; width: 100px; display: inline-block;">TELÉFONO:</strong> ' . $data['phone'] . '</td></tr>
-            </table>
-            
-            <div style="margin-top: 25px;">
-                <strong style="color: ' . $header_bg . '; display: block; margin-bottom: 10px;">MENSAJE DEL CLIENTE:</strong>
-                <div style="background-color: #fff; border: 1px solid #eee; padding: 15px; color: #555; line-height: 1.6;">
-                    ' . $data['message'] . '
+// --- Build Admin Body (1400px) ---
+$body_admin = "
+<html>
+<body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
+    <div style='max-width: 1400px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
+
+        <!-- Header Bar -->
+        <table width='100%' cellpadding='0' cellspacing='0' style='background-color: #0F2A44; padding: 20px 40px; border-bottom: 4px solid #f2b705;'>
+            <tr>
+                <td align='left' style='vertical-align: middle;'>
+                    <a href='https://piic.com.mx/' style='text-decoration: none;'>
+                        $logo_css_vml
+                        <span style='color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-left: 15px; vertical-align: middle; text-transform: uppercase;'>PIIC</span>
+                    </a>
+                </td>
+                <td align='right' style='vertical-align: middle;'>
+                    <h1 style='color: #ffffff; margin: 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;'>Nueva Oportunidad de Negocio</h1>
+                    <p style='color: #f2b705; margin: 5px 0 0; font-weight: bold; font-size: 14px;'>Formulario de Contacto General</p>
+                </td>
+            </tr>
+        </table>
+
+        <div style='padding: 40px;'>
+            <p style='color: #444; font-size: 16px; margin-bottom: 30px;'>Se ha recibido una nueva solicitud de contacto a través del portal <strong>piic.com.mx</strong>:</p>
+
+            <!-- Section: Remitente -->
+            <div style='margin-bottom: 30px;'>
+                <h3 style='color: #0F2A44; border-bottom: 2px solid #f2b705; padding-bottom: 8px; margin-bottom: 15px; font-size: 18px; text-transform: uppercase; display: flex; align-items: center;'>
+                    $icon_user INFORMACIÓN DEL REMITENTE
+                </h3>
+                <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse;'>
+                    <tr>
+                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'><span style='color: #f2b705; margin-right: 8px;'>👤</span> Nombre:</td>
+                        <td width='60%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #333; font-size: 15px;'>$name</td>
+                    </tr>
+                    <tr>
+                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'><span style='color: #f2b705; margin-right: 8px;'>🏢</span> Empresa:</td>
+                        <td width='60%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #333; font-size: 15px;'>$company</td>
+                    </tr>
+                    <tr>
+                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'><span style='color: #f2b705; margin-right: 8px;'>✉️</span> Email:</td>
+                        <td width='60%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #333; font-size: 15px;'><a href='mailto:$email' style='color: #0F2A44; text-decoration: none; font-weight: bold;'>$email</a></td>
+                    </tr>
+                    <tr>
+                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'><span style='color: #f2b705; margin-right: 8px;'>📞</span> Teléfono:</td>
+                        <td width='60%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #333; font-size: 15px;'>$phone</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section: Mensaje -->
+            <div style='margin-bottom: 30px;'>
+                <h3 style='color: #0F2A44; border-bottom: 2px solid #f2b705; padding-bottom: 8px; margin-bottom: 15px; font-size: 18px; text-transform: uppercase; display: flex; align-items: center;'>
+                    $icon_data REQUERIMIENTO / MENSAJE
+                </h3>
+                <div style='background-color: #f9f9f9; border: 1px solid #eee; padding: 25px; border-radius: 6px; color: #333; line-height: 1.8; font-size: 16px;'>
+                    $message
                 </div>
-            </div>';
-  } else {
-    // Client Auto-reply
-    $html .= '
-            <h2 style="color: ' . $header_bg . '; margin-top: 0; font-size: 24px;">¡Gracias por contactarnos,<br>' . $data['name'] . '!</h2>
-            <p style="font-size: 16px; line-height: 1.6; color: #555;"> Hemos recibido tu solicitud correctamente.</p>
-            <p style="font-size: 16px; line-height: 1.6; color: #555;">Nuestro equipo comercial analizará tus requerimientos y se pondrá en contacto contigo a la brevedad posible para brindarte la mejor solución industrial.</p>
+            </div>
+
+            <div style='margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 12px;'>
+                Este reporte fue generado automáticamente por el sistema de PIIC.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+";
+
+// --- Build Client Body (900px) ---
+$body_client = "
+<html>
+<body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
+    <div style='max-width: 900px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
+
+        <!-- Header Bar -->
+        <table width='100%' cellpadding='0' cellspacing='0' style='background-color: #0F2A44; padding: 20px 40px; border-bottom: 4px solid #f2b705;'>
+            <tr>
+                <td align='left' style='vertical-align: middle;'>
+                    <a href='https://piic.com.mx/' style='text-decoration: none;'>
+                        $logo_css_vml
+                        <span style='color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-left: 15px; vertical-align: middle; text-transform: uppercase;'>PIIC</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <div style='padding: 40px;'>
+            <h2 style='color: #0F2A44; margin-top: 0; font-size: 24px;'>¡Gracias por contactarnos, $name!</h2>
+            <p style='color: #444; font-size: 16px; line-height: 1.6;'>Hemos recibido tu solicitud técnica correctamente.</p>
+            <p style='color: #444; font-size: 16px; line-height: 1.6;'>Nuestro equipo de ingeniería revisará tus requerimientos y se pondrá en contacto contigo a la brevedad posible para ofrecerte la solución industrial más eficiente.</p>
             
-            <div style="margin-top: 30px; padding: 20px; background-color: #f0fbff; border-radius: 4px; text-align: center;">
-                <p style="margin: 0; color: #0F2A44; font-weight: bold;">Tu solicitud ha sido registrada con éxito.</p>
-            </div>';
-  }
+            <div style='margin: 30px 0; padding: 30px; background-color: #f0f7ff; border-radius: 10px; border-left: 6px solid #0F2A44;'>
+                <p style='margin: 0; color: #0F2A44; font-weight: bold; font-size: 18px;'>Tu mensaje ha sido registrado con éxito en nuestro sistema.</p>
+            </div>
 
-  // Footer
-  $html .= '
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color: #eeeeee; padding: 20px; text-align: center; font-size: 12px; color: #888;">
-            <p style="margin: 0;">&copy; ' . date('Y') . ' Proveedora de Insumos Industriales y Comerciales (PIIC).</p>
-            <p style="margin: 5px 0 0;"><a href="https://piic.com.mx" style="color: #666; text-decoration: underline;">www.piic.com.mx</a></p>
-          </td>
-        </tr>
-      </table>
-    </div>';
+            <p style='color: #666; font-size: 14px; margin-top: 40px;'>Atentamente,<br><strong>Equipo Comercial PIIC</strong></p>
 
-  return $html;
-}
-
-// Prepare Data for Templates
-$template_data = [
-  'name' => $name,
-  'company' => $company,
-  'email' => $email,
-  'phone' => $phone,
-  'message' => $message
-];
+            <div style='margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 12px;'>
+                &copy; " . date('Y') . " Proveedora de Insumos Industriales y Comerciales. Todos los derechos reservados.<br>
+                <a href='https://piic.com.mx' style='color: #999; text-decoration: underline;'>www.piic.com.mx</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+";
 
 // 1. Send Admin Email
-$body_admin = get_email_template(true, $template_data, $logo_url);
 $mailer = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
-// Add Reply-To so admin can reply directly to client
 $headers_admin = "From: PIIC Web Notifier <$smtp_user>\r\n";
 $headers_admin .= "Reply-To: $email\r\n";
 $headers_admin .= "MIME-Version: 1.0\r\n";
@@ -136,16 +189,13 @@ if (!$mailer->send($to_admin, $subject_admin, $body_admin, $headers_admin)) {
 }
 
 // 2. Send Client Auto-reply
-$body_client = get_email_template(false, $template_data, $logo_url);
 $mailer_client = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
 $headers_client = "From: Ventas PIIC <$smtp_user>\r\n";
 $headers_client .= "MIME-Version: 1.0\r\n";
 $headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-// We don't fail if client email fails, just log it or ignore
 $mailer_client->send($email, $subject_client, $body_client, $headers_client);
 
 // Success Response
 http_response_code(200);
 echo json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
-?>
