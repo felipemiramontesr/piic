@@ -106,12 +106,20 @@ $html_client = "
 <body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
     <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
         
-        <div style='background-color: #0F2A44; padding: 30px; text-align: center;'>
-            <div style='display: inline-block; width: 80px; height: 80px; border: 6px solid #F2B705; border-radius: 50%; background: linear-gradient(to right, #F2B705 50%, #0F2A44 50%); box-sizing: border-box; margin-bottom: 15px;'></div>
-            <h1 style='color: #ffffff; margin: 0; font-size: 22px; text-transform: uppercase;'>¡Solicitud Recibida! (PRUEBA)</h1>
-        </div>
+        <!-- Header Bar -->
+        <table width='100%' cellpadding='0' cellspacing='0' style='background-color: #0F2A44; padding: 20px 40px; border-bottom: 4px solid #f2b705;'>
+            <tr>
+                <td align='left' style='vertical-align: middle;'>
+                    <a href='https://piic.com.mx/' style='text-decoration: none; display: flex; align-items: center;'>
+                        <div style='display: inline-block; width: 40px; height: 40px; border: 4px solid #F2B705; border-radius: 50%; background: linear-gradient(to right, #F2B705 50%, #0F2A44 50%); vertical-align: middle; box-sizing: border-box;'></div>
+                        <span style='color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-left: 15px; vertical-align: middle; text-transform: uppercase;'>PIIC</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
 
         <div style='padding: 30px;'>
+            <p style='color: #f2b705; font-weight: bold; font-size: 18px; text-transform: uppercase; margin-bottom: 20px;'>¡Solicitud Recibida! (PRUEBA)</p>
             <h2 style='color: #0F2A44; margin-top: 0;'>¡Gracias por contactarnos, " . $contact_name . "!</h2>
             <p style='color: #444; font-size: 16px; line-height: 1.6;'>
                 Hemos recibido exitosamente la información técnica de tu aplicación para <strong>Oil Skimmers</strong>.
