@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
         .footer-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 40px;
+          gap: 80px;
           margin-bottom: 40px;
           border-bottom: 1px solid rgba(255,255,255,0.1);
           padding-bottom: 40px;
