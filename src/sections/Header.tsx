@@ -156,9 +156,9 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         @keyframes arrowSlideCycle {
             0% { transform: translateX(0); }
-            16.66% { transform: translateX(-10px); } /* 5s linear move to left */
-            16.67% { transform: translateX(0); } /* Reset instantly and wait */
-            100% { transform: translateX(0); } /* 25s pause */
+            6.66% { transform: translateX(-10px); } /* 2s linear move to left */
+            6.67% { transform: translateX(0); } /* Reset instantly and wait */
+            100% { transform: translateX(0); } /* 28s pause */
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }
