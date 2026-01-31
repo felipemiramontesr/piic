@@ -2,33 +2,33 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CookieBanner: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(() => {
-        const consent = localStorage.getItem('piic_cookie_consent');
-        return !consent;
-    });
+  const [isVisible, setIsVisible] = useState(() => {
+    const consent = localStorage.getItem('piic_cookie_consent');
+    return !consent;
+  });
 
-    const handleAccept = () => {
-        localStorage.setItem('piic_cookie_consent', 'true');
-        setIsVisible(false);
-    };
+  const handleAccept = () => {
+    localStorage.setItem('piic_cookie_consent', 'true');
+    setIsVisible(false);
+  };
 
-    if (!isVisible) return null;
+  if (!isVisible) return null;
 
-    return (
-        <div className="cookie-banner">
-            <div className="cookie-container">
-                <div className="cookie-text">
-                    Utilizamos cookies propias y de terceros para mejorar su experiencia. Al continuar navegando, acepta nuestra{' '}
-                    <Link to="/politicas" className="cookie-link">
-                        política de uso, tratamiento de información y cookies
-                    </Link>.
-                </div>
-                <button className="cookie-button" onClick={handleAccept}>
-                    ACEPTAR
-                </button>
-            </div>
+  return (
+    <div className="cookie-banner">
+      <div className="cookie-container">
+        <div className="cookie-text">
+          Utilizamos cookies propias y de terceros. Al continuar navegando, acepta nuestra{' '}
+          <Link to="/politicas" className="cookie-link">
+            política de uso, tratamiento de información y cookies
+          </Link>.
+        </div>
+        <button className="cookie-button" onClick={handleAccept}>
+          ACEPTAR
+        </button>
+      </div>
 
-            <style>{`
+      <style>{`
         .cookie-banner {
           position: fixed;
           bottom: 0;
@@ -99,8 +99,8 @@ const CookieBanner: React.FC = () => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default CookieBanner;
