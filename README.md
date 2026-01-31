@@ -2,7 +2,7 @@
 
 Portal de servicios y cuestionarios técnicos para PIIC.
 
-## Versión 1.0 Stable
+## Versión 1.1.2 Stable
 
 Esta versión marca el primer release estable del portal, con las siguientes mejoras de calidad:
 
