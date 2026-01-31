@@ -22,10 +22,10 @@ const Footer: React.FC = () => {
           <div className="footer-contact">
             <h3>Contacto</h3>
             <p>
-              Email: <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a>
+              <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a>
             </p>
             <p>
-              Tel: <a href="tel:4929421780">(492) 942 1780</a>
+              <a href="tel:4929421780">(492) 942 1780</a>
             </p>
             <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
           </div>
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} PIIC. Todos los derechos reservados.</p>
           <p style={{ marginTop: '10px' }}>
-            <a href="/politicas" style={{ color: 'inherit', textDecoration: 'underline' }}>
+            <a href="/politicas" className="footer-policy-link">
               Política de Uso, Tratamiento de Información y Cookies
             </a>
           </p>
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
       <style>{`
         .footer {
           background-color: var(--color-secondary);
-          color: var(--color-white);
+          color: var(--color-accent);
           padding: 60px 0 30px;
         }
         .footer-grid {
@@ -65,32 +65,46 @@ const Footer: React.FC = () => {
           height: 32px;
         }
         .footer-logo {
-          color: var(--color-white);
+          color: var(--color-accent);
           font-size: 28px;
           margin-bottom: 0;
         }
         .footer h3 {
-          color: var(--color-white);
+          color: var(--color-accent);
           margin-bottom: 20px;
         }
         .footer-contact p {
-          color: rgba(255,255,255,0.7);
+          color: var(--color-accent);
           margin-bottom: 10px;
         }
         .footer-contact a {
           color: inherit;
           text-decoration: none;
-          transition: color 0.3s ease;
+          display: inline-block;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .footer-contact a:hover {
-          color: var(--color-accent);
+          color: #d4a004; /* Darker yellow */
+          transform: scale(1.03);
+          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .footer-bottom {
           text-align: center;
-          color: rgba(255,255,255,0.5);
+          color: var(--color-accent);
+          opacity: 0.8;
           font-size: 14px;
         }
         .footer-bottom p { margin: 0; }
+        .footer-policy-link {
+          color: inherit;
+          text-decoration: underline;
+          display: inline-block;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .footer-policy-link:hover {
+          color: #d4a004;
+          transform: scale(1.03);
+        }
       `}</style>
     </footer>
   );
