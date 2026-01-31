@@ -42,22 +42,22 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             <nav className="nav">
               <ul className="nav-list">
                 <li>
-                  <a href="#inicio">Inicio</a>
+                  <a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a>
                 </li>
                 <li>
-                  <a href="#quienes-somos">Quiénes Somos</a>
+                  <a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a>
                 </li>
                 <li>
-                  <a href="#servicios">Servicios</a>
+                  <a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a>
                 </li>
                 <li>
-                  <a href="#por-que-piic">Por Qué PIIC</a>
+                  <a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a>
                 </li>
                 <li>
-                  <a href="#proceso">Proceso</a>
+                  <a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a>
                 </li>
                 <li>
-                  <a href="#contacto">Contacto</a>
+                  <a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a>
                 </li>
               </ul>
             </nav>
@@ -139,7 +139,10 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           font-weight: 500;
           color: var(--color-white);
           text-decoration: none;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
         .nav-list a:hover {
           color: var(--color-accent);
