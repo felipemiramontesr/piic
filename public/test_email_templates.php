@@ -48,7 +48,7 @@ $html_sales = "
             <tr>
                 <td align='left' style='vertical-align: middle;'>
                     <a href='https://piic.com.mx/' style='text-decoration: none; display: flex; align-items: center;'>
-                        <img src='https://piic.com.mx/logo.png' alt='PIIC' style='height: 40px; vertical-align: middle;'>
+                        <img src='https://piic.com.mx/logo-email.png' alt='PIIC' style='height: 40px; vertical-align: middle;'>
                         <span style='color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-left: 15px; vertical-align: middle; text-transform: uppercase;'>PIIC</span>
                     </a>
                 </td>
