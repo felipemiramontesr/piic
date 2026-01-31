@@ -72,11 +72,35 @@ $html_body = "
 ";
 
 foreach ($fields as $section => $data) {
+    // Determine section icon
+    $section_icon = "";
+    if ($section === 'Datos de la Empresa') {
+        $section_icon = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:4px; position:relative; margin-right:12px; vertical-align:middle; overflow:hidden;'>
+                            <div style='position:absolute; top:4px; left:4px; width:6px; height:6px; background-color:#0F2A44; border-radius:1px;'></div>
+                            <div style='position:absolute; top:4px; right:4px; width:6px; height:6px; background-color:#0F2A44; border-radius:1px;'></div>
+                            <div style='position:absolute; bottom:4px; left:4px; width:6px; height:6px; background-color:#0F2A44; border-radius:1px;'></div>
+                            <div style='position:absolute; bottom:0; right:4px; width:6px; height:10px; background-color:#0F2A44; border-radius:1px 1px 0 0;'></div>
+                         </div>";
+    } elseif ($section === 'Contacto') {
+        $section_icon = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:50%; position:relative; margin-right:12px; vertical-align:middle; overflow:hidden;'>
+                            <div style='position:absolute; top:4px; left:7px; width:10px; height:10px; background-color:#0F2A44; border-radius:50%;'></div>
+                            <div style='position:absolute; bottom:-4px; left:2px; width:20px; height:12px; background-color:#0F2A44; border-radius:10px 10px 0 0;'></div>
+                         </div>";
+    } elseif ($section === 'Información del Aceite') {
+        $section_icon = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:2px 50% 50% 50%; transform:rotate(45deg); position:relative; margin-right:12px; vertical-align:middle;'>
+                            <div style='position:absolute; top:6px; left:6px; width:8px; height:8px; background-color:#0F2A44; border-radius:50%;'></div>
+                         </div>";
+    } elseif ($section === 'Técnico') {
+        $section_icon = "<div style='display:inline-block; width:24px; height:24px; border:4px solid #f2b705; border-radius:50%; box-sizing:border-box; position:relative; margin-right:12px; vertical-align:middle;'>
+                            <div style='position:absolute; top:3px; left:3px; width:10px; height:10px; background-color:#f2b705; border-radius:50%;'></div>
+                         </div>";
+    }
+
     $html_body .= "
             <!-- Section: $section -->
             <div style='margin-bottom: 30px;'>
-                <h3 style='color: #0F2A44; border-bottom: 2px solid #f2b705; padding-bottom: 8px; margin-bottom: 15px; font-size: 18px; text-transform: uppercase;'>
-                    <span style='background-color: #f2b705; color: #0F2A44; padding: 2px 8px; border-radius: 4px; margin-right: 10px;'>&bull;</span> $section
+                <h3 style='color: #0F2A44; border-bottom: 2px solid #f2b705; padding-bottom: 8px; margin-bottom: 15px; font-size: 18px; text-transform: uppercase; display: flex; align-items: center;'>
+                    $section_icon $section
                 </h3>
                 <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse: collapse;'>
     ";
@@ -86,9 +110,25 @@ foreach ($fields as $section => $data) {
         if (empty($clean_val))
             $clean_val = "<span style='color: #999; font-style: italic;'>No proporcionado</span>";
 
+        // Field Icon Logic
+        $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>&rsaquo;</span>";
+        if (stripos($label, 'Dirección') !== false || stripos($label, 'Ciudad') !== false || stripos($label, 'Estado') !== false || stripos($label, 'CP') !== false || stripos($label, 'Colonia') !== false) {
+            $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>📍</span>";
+        } elseif (stripos($label, 'Nombre') !== false) {
+            $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>👤</span>";
+        } elseif (stripos($label, 'Email') !== false) {
+            $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>✉️</span>";
+        } elseif (stripos($label, 'Teléfono') !== false || stripos($label, 'Móvil') !== false) {
+            $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>📞</span>";
+        } elseif (stripos($label, 'Compañía') !== false) {
+            $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>🏢</span>";
+        } elseif (stripos($label, 'Voltaje') !== false) {
+            $field_marker = "<span style='color: #f2b705; margin-right: 8px;'>⚡</span>";
+        }
+
         $html_body .= "
                     <tr>
-                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'>$label:</td>
+                        <td width='40%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #666; font-weight: bold; font-size: 14px;'>$field_marker $label:</td>
                         <td width='60%' style='padding: 10px; border-bottom: 1px solid #eeeeee; color: #333; font-size: 15px;'>$clean_val</td>
                     </tr>
         ";
