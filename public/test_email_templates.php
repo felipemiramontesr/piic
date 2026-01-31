@@ -104,7 +104,7 @@ $html_sales .= "
 $html_client = "
 <html>
 <body style='font-family: Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 20px;'>
-    <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
+    <div style='max-width: 900px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #f2b705;'>
         
         <!-- Header Bar -->
         <table width='100%' cellpadding='0' cellspacing='0' style='background-color: #0F2A44; padding: 20px 40px; border-bottom: 4px solid #f2b705;'>
