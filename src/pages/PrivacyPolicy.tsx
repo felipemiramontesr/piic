@@ -35,6 +35,7 @@ const PrivacyPolicy: React.FC = () => {
         <div className="privacy-hero">
           <h1>Centro de Privacidad y Legal</h1>
           <p>Transparencia en el uso y protección de sus datos personales bajo la normativa mexicana.</p>
+          <p className="last-update">Última actualización: Enero 2026. PIIC - Zacatecas, México.</p>
         </div>
 
         <div className="policy-grid">
@@ -103,9 +104,6 @@ const PrivacyPolicy: React.FC = () => {
           </PolicyCard>
         </div>
 
-        <p className="last-update">
-          Última actualización: Enero 2026. PIIC - Zacatecas, México.
-        </p>
       </main>
 
       <Footer />
@@ -244,8 +242,8 @@ const PrivacyPolicy: React.FC = () => {
 
         .last-update {
           text-align: center;
-          margin-top: 60px;
-          font-size: 14px;
+          margin-top: 10px;
+          font-size: 13px;
           color: var(--color-text-secondary);
           opacity: 0.7;
         }
