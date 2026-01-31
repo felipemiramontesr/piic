@@ -250,7 +250,7 @@ const PrivacyPolicy: React.FC = () => {
 
         @media (max-width: 768px) {
           .privacy-container {
-            padding-top: 100px;
+            padding-top: 160px;
           }
           .privacy-hero h1 {
             font-size: 32px;
