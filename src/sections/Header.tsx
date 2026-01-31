@@ -32,10 +32,9 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
 
         {simpleMode ? (
           <div className="nav-simple">
-            <a href="https://piic.com.mx/" className="simple-link">
-              <i className="fa-solid fa-globe icon-globe"></i>
+            <Button href="https://piic.com.mx/" variant="primary">
               Ver nuestro sitio web
-            </a>
+            </Button>
           </div>
         ) : (
           <>
@@ -144,21 +143,9 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .nav-list a:hover {
           color: var(--color-accent);
         }
-        .simple-link {
+        .nav-simple {
             display: flex;
             align-items: center;
-            gap: 8px; /* Space between icon and text */
-            color: var(--color-white);
-            font-weight: 600;
-            font-size: 15px;
-            text-decoration: none; /* No underline */
-            transition: all 0.3s ease;
-        }
-        .simple-link:hover {
-            color: var(--color-accent);
-        }
-        .icon-globe {
-            font-size: 18px;
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }
