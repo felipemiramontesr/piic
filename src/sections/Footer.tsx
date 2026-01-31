@@ -1,6 +1,8 @@
-import React from 'react';
+interface FooterProps {
+  hideNavigation?: boolean;
+}
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
   return (
     <footer className="footer">
       <div className="container">
@@ -19,17 +21,19 @@ const Footer: React.FC = () => {
             </div>
             <p className="footer-description">Proveedora de Insumos Industriales y Comerciales</p>
           </div>
-          <div className="footer-nav">
-            <h3>Navegación</h3>
-            <ul className="footer-nav-list">
-              <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
-              <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
-              <li><a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a></li>
-              <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
-              <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
-              <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
-            </ul>
-          </div>
+          {!hideNavigation && (
+            <div className="footer-nav">
+              <h3>Navegación</h3>
+              <ul className="footer-nav-list">
+                <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
+                <li><a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a></li>
+                <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
+                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
+                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
+              </ul>
+            </div>
+          )}
           <div className="footer-contact">
             <h3>Contacto</h3>
             <p>

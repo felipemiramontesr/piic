@@ -106,7 +106,7 @@ const PrivacyPolicy: React.FC = () => {
 
       </main>
 
-      <Footer />
+      <Footer hideNavigation={true} />
 
       <style>{`
         .privacy-page {
