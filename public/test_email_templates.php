@@ -68,10 +68,12 @@ foreach ($fields as $section => $data) {
     $section_icon = "";
     if ($section === 'Datos de la Empresa') {
         $section_icon = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:4px; position:relative; margin-right:12px; vertical-align:middle; overflow:hidden;'>
-                            <div style='position:absolute; top:4px; left:4px; width:6px; height:6px; background-color:#0F2A44; border-radius:1px;'></div>
-                            <div style='position:absolute; top:4px; right:4px; width:6px; height:6px; background-color:#0F2A44; border-radius:1px;'></div>
-                            <div style='position:absolute; bottom:4px; left:4px; width:6px; height:6px; background-color:#0F2A44; border-radius:1px;'></div>
-                            <div style='position:absolute; bottom:0; right:4px; width:6px; height:10px; background-color:#0F2A44; border-radius:1px 1px 0 0;'></div>
+                            <!-- Clipboard Clip -->
+                            <div style='position:absolute; top:0; left:7px; width:10px; height:4px; background-color:#0F2A44; border-radius:0 0 2px 2px;'></div>
+                            <!-- Data Lines -->
+                            <div style='position:absolute; top:8px; left:4px; width:16px; height:2px; background-color:#0F2A44; opacity:0.8;'></div>
+                            <div style='position:absolute; top:13px; left:4px; width:16px; height:2px; background-color:#0F2A44; opacity:0.8;'></div>
+                            <div style='position:absolute; top:18px; left:4px; width:10px; height:2px; background-color:#0F2A44; opacity:0.8;'></div>
                          </div>";
     } elseif ($section === 'Contacto') {
         $section_icon = "<div style='display:inline-block; width:24px; height:24px; background-color:#f2b705; border-radius:50%; position:relative; margin-right:12px; vertical-align:middle; overflow:hidden;'>
