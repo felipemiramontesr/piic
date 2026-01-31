@@ -48,7 +48,7 @@ const Contact: React.FC = () => {
       <div className="container">
         <div className="contact-grid">
           <div className="contact-info">
-            <h2>Hablemos de su próximo requerimiento</h2>
+            <h2>Hablemos de su próximo proyecto</h2>
             <p>
               Estamos listos para atender las necesidades de su empresa con profesionalismo y
               rapidez.
