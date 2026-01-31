@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
     <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
       <div className="container header-container">
         <div className="logo">
-          <a href={simpleMode ? "https://piic.com.mx/" : "#inicio"}>
+          <a href={simpleMode ? 'https://piic.com.mx/' : '#inicio'}>
             <svg className="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" stroke-width="10" />
               <path d="M50 5 A45 45 0 0 0 50 95 Z" fill="#F2B705" />
@@ -41,12 +41,24 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           <>
             <nav className="nav">
               <ul className="nav-list">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#quienes-somos">Quiénes Somos</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#por-que-piic">Por Qué PIIC</a></li>
-                <li><a href="#proceso">Proceso</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li>
+                  <a href="#inicio">Inicio</a>
+                </li>
+                <li>
+                  <a href="#quienes-somos">Quiénes Somos</a>
+                </li>
+                <li>
+                  <a href="#servicios">Servicios</a>
+                </li>
+                <li>
+                  <a href="#por-que-piic">Por Qué PIIC</a>
+                </li>
+                <li>
+                  <a href="#proceso">Proceso</a>
+                </li>
+                <li>
+                  <a href="#contacto">Contacto</a>
+                </li>
               </ul>
             </nav>
             {showCta && (

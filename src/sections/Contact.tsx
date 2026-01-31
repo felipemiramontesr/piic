@@ -17,7 +17,7 @@ const Contact: React.FC = () => {
       email: formData.get('email'),
       phone: formData.get('phone'),
       message: formData.get('message'),
-      consent: formData.get('consent') === 'on'
+      consent: formData.get('consent') === 'on',
     };
 
     try {
@@ -49,7 +49,10 @@ const Contact: React.FC = () => {
         <div className="contact-grid">
           <div className="contact-info">
             <h2>Hablemos de su próximo requerimiento</h2>
-            <p>Estamos listos para atender las necesidades de su empresa con profesionalismo y rapidez.</p>
+            <p>
+              Estamos listos para atender las necesidades de su empresa con profesionalismo y
+              rapidez.
+            </p>
             <div className="contact-details">
               <div className="detail-item">
                 <div className="detail-header">
@@ -63,14 +66,18 @@ const Contact: React.FC = () => {
                   <i className="fa-solid fa-envelope contact-icon"></i>
                   <strong>Email</strong>
                 </div>
-                <p><a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a></p>
+                <p>
+                  <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a>
+                </p>
               </div>
               <div className="detail-item">
                 <div className="detail-header">
                   <i className="fa-solid fa-phone contact-icon"></i>
                   <strong>Teléfono</strong>
                 </div>
-                <p><a href="tel:4929421780">(492) 942 1780</a></p>
+                <p>
+                  <a href="tel:4929421780">(492) 942 1780</a>
+                </p>
               </div>
             </div>
           </div>
@@ -79,22 +86,46 @@ const Contact: React.FC = () => {
               <div className="success-message">
                 <h3>¡Mensaje enviado con éxito!</h3>
                 <p>Nos pondremos en contacto con usted a la brevedad posible.</p>
-                <Button onClick={() => { setStatus('idle'); }}>Enviar otro mensaje</Button>
+                <Button
+                  onClick={() => {
+                    setStatus('idle');
+                  }}
+                >
+                  Enviar otro mensaje
+                </Button>
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Nombre</label>
-                  <input type="text" id="name" name="name" required placeholder="Su nombre completo" />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Su nombre completo"
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="company">Empresa</label>
-                  <input type="text" id="company" name="company" required placeholder="Nombre de su empresa" />
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    required
+                    placeholder="Nombre de su empresa"
+                  />
                 </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="correo@empresa.com" />
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="correo@empresa.com"
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="phone">Teléfono</label>
@@ -103,13 +134,23 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="message">Mensaje / Requerimiento</label>
-                  <textarea id="message" name="message" rows={4} placeholder="Detalle su solicitud aquí..." required></textarea>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    placeholder="Detalle su solicitud aquí..."
+                    required
+                  ></textarea>
                 </div>
                 <div className="form-checkbox">
                   <input type="checkbox" id="consent" name="consent" />
                   <label htmlFor="consent">Deseo que me contacten para cotización</label>
                 </div>
-                {status === 'error' && <p className="error-text" style={{ color: 'red', marginBottom: '15px' }}>{errorMessage}</p>}
+                {status === 'error' && (
+                  <p className="error-text" style={{ color: 'red', marginBottom: '15px' }}>
+                    {errorMessage}
+                  </p>
+                )}
                 <Button className="submit-btn" variant="primary">
                   {status === 'submitting' ? 'Enviando...' : 'Enviar solicitud'}
                 </Button>

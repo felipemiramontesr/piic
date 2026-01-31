@@ -45,11 +45,31 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
 
 const Services: React.FC = () => {
   const serviceList = [
-    { icon: 'fa-solid fa-shield-halved', title: 'Seguridad industrial', description: 'Equipos de protección personal y sistemas de seguridad vial.' },
-    { icon: 'fa-solid fa-broom', title: 'Limpieza y sanitización', description: 'Productos químicos y herramientas para mantenimiento de higiene.' },
-    { icon: 'fa-solid fa-folder-open', title: 'Papelería y suministros de oficina', description: 'Todo lo necesario para la administración diaria.' },
-    { icon: 'fa-solid fa-briefcase', title: 'Insumos comerciales', description: 'Materiales diversos para la operación comercial.' },
-    { icon: 'fa-solid fa-screwdriver-wrench', title: 'Operación y mantenimiento', description: 'Herramientas y refacciones críticas para sus equipos.' },
+    {
+      icon: 'fa-solid fa-shield-halved',
+      title: 'Seguridad industrial',
+      description: 'Equipos de protección personal y sistemas de seguridad vial.',
+    },
+    {
+      icon: 'fa-solid fa-broom',
+      title: 'Limpieza y sanitización',
+      description: 'Productos químicos y herramientas para mantenimiento de higiene.',
+    },
+    {
+      icon: 'fa-solid fa-folder-open',
+      title: 'Papelería y suministros de oficina',
+      description: 'Todo lo necesario para la administración diaria.',
+    },
+    {
+      icon: 'fa-solid fa-briefcase',
+      title: 'Insumos comerciales',
+      description: 'Materiales diversos para la operación comercial.',
+    },
+    {
+      icon: 'fa-solid fa-screwdriver-wrench',
+      title: 'Operación y mantenimiento',
+      description: 'Herramientas y refacciones críticas para sus equipos.',
+    },
   ];
 
   return (

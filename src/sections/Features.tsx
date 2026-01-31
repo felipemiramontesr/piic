@@ -2,11 +2,20 @@ import React from 'react';
 
 const Features: React.FC = () => {
   const featureList = [
-    { title: 'Atención personalizada', text: 'Entendemos los requerimientos específicos de cada cliente.' },
+    {
+      title: 'Atención personalizada',
+      text: 'Entendemos los requerimientos específicos de cada cliente.',
+    },
     { title: 'Respuesta rápida', text: 'Sabemos que en la industria cada minuto cuenta.' },
     { title: 'Proveedores confiables', text: 'Solo trabajamos con marcas de calidad comprobada.' },
-    { title: 'Calidad y cumplimiento', text: 'Garantizamos que lo que cotizamos es lo que entregamos.' },
-    { title: 'Relación a largo plazo', text: 'Buscamos ser socios comerciales, no solo proveedores.' },
+    {
+      title: 'Calidad y cumplimiento',
+      text: 'Garantizamos que lo que cotizamos es lo que entregamos.',
+    },
+    {
+      title: 'Relación a largo plazo',
+      text: 'Buscamos ser socios comerciales, no solo proveedores.',
+    },
   ];
 
   return (

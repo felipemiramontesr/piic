@@ -1,14 +1,14 @@
 :root {
   /* Corporate Colors */
-  --color-primary: #0F2A44;
-  --color-secondary: #2E2E2E;
-  --color-accent: #F2B705;
-  --color-bg: #F2F4F7;
-  --color-white: #FFFFFF;
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #5F6C7B;
-  --color-border: #E5E7EB;
-  --color-input-border: #D1D5DB;
+  --color-primary: #0f2a44;
+  --color-secondary: #2e2e2e;
+  --color-accent: #f2b705;
+  --color-bg: #f2f4f7;
+  --color-white: #ffffff;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #5f6c7b;
+  --color-border: #e5e7eb;
+  --color-input-border: #d1d5db;
 
   /* Typography */
   --font-main: 'Inter', sans-serif;

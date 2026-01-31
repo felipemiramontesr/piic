@@ -1,34 +1,50 @@
 import React from 'react';
 
 const Process: React.FC = () => {
-    const steps = [
-        { number: '01', title: 'Recepción de requerimiento', text: 'Analizamos sus necesidades específicas de suministro.' },
-        { number: '02', title: 'Búsqueda y cotización', text: 'Localizamos los mejores insumos con proveedores certificados.' },
-        { number: '03', title: 'Presentación de opciones', text: 'Entregamos una propuesta competitiva en tiempo record.' },
-        { number: '04', title: 'Suministro y seguimiento', text: 'Entregamos el material y aseguramos su satisfacción total.' },
-    ];
+  const steps = [
+    {
+      number: '01',
+      title: 'Recepción de requerimiento',
+      text: 'Analizamos sus necesidades específicas de suministro.',
+    },
+    {
+      number: '02',
+      title: 'Búsqueda y cotización',
+      text: 'Localizamos los mejores insumos con proveedores certificados.',
+    },
+    {
+      number: '03',
+      title: 'Presentación de opciones',
+      text: 'Entregamos una propuesta competitiva en tiempo record.',
+    },
+    {
+      number: '04',
+      title: 'Suministro y seguimiento',
+      text: 'Entregamos el material y aseguramos su satisfacción total.',
+    },
+  ];
 
-    return (
-        <section id="proceso" className="section section-white">
-            <div className="container">
-                <div className="section-header">
-                    <h2>Nuestro Proceso</h2>
-                    <p>Un flujo de trabajo optimizado para garantizar su operación.</p>
-                </div>
-                <div className="process-grid">
-                    {steps.map((step, index) => (
-                        <div key={index} className="process-step">
-                            <div className="step-number">{step.number}</div>
-                            <div className="step-content">
-                                <h3>{step.title}</h3>
-                                <p>{step.text}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  return (
+    <section id="proceso" className="section section-white">
+      <div className="container">
+        <div className="section-header">
+          <h2>Nuestro Proceso</h2>
+          <p>Un flujo de trabajo optimizado para garantizar su operación.</p>
+        </div>
+        <div className="process-grid">
+          {steps.map((step, index) => (
+            <div key={index} className="process-step">
+              <div className="step-number">{step.number}</div>
+              <div className="step-content">
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
             </div>
+          ))}
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .process-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -61,8 +77,8 @@ const Process: React.FC = () => {
           font-size: 15px;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Process;

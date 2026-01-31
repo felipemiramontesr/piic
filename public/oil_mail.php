@@ -1,6 +1,19 @@
 <?php
+
+/**
+ * Oil Skimmers Technical Questionnaire Handler
+ * 
+ * Processes the technical data for industrial applications,
+ * handles file attachments, and sends detailed branded reports
+ * to the engineering team and client receipts.
+ * 
+ * @package PIIC\Backend
+ * @author PIIC Engineering
+ */
+
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
+
 require_once 'config.php';
 require_once 'SimpleSMTP.php';
 
@@ -141,6 +154,12 @@ foreach ($fields as $section => $data) {
             </div>";
 }
 
+// 3. Handle File Attachment (Moved up to be available for Body)
+$attachment = null;
+if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK) {
+    $attachment = $_FILES['attachment'];
+}
+
 if ($attachment) {
     $html_body .= "
             <!-- Attachment Notice -->
@@ -161,12 +180,6 @@ $html_body .= "
     </div>
 </body>
 </html>";
-
-// 3. Handle File Attachment
-$attachment = null;
-if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK) {
-    $attachment = $_FILES['attachment'];
-}
 
 // 4. Construct Multipart Email for Admin
 $boundary = md5(time());
@@ -198,7 +211,6 @@ if ($attachment) {
 $body .= "--$boundary--";
 
 // 5. Send to Admin
-// The form is filled BY the client (Pedro), so it should be sent TO the Admin (PIIC)
 $to_admin = $smtp_user;
 $subject_admin = "Cuestionario Oil Skimmers: $company_name";
 
@@ -208,8 +220,6 @@ $admin_sent = $mailer->send($to_admin, $subject_admin, $body, $headers);
 // 6. Send Auto-Reply to Client
 if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $subject_client = "Hemos recibido tu solicitud - PIIC";
-
-    // Industrial Style Header for Client
     $headers_client = "From: PIIC <$smtp_user>\r\n";
     $headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
 
@@ -256,7 +266,6 @@ if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     </body>
     </html>";
 
-    // We don't fail if client email fails, just best effort
     $mailer->send($email, $subject_client, $client_body, $headers_client);
 }
 
@@ -266,4 +275,3 @@ if ($admin_sent) {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Failed to send admin email']);
 }
-?>

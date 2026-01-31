@@ -2,20 +2,26 @@ import React from 'react';
 import Button from '../components/Button';
 
 const Hero: React.FC = () => {
-    return (
-        <section id="inicio" className="hero-section">
-            <div className="container hero-container">
-                <div className="hero-content">
-                    <h1>Suministro industrial y comercial para operaciones que no pueden detenerse</h1>
-                    <p className="hero-subtitle">Respuesta rápida y suministro confiable para el sector minero e industrial.</p>
-                    <div className="hero-actions">
-                        <Button href="#contacto" className="hero-btn">Solicitar cotización</Button>
-                        <Button href="#servicios" variant="outline" className="hero-btn">Ver servicios</Button>
-                    </div>
-                </div>
-            </div>
+  return (
+    <section id="inicio" className="hero-section">
+      <div className="container hero-container">
+        <div className="hero-content">
+          <h1>Suministro industrial y comercial para operaciones que no pueden detenerse</h1>
+          <p className="hero-subtitle">
+            Respuesta rápida y suministro confiable para el sector minero e industrial.
+          </p>
+          <div className="hero-actions">
+            <Button href="#contacto" className="hero-btn">
+              Solicitar cotización
+            </Button>
+            <Button href="#servicios" variant="outline" className="hero-btn">
+              Ver servicios
+            </Button>
+          </div>
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .hero-section {
           position: relative;
           background-image: linear-gradient(rgba(15, 42, 68, 0.9), rgba(15, 42, 68, 0.75)), url('/assets/hero-bg.png');
@@ -69,8 +75,8 @@ const Hero: React.FC = () => {
           }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Hero;

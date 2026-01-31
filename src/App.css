@@ -1,59 +1,59 @@
 .section {
-    padding: 80px 0;
+  padding: 80px 0;
 }
 
 .section-white {
-    background-color: var(--color-white);
+  background-color: var(--color-white);
 }
 
 .section-dark {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
 }
 
 .section-dark h2 {
-    color: var(--color-white);
+  color: var(--color-white);
 }
 
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 15px;
-    transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background-color: var(--color-accent);
-    color: var(--color-primary);
+  background-color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 .btn-primary:hover {
-    background-color: #d9a404;
+  background-color: #d9a404;
 }
 
 .btn-outline {
-    border: 1px solid var(--color-white);
-    color: var(--color-white);
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
 }
 
 .btn-outline:hover {
-    background-color: var(--color-white);
-    color: var(--color-primary);
+  background-color: var(--color-white);
+  color: var(--color-primary);
 }
 
 .glass-card {
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 32px;
-    transition: all 0.3s ease;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 32px;
+  transition: all 0.3s ease;
 }
 
 .glass-card:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    border-color: var(--color-accent);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-color: var(--color-accent);
 }

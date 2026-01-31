@@ -7,7 +7,11 @@ const Footer: React.FC = () => {
         <div className="footer-grid">
           <div className="footer-info">
             <div className="footer-logo-wrapper">
-              <svg className="footer-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <svg
+                className="footer-logo-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+              >
                 <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" stroke-width="10" />
                 <path d="M50 5 A45 45 0 0 0 50 95 Z" fill="#F2B705" />
               </svg>
@@ -17,8 +21,12 @@ const Footer: React.FC = () => {
           </div>
           <div className="footer-contact">
             <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a></p>
-            <p>Tel: <a href="tel:4929421780">(492) 942 1780</a></p>
+            <p>
+              Email: <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a>
+            </p>
+            <p>
+              Tel: <a href="tel:4929421780">(492) 942 1780</a>
+            </p>
             <p>Av. Barones, 209, Colonia Las Americas, Guadalupe Zacatecas</p>
           </div>
         </div>
