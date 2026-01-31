@@ -30,7 +30,7 @@ const PrivacyPolicy: React.FC = () => {
                         Su privacidad es importante para nosotros. Es política de PIIC respetar su privacidad con respecto a cualquier información que podamos recopilar en nuestro sitio web.
                     </p>
                     <p>
-                        Solo solicitamos información personal cuando realmente la necesitamos para brindarle un servicio (como el cuestionario de Oil Skimmers o el formulario de contacto). Lo hacemos por medios justos y legales, con su conocimiento y consentimiento.
+                        Solo solicitamos información personal cuando realmente la necesitamos para brindarle un servicio. Lo hacemos por medios justos y legales, con su conocimiento y consentimiento.
                     </p>
                     <p>
                         No compartimos ninguna información de identificación personal públicamente o con terceros, excepto cuando así lo requiera la ley.
