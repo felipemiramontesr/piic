@@ -76,7 +76,7 @@ const PrivacyPolicy: React.FC = () => {
 
           <PolicyCard icon="fa-solid fa-scale-balanced" title="4. Derechos ARCO (LFPDPPP)">
             <p>
-              De acuerdo con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (México), usted cuenta con los derechos **ARCO**:
+              De acuerdo con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (México), usted cuenta con los derechos ARCO:
             </p>
             <ul className="policy-list arco-list">
               <li><strong>Acceso:</strong> Conocer qué datos personales tenemos y para qué los utilizamos.</li>
@@ -136,8 +136,9 @@ const PrivacyPolicy: React.FC = () => {
         .privacy-hero p {
           font-size: 18px;
           color: var(--color-text-secondary);
-          max-width: 700px;
+          max-width: none;
           margin: 0 auto;
+          white-space: nowrap;
         }
 
         .policy-grid {
@@ -187,6 +188,7 @@ const PrivacyPolicy: React.FC = () => {
           line-height: 1.7;
           margin-bottom: 15px;
           font-size: 15px;
+          text-align: justify;
         }
 
         .policy-list {
@@ -254,6 +256,9 @@ const PrivacyPolicy: React.FC = () => {
           }
           .privacy-hero h1 {
             font-size: 32px;
+          }
+          .privacy-hero p {
+            white-space: normal;
           }
           .policy-grid {
             grid-template-columns: 1fr;
