@@ -67,7 +67,7 @@ const Process: React.FC = () => {
           font-weight: 800;
           color: var(--color-bg);
           line-height: 1;
-          margin-bottom: -20px;
+          margin-bottom: 15px;
           display: flex;
           align-items: center;
           gap: 15px;
