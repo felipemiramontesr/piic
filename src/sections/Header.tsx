@@ -33,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         {simpleMode ? (
           <div className="nav-simple">
             <Button href="https://piic.com.mx/" variant="primary">
+              <i className="fa-solid fa-arrow-left animated-arrow"></i>
               Ver nuestro sitio web
             </Button>
           </div>
@@ -146,6 +147,19 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .nav-simple {
             display: flex;
             align-items: center;
+        }
+        .animated-arrow {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 14px;
+            animation: arrowSlideCycle 30s infinite ease-in-out;
+        }
+        @keyframes arrowSlideCycle {
+            0% { transform: translateX(12px); opacity: 0; }
+            2% { opacity: 1; }
+            14% { transform: translateX(-4px); opacity: 1; }
+            16.66% { opacity: 0; transform: translateX(-8px); }
+            100% { opacity: 0; }
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }
