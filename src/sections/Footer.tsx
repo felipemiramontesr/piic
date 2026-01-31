@@ -96,14 +96,14 @@ const Footer: React.FC = () => {
         }
         .footer-bottom {
           text-align: center;
-          color: var(--color-accent);
+          color: var(--color-white);
           opacity: 0.8;
           font-size: 14px;
         }
         .footer-bottom p { margin: 0; }
         .footer-policy-link {
           color: var(--color-accent);
-          text-decoration: underline;
+          text-decoration: none;
           display: inline-block;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
