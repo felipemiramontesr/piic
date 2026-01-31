@@ -8,6 +8,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,20 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = '';
+  };
 
   return (
     <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
@@ -41,31 +56,54 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           <>
             <nav className="nav">
               <ul className="nav-list">
-                <li>
-                  <a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a>
-                </li>
-                <li>
-                  <a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a>
-                </li>
-                <li>
-                  <a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a>
-                </li>
-                <li>
-                  <a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a>
-                </li>
-                <li>
-                  <a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a>
-                </li>
-                <li>
-                  <a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a>
-                </li>
+                <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
+                <li><a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a></li>
+                <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
+                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
+                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
               </ul>
             </nav>
-            {showCta && (
-              <div className="nav-cta">
-                <Button href="#contacto">Solicitar cotización</Button>
+
+            <div className="header-actions">
+              {showCta && (
+                <div className="nav-cta">
+                  <Button href="#contacto">Solicitar cotización</Button>
+                </div>
+              )}
+
+              {/* Hamburger Trigger */}
+              <button
+                className={`menu-trigger ${isMenuOpen ? 'active' : ''}`}
+                onClick={toggleMenu}
+                aria-label="Menu"
+              >
+                <i className={`fa-solid ${isMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
+              </button>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+              <div className="mobile-menu-content">
+                <nav className="mobile-nav">
+                  <ul className="mobile-nav-list">
+                    <li><a href="#inicio" onClick={closeMenu}><i className="fa-solid fa-house"></i> Inicio</a></li>
+                    <li><a href="#quienes-somos" onClick={closeMenu}><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
+                    <li><a href="#servicios" onClick={closeMenu}><i className="fa-solid fa-gears"></i> Servicios</a></li>
+                    <li><a href="#por-que-piic" onClick={closeMenu}><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
+                    <li><a href="#proceso" onClick={closeMenu}><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
+                    <li><a href="#contacto" onClick={closeMenu}><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
+                  </ul>
+                </nav>
+                {showCta && (
+                  <div className="mobile-cta">
+                    <Button href="#contacto" onClick={closeMenu} fullWidth>
+                      Solicitar cotización
+                    </Button>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </>
         )}
       </div>
@@ -147,6 +185,102 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .nav-list a:hover {
           color: var(--color-accent);
         }
+        .header-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        .menu-trigger {
+          display: none;
+          background: none;
+          border: none;
+          color: var(--color-white);
+          font-size: 24px;
+          cursor: pointer;
+          z-index: 1001;
+          transition: all 0.3s ease;
+          padding: 5px;
+        }
+        .menu-trigger.active {
+          color: var(--color-accent);
+          transform: rotate(90deg);
+        }
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 100%;
+          height: 100vh;
+          background-color: rgba(15, 42, 68, 0.98);
+          backdrop-filter: blur(10px);
+          z-index: 999;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          display: flex;
+          justify-content: flex-end;
+          visibility: hidden;
+        }
+        .mobile-menu.open {
+          right: 0;
+          visibility: visible;
+        }
+        .mobile-menu-content {
+          width: 80%;
+          height: 100%;
+          background: var(--color-primary);
+          padding: 120px 40px;
+          box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+          display: flex;
+          flex-direction: column;
+        }
+        .mobile-nav-list {
+          list-style: none;
+          padding: 0;
+          margin-bottom: 40px;
+        }
+        .mobile-nav-list li {
+          margin-bottom: 25px;
+          opacity: 0;
+          transform: translateX(20px);
+          transition: all 0.3s ease;
+        }
+        .mobile-menu.open .mobile-nav-list li {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        /* Delay each menu item for stagger effect */
+        .mobile-nav-list li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-list li:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-nav-list li:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-nav-list li:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-nav-list li:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-nav-list li:nth-child(6) { transition-delay: 0.35s; }
+
+        .mobile-nav-list a {
+          color: var(--color-white);
+          text-decoration: none;
+          font-size: 20px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          transition: color 0.3s ease;
+        }
+        .mobile-nav-list a i {
+          color: var(--color-accent);
+          width: 25px;
+          text-align: center;
+        }
+        .mobile-nav-list a:hover {
+          color: var(--color-accent);
+        }
+        .mobile-cta {
+          margin-top: auto;
+          opacity: 0;
+          transition: all 0.3s ease 0.4s;
+        }
+        .mobile-menu.open .mobile-cta {
+          opacity: 1;
+        }
         .nav-simple {
             display: flex;
             align-items: center;
@@ -159,12 +293,19 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         @keyframes arrowSlideCycle {
             0% { transform: translateX(0); }
-            28.57% { transform: translateX(-10px); } /* 2s linear move to left (2/7 approx 28.57%) */
-            28.58% { transform: translateX(0); } /* Reset instantly and wait */
-            100% { transform: translateX(0); } /* 5s pause */
+            28.57% { transform: translateX(-10px); }
+            28.58% { transform: translateX(0); }
+            100% { transform: translateX(0); }
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }
+          .menu-trigger { display: block; }
+        }
+        @media (max-width: 480px) {
+          .mobile-menu-content {
+            width: 100%;
+            padding: 100px 30px;
+          }
         }
       `}</style>
     </header>

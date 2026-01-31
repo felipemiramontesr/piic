@@ -26,6 +26,10 @@
   transition: all 0.3s ease;
 }
 
+.btn-full {
+  width: 100%;
+}
+
 .btn-primary {
   background-color: var(--color-accent);
   color: var(--color-primary);

@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   href?: string;
+  fullWidth?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -14,8 +15,9 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   className = '',
   href,
+  fullWidth = false,
 }) => {
-  const baseClass = `btn btn-${variant} ${className}`;
+  const baseClass = `btn btn-${variant} ${fullWidth ? 'btn-full' : ''} ${className}`;
 
   if (href) {
     return (
