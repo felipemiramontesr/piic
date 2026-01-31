@@ -8,6 +8,8 @@ import Process from './sections/Process';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import OilSkimmersForm from './pages/OilSkimmersForm';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import CookieBanner from './components/CookieBanner';
 import './App.css';
 
 function App() {
@@ -35,7 +37,11 @@ function App() {
 
         {/* Standalone Technical Form */}
         <Route path="/cuestionario-oil-skimmers" element={<OilSkimmersForm />} />
+
+        {/* Privacy Policy */}
+        <Route path="/politicas" element={<PrivacyPolicy />} />
       </Routes>
+      <CookieBanner />
     </Router>
   );
 }

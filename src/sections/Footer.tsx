@@ -32,6 +32,11 @@ const Footer: React.FC = () => {
         </div>
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} PIIC. Todos los derechos reservados.</p>
+          <p style={{ marginTop: '10px' }}>
+            <a href="/politicas" style={{ color: 'inherit', textDecoration: 'underline' }}>
+              Política de Uso, Tratamiento de Información y Cookies
+            </a>
+          </p>
         </div>
       </div>
 
