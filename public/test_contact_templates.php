@@ -111,10 +111,21 @@ $status = '';
 
 if ($action === 'both') {
     $mailer = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
-    $headers = "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nFrom: PIIC Test <$smtp_user>\r\n";
 
-    $ok_admin = $mailer->send($test_admin_email, "TEST: Reporte Contacto Homologado", $preview_admin, $headers);
-    $ok_client = $mailer->send($test_client_email, "TEST: Confirmación Contacto Homologada", $preview_client, $headers);
+    // Shared headers base
+    $base_headers = "MIME-Version: 1.0\r\n";
+    $base_headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+    // Admin headers
+    $h_admin = $base_headers . "From: PIIC Test Admin <$smtp_user>\r\n";
+    $ok_admin = $mailer->send($test_admin_email, "TEST: Reporte Contacto Homologado", $preview_admin, $h_admin);
+
+    // Small pause to prevent SMTP race conditions
+    usleep(500000); // 0.5s
+
+    // Client headers
+    $h_client = $base_headers . "From: Proveedora de Insumos Industriales <$smtp_user>\r\n";
+    $ok_client = $mailer->send($test_client_email, "TEST: Confirmación Contacto Homologada", $preview_client, $h_client);
 
     if ($ok_admin && $ok_client) {
         $status = "<div style='background:#dcfce7; color:#166534; padding:20px; border-radius:8px; margin-bottom:20px;'>✅ ¡Correos enviados con éxito a <b>$test_admin_email</b> e <b>$test_client_email</b>!</div>";

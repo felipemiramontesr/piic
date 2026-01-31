@@ -5,18 +5,18 @@ require_once 'SimpleSMTP.php';
 
 // Prevent direct access
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  http_response_code(405);
-  echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
-  exit;
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
+    exit;
 }
 
 // Get JSON input
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!$data) {
-  http_response_code(400);
-  echo json_encode(['status' => 'error', 'message' => 'Invalid JSON']);
-  exit;
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid JSON']);
+    exit;
 }
 
 // Sanitize inputs
@@ -28,15 +28,15 @@ $message = nl2br(htmlspecialchars(strip_tags($data['message'] ?? '')));
 
 // Validate required fields
 if (empty($name) || empty($email) || empty($phone) || empty($message)) {
-  http_response_code(400);
-  echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
-  exit;
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
+    exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  http_response_code(400);
-  echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
-  exit;
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
+    exit;
 }
 
 // Configuration
@@ -177,22 +177,23 @@ $body_client = "
 
 // 1. Send Admin Email
 $mailer = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
-$headers_admin = "From: PIIC Web Notifier <$smtp_user>\r\n";
-$headers_admin .= "Reply-To: $email\r\n";
-$headers_admin .= "MIME-Version: 1.0\r\n";
+$headers_admin = "MIME-Version: 1.0\r\n";
 $headers_admin .= "Content-Type: text/html; charset=UTF-8\r\n";
+$headers_admin .= "From: PIIC Web Notifier <$smtp_user>\r\n";
+$headers_admin .= "Reply-To: $email\r\n";
 
 if (!$mailer->send($to_admin, $subject_admin, $body_admin, $headers_admin)) {
-  http_response_code(500);
-  echo json_encode(['status' => 'error', 'message' => 'Failed to send admin notification']);
-  exit;
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Failed to send admin notification']);
+    exit;
 }
 
 // 2. Send Client Auto-reply
 $mailer_client = new SimpleSMTP($smtp_host, $smtp_port, $smtp_user, $smtp_pass);
-$headers_client = "From: Ventas PIIC <$smtp_user>\r\n";
-$headers_client .= "MIME-Version: 1.0\r\n";
+$headers_client = "MIME-Version: 1.0\r\n";
 $headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
+$headers_client .= "From: Proveedora de Insumos Industriales <$smtp_user>\r\n";
+$headers_client .= "Reply-To: $smtp_user\r\n";
 
 $mailer_client->send($email, $subject_client, $body_client, $headers_client);
 
