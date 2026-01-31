@@ -152,14 +152,13 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             display: inline-block;
             margin-right: 10px;
             font-size: 14px;
-            animation: arrowSlideCycle 30s infinite ease-in-out;
+            animation: arrowSlideCycle 30s infinite linear;
         }
         @keyframes arrowSlideCycle {
-            0% { transform: translateX(12px); opacity: 0; }
-            2% { opacity: 1; }
-            14% { transform: translateX(-4px); opacity: 1; }
-            16.66% { opacity: 0; transform: translateX(-8px); }
-            100% { opacity: 0; }
+            0% { transform: translateX(0); }
+            16.66% { transform: translateX(-10px); } /* 5s linear move to left */
+            16.67% { transform: translateX(0); } /* Reset instantly and wait */
+            100% { transform: translateX(0); } /* 25s pause */
         }
         @media (max-width: 992px) {
           .nav, .nav-cta { display: none; }
