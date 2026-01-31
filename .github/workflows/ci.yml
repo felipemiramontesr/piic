@@ -40,4 +40,5 @@ jobs:
         local-dir: ./dist/
         server-dir: ./
         protocol: ftp
-        timeout: 600000 # Increased timeout for better stability
+        log-level: verbose
+        timeout: 600000
