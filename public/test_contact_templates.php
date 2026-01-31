@@ -9,7 +9,7 @@ require_once 'config.php';
 require_once 'SimpleSMTP.php';
 
 // --- CONFIGURATION ---
-$test_client_email = "felipermiramontesr@gmail.com";
+$test_client_email = "felipemiramontesr@gmail.com";
 $test_admin_email = "info@felipemiramontesr.net";
 $test_name = "Felipe Miramontes (TEST)";
 $test_company = "PIIC Industrial Solutions";
