@@ -23,6 +23,7 @@ const About: React.FC = () => {
               src="/assets/about-img.png"
               alt="Suministro Industrial"
               className="industrial-img"
+              loading="lazy"
             />
           </div>
         </div>
