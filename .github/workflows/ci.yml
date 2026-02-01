@@ -1,4 +1,4 @@
-name: CI
+name: CI # Triggering deployment with standard FTP and high timeout
 
 on:
   push:
