@@ -1,4 +1,4 @@
-name: CI # Triggering deployment with standard FTP and high timeout
+name: CI/CD Strategy
 
 on:
   push:
@@ -7,48 +7,70 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  quality-check:
+    name: 🔍 Quality & Security
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Run linting
-      run: npm run lint
+      - name: Run linting
+        run: npm run lint
 
-    - name: Run unit tests
-      run: npm test
+      - name: Run unit tests
+        run: npm test
 
-    - name: Security audit
-      run: npm audit --audit-level=high
+      - name: Security audit
+        run: npm audit --audit-level=high
 
-    - name: Build project
-      run: npm run build
+  build-and-deploy:
+    name: 🚀 Build & Deploy
+    needs: quality-check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Verify Build (Health Check)
-      run: |
-        if [ ! -f dist/index.html ]; then echo "Build failed: index.html missing"; exit 1; fi
-        if [ ! -d dist/assets ]; then echo "Build failed: assets directory missing"; exit 1; fi
-        echo "Build health check passed!"
+      - name: Install dependencies
+        run: npm ci
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/
-        server-dir: ./
-        protocol: ftp
-        port: 21
-        log-level: verbose
-        timeout: 900000
+      - name: 🖼️ Optimize Images
+        uses: calibreapp/image-actions@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true
+
+      - name: Build project
+        run: npm run build
+
+      - name: Verify Build
+        run: |
+          if [ ! -f dist/index.html ]; then echo "Build failed: index.html missing"; exit 1; fi
+          if [ ! -d dist/assets ]; then echo "Build failed: assets directory missing"; exit 1; fi
+
+      - name: 📂 Sync to Production (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
+          protocol: ftp
+          port: 21
+          timeout: 900000
+

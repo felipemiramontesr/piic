@@ -39,18 +39,22 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           <a href={simpleMode ? 'https://piic.com.mx/' : '#inicio'}>
             <svg className="logo-icon animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
               <defs>
-                <clipPath id="circleClip">
+                <clipPath id="logoMask">
                   <circle cx="50" cy="50" r="45" />
                 </clipPath>
               </defs>
-              {/* Fondo Azul (Noche) */}
-              <circle cx="50" cy="50" r="45" fill="#0F2A44" />
+              {/* Capa 1: Base (Logo Original) */}
+              <rect x="0" y="0" width="100" height="100" fill="#F2B705" clipPath="url(#logoMask)" />
+              <rect x="0" y="0" width="50" height="100" fill="#0F2A44" clipPath="url(#logoMask)" />
 
-              {/* Parte Amarilla (Día/Sol) que será cubierta por la luna */}
-              <circle className="sun-layer" cx="50" cy="50" r="45" fill="#F2B705" clipPath="url(#circleClip)" />
+              {/* Capa 2: Fase 2 - Sol crece desde el centro hacia la izquierda */}
+              <rect className="sun-grow-left-v5" x="50" y="0" width="0" height="100" fill="#F2B705" clipPath="url(#logoMask)" />
 
-              {/* La Luna (Azul) que crece */}
-              <circle className="moon-layer" cx="145" cy="50" r="45" fill="#0F2A44" clipPath="url(#circleClip)" />
+              {/* Capa 3: Fase 3 - Luna Llena entra desde la derecha */}
+              <rect className="luna-full-rl-v5" x="100" y="0" width="100" height="100" fill="#0F2A44" clipPath="url(#logoMask)" />
+
+              {/* Capa 4: Fase 4 - Sol Restauración entra desde la derecha */}
+              <rect className="sol-half-rl-v5" x="100" y="0" width="50" height="100" fill="#F2B705" clipPath="url(#logoMask)" />
 
               {/* Borde Amarillo (Estatico) */}
               <circle cx="50" cy="50" r="45" fill="none" stroke="#F2B705" strokeWidth="10" />
@@ -315,68 +319,42 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         .logo-icon.animated-logo {
             overflow: visible;
-            animation: logoRotate 15s infinite linear;
         }
-        .sun-layer {
-            animation: sunOpacity 15s infinite linear;
+        .sun-grow-left-v5 {
+            animation: sunGrowLeftV5 30s infinite linear;
         }
-        .moon-layer {
-            animation: moonSlide 15s infinite linear;
+        .luna-full-rl-v5 {
+            animation: lunaFullRLV5 30s infinite linear;
         }
-
-        @keyframes moonSlide {
-            0%, 66.66% { transform: translateX(0); } /* Reposo: mitad-mitad (10s de 15s) */
-            66.67% { transform: translateX(-45px); } /* Inicio animación: Sol completo (Luna fuera a la izquierda) */
-            73.33% { transform: translateX(0); } /* Luna crece hasta la mitad (Posición original) */
-            80% { transform: translateX(45px); } /* Luna llena (Luna cubre todo el sol) */
-            86.66% { transform: translateX(0); } /* Regreso a mitad-mitad después de rotación */
-            100% { transform: translateX(0); }
+        .sol-half-rl-v5 {
+            animation: solHalfRLV5 30s infinite linear;
         }
 
-        @keyframes sunOpacity {
-            0%, 66.66% { opacity: 1; }
-            80% { opacity: 1; }
-            80.1% { opacity: 0; } /* En luna llena, el sol desaparece para que se vea el fondo azul */
-            86.66% { opacity: 1; }
-            100% { opacity: 1; }
+        @keyframes sunGrowLeftV5 {
+            /* 0-3s: Reposo, invisible */
+            0%, 10% { x: 50px; width: 0; }
+            /* 3-4.5s: Crece a la izquierda */
+            15% { x: 0px; width: 50px; }
+            /* Se mantiene para cubrir la base */
+            15.01%, 100% { x: 0px; width: 50px; }
         }
 
-        @keyframes logoRotate {
-            0%, 80% { transform: rotate(0deg); }
-            86.66% { transform: rotate(180deg); } /* Rotación al final de la fase de luna llena */
-            100% { transform: rotate(180deg); }
-        }
-        /* Ajuste fino de la animación para cumplir con 15s/5s e hito de sol completo */
-        @keyframes moonSlide {
-            0%, 66.66% { cx: 95px; } /* Reposo: Luna posicionada para mostrar mitad sol */
-            66.67% { cx: 145px; } /* 10s: Inicio animación. Luna sale a la derecha -> SOL COMPLETO */
-            80% { cx: 50px; } /* 12s: Luna entra hasta cubrir todo -> LUNA LLENA */
-            93.33%, 100% { cx: 95px; } /* 14s-15s: Regreso a posición mitad tras rotación */
-        }
-        @keyframes logoRotate {
-            0%, 80% { transform: rotate(0deg); }
-            93.33%, 100% { transform: rotate(180deg); } /* Rotación de 12s a 14s */
-        }
-        
-        /* Implementación limpia de los keyframes para 15s de ciclo y 5s de animación (66.6% a 100%) */
-        .moon-layer {
-            cx: 95px; /* Estado base: mitad */
-            animation: moonTransition 15s infinite linear;
-        }
-        .animated-logo {
-            animation: logoSpin 15s infinite linear;
+        @keyframes lunaFullRLV5 {
+            /* 0-4.5s: Fuera */
+            0%, 15% { x: 100px; }
+            /* 4.5-7.5s: Cubre todo */
+            25% { x: 0px; }
+            /* Se mantiene */
+            25.01%, 100% { x: 0px; }
         }
 
-        @keyframes moonTransition {
-            0%, 66.66% { cx: 95px; } /* Reposo 10s */
-            73.33% { cx: 145px; }   /* 1s: Se mueve a la derecha -> Sol Completo */
-            86.66% { cx: 50px; }    /* 2s más (total 3s): Se mueve al centro -> Luna Llena */
-            93.33%, 100% { cx: 95px; } /* 1s más: Regresa a posición de mitad */
-        }
-
-        @keyframes logoSpin {
-            0%, 86.66% { transform: rotate(0deg); } /* Inicia rotación justo después de luna llena */
-            93.33%, 100% { transform: rotate(180deg); } /* Gira 180 grados */
+        @keyframes solHalfRLV5 {
+            /* 0-7.5s: Fuera */
+            0%, 25% { x: 100px; }
+            /* 7.5-9s: Entra a la mitad */
+            30% { x: 50px; }
+            /* Reposo largo */
+            30.01%, 100% { x: 50px; }
         }
 
         @media (max-width: 1024px) {
