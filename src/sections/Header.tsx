@@ -37,9 +37,23 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
       <div className="container header-container">
         <div className="logo">
           <a href={simpleMode ? 'https://piic.com.mx/' : '#inicio'}>
-            <svg className="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="#0F2A44" stroke="#F2B705" strokeWidth="10" />
-              <path d="M50 5 A45 45 0 0 0 50 95 Z" fill="#F2B705" />
+            <svg className="logo-icon animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <defs>
+                <clipPath id="circleClip">
+                  <circle cx="50" cy="50" r="45" />
+                </clipPath>
+              </defs>
+              {/* Fondo Azul (Noche) */}
+              <circle cx="50" cy="50" r="45" fill="#0F2A44" />
+
+              {/* Parte Amarilla (Día/Sol) que será cubierta por la luna */}
+              <circle className="sun-layer" cx="50" cy="50" r="45" fill="#F2B705" clipPath="url(#circleClip)" />
+
+              {/* La Luna (Azul) que crece */}
+              <circle className="moon-layer" cx="145" cy="50" r="45" fill="#0F2A44" clipPath="url(#circleClip)" />
+
+              {/* Borde Amarillo (Estatico) */}
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#F2B705" strokeWidth="10" />
             </svg>
             <span className="logo-text">PIIC</span>
           </a>
@@ -299,6 +313,72 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             28.58% { transform: translateX(0); }
             100% { transform: translateX(0); }
         }
+        .logo-icon.animated-logo {
+            overflow: visible;
+            animation: logoRotate 15s infinite linear;
+        }
+        .sun-layer {
+            animation: sunOpacity 15s infinite linear;
+        }
+        .moon-layer {
+            animation: moonSlide 15s infinite linear;
+        }
+
+        @keyframes moonSlide {
+            0%, 66.66% { transform: translateX(0); } /* Reposo: mitad-mitad (10s de 15s) */
+            66.67% { transform: translateX(-45px); } /* Inicio animación: Sol completo (Luna fuera a la izquierda) */
+            73.33% { transform: translateX(0); } /* Luna crece hasta la mitad (Posición original) */
+            80% { transform: translateX(45px); } /* Luna llena (Luna cubre todo el sol) */
+            86.66% { transform: translateX(0); } /* Regreso a mitad-mitad después de rotación */
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes sunOpacity {
+            0%, 66.66% { opacity: 1; }
+            80% { opacity: 1; }
+            80.1% { opacity: 0; } /* En luna llena, el sol desaparece para que se vea el fondo azul */
+            86.66% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes logoRotate {
+            0%, 80% { transform: rotate(0deg); }
+            86.66% { transform: rotate(180deg); } /* Rotación al final de la fase de luna llena */
+            100% { transform: rotate(180deg); }
+        }
+        /* Ajuste fino de la animación para cumplir con 15s/5s e hito de sol completo */
+        @keyframes moonSlide {
+            0%, 66.66% { cx: 95px; } /* Reposo: Luna posicionada para mostrar mitad sol */
+            66.67% { cx: 145px; } /* 10s: Inicio animación. Luna sale a la derecha -> SOL COMPLETO */
+            80% { cx: 50px; } /* 12s: Luna entra hasta cubrir todo -> LUNA LLENA */
+            93.33%, 100% { cx: 95px; } /* 14s-15s: Regreso a posición mitad tras rotación */
+        }
+        @keyframes logoRotate {
+            0%, 80% { transform: rotate(0deg); }
+            93.33%, 100% { transform: rotate(180deg); } /* Rotación de 12s a 14s */
+        }
+        
+        /* Implementación limpia de los keyframes para 15s de ciclo y 5s de animación (66.6% a 100%) */
+        .moon-layer {
+            cx: 95px; /* Estado base: mitad */
+            animation: moonTransition 15s infinite linear;
+        }
+        .animated-logo {
+            animation: logoSpin 15s infinite linear;
+        }
+
+        @keyframes moonTransition {
+            0%, 66.66% { cx: 95px; } /* Reposo 10s */
+            73.33% { cx: 145px; }   /* 1s: Se mueve a la derecha -> Sol Completo */
+            86.66% { cx: 50px; }    /* 2s más (total 3s): Se mueve al centro -> Luna Llena */
+            93.33%, 100% { cx: 95px; } /* 1s más: Regresa a posición de mitad */
+        }
+
+        @keyframes logoSpin {
+            0%, 86.66% { transform: rotate(0deg); } /* Inicia rotación justo después de luna llena */
+            93.33%, 100% { transform: rotate(180deg); } /* Gira 180 grados */
+        }
+
         @media (max-width: 1024px) {
           .nav, .nav-cta { display: none; }
           .menu-trigger { display: block; }
