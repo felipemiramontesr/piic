@@ -55,9 +55,17 @@ const Features: React.FC = () => {
         }
         .features-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 40px;
         }
+
+        @media (min-width: 1200px) {
+          .features-grid {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+          }
+        }
+
         .feature-item {
           display: flex;
           gap: 20px;
