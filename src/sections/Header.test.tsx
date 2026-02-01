@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import Header from './Header';
@@ -27,7 +27,6 @@ describe('Header Component', () => {
     it('contains specifically 4 animation layers for v5.2', () => {
         const { container } = renderHeader();
 
-        // Base (2 layers) + 3 dynamic layers = 5 rects in total inside the SVG
         // Let's check for the specific classes of v5.2
         expect(container.querySelector('.sun-grow-left-v5')).toBeInTheDocument();
         expect(container.querySelector('.luna-full-rl-v5')).toBeInTheDocument();
@@ -49,12 +48,12 @@ describe('Header Component', () => {
         const mobileMenu = container.querySelector('.mobile-menu');
         expect(mobileMenu).not.toHaveClass('open');
 
-        // Click trigger para abrir
-        trigger.click();
+        // Click trigger para abrir usando fireEvent para asegurar el tick de React
+        fireEvent.click(trigger);
         expect(mobileMenu).toHaveClass('open');
 
         // Click trigger para cerrar
-        trigger.click();
+        fireEvent.click(trigger);
         expect(mobileMenu).not.toHaveClass('open');
     });
 });
