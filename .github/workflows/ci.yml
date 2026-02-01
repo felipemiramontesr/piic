@@ -39,6 +39,9 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./dist/
         server-dir: ./
-        protocol: ftp
+        protocol: sftp
+        port: 22
         log-level: verbose
-        timeout: 600000
+        timeout: 900000
+        dangerous-clean-slate: false
+        state-name: .ftp-deploy-sync-state.json

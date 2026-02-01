@@ -112,6 +112,15 @@ const PrivacyPolicy: React.FC = () => {
         .privacy-page {
           background-color: var(--color-bg);
           min-height: 100vh;
+          width: 100%;
+          max-width: 100vw;
+          overflow-x: hidden;
+          position: relative;
+          /* Bleed correction */
+          margin-left: -1px;
+          margin-right: -1px;
+          padding-left: 1px;
+          padding-right: 1px;
         }
 
         .privacy-container {
