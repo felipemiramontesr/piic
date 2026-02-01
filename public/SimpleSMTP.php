@@ -60,6 +60,12 @@ class SimpleSMTP
         $this->log("-----------------------------------");
         $this->log("Starting email send to: $to");
 
+        // Diamond Tier: Dry Run Mode for API Testing
+        if (getenv('SMTP_DRY_RUN') === 'true') {
+            $this->log("DRY RUN: Email simulation successful (No socket opened)");
+            return true;
+        }
+
         $this->connection = fsockopen("ssl://{$this->host}", $this->port, $errno, $errstr, 10);
         if (!$this->connection) {
             $this->log("Connection failed: $errno - $errstr");
