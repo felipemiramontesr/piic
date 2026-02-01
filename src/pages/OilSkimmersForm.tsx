@@ -242,7 +242,7 @@ export default function OilSkimmersForm() {
 
         {status === 'success' ? (
           <div className="success-message">
-            <div className="success-icon">
+            <div className="success-icon" aria-hidden="true">
               <i className="fa-solid fa-circle-check"></i>
             </div>
             <h2>¡Información Enviada!</h2>
@@ -265,7 +265,7 @@ export default function OilSkimmersForm() {
             {/* 1. Datos de la Empresa */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-building section-icon"></i>1. Datos de la Empresa
+                <i className="fa-solid fa-building section-icon" aria-hidden="true"></i>1. Datos de la Empresa
               </h3>
               <div className="form-grid">
                 <div className="form-group col-span-2">
@@ -345,6 +345,7 @@ export default function OilSkimmersForm() {
                     onChange={handleChange}
                     className="form-input"
                     disabled={!formData.city || isLoadingColonias}
+                    aria-live="polite"
                   >
                     <option value="">
                       {!formData.city
@@ -399,7 +400,7 @@ export default function OilSkimmersForm() {
             {/* 2. Datos de Contacto */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-user-tie section-icon"></i>2. Datos de Contacto
+                <i className="fa-solid fa-user-tie section-icon" aria-hidden="true"></i>2. Datos de Contacto
               </h3>
               <div className="form-grid">
                 <div className="form-group col-span-2">
@@ -455,7 +456,7 @@ export default function OilSkimmersForm() {
             {/* 3. Información del Aceite */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-droplet section-icon"></i>3. Información del Aceite
+                <i className="fa-solid fa-droplet section-icon" aria-hidden="true"></i>3. Información del Aceite
               </h3>
               <div className="form-grid">
                 <div className="form-group col-span-2">
@@ -540,7 +541,7 @@ export default function OilSkimmersForm() {
                     type="number"
                     step="0.1"
                     className="form-input"
-                    style={{ maxWidth: '50%' }}
+                    style={{ maxWidth: '200px' }}
                   />
                 </div>
               </div>
@@ -550,7 +551,7 @@ export default function OilSkimmersForm() {
             <div className="form-grid">
               <section className="form-section">
                 <h3>
-                  <i className="fa-solid fa-plug-circle-bolt section-icon"></i>4. Información
+                  <i className="fa-solid fa-plug-circle-bolt section-icon" aria-hidden="true"></i>4. Información
                   Eléctrica
                 </h3>
                 <div className="form-group">
@@ -584,7 +585,7 @@ export default function OilSkimmersForm() {
 
               <section className="form-section">
                 <h3>
-                  <i className="fa-solid fa-map-location-dot section-icon"></i>5. Ubicación
+                  <i className="fa-solid fa-map-location-dot section-icon" aria-hidden="true"></i>5. Ubicación
                 </h3>
                 <div className="form-group">
                   <label>Entorno *</label>
@@ -619,7 +620,7 @@ export default function OilSkimmersForm() {
             {/* 6. Tipo de Contenedor */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-industry section-icon"></i>6. Tipo de Contenedor *
+                <i className="fa-solid fa-industry section-icon" aria-hidden="true"></i>6. Tipo de Contenedor *
               </h3>
               <div className="form-radio-group">
                 {['Laguna', 'Tanque', 'Acequia', 'Cisterna'].map((type) => (
@@ -659,7 +660,7 @@ export default function OilSkimmersForm() {
             {/* 7. Archivos */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-file-lines section-icon"></i>7. Archivos de Apoyo
+                <i className="fa-solid fa-file-lines section-icon" aria-hidden="true"></i>7. Archivos de Apoyo
               </h3>
               <p className="form-section-description">
                 Adjuntar planos, dibujos o fotografías de su proyecto actual nos ayudará a
@@ -672,7 +673,7 @@ export default function OilSkimmersForm() {
                 onDrop={handleDrop}
               >
                 <div className="file-upload-icon">
-                  <i className="fa-solid fa-cloud-arrow-up"></i>
+                  <i className="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
                 </div>
                 <div className="file-upload-text">Arrastra tus archivos aquí</div>
                 <div className="file-upload-divider">o</div>
@@ -690,7 +691,7 @@ export default function OilSkimmersForm() {
                 <div className="file-upload-hint">Máx. 5MB (JPG, PNG, PDF)</div>
                 {file && (
                   <div className="selected-file">
-                    <i className="fa-solid fa-circle-check"></i> {file.name}
+                    <i className="fa-solid fa-circle-check" aria-hidden="true"></i> {file.name}
                   </div>
                 )}
               </div>

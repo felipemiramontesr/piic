@@ -56,14 +56,14 @@ const Contact: React.FC = () => {
             <div className="contact-details">
               <div className="detail-item">
                 <div className="detail-header">
-                  <i className="fa-solid fa-location-dot contact-icon"></i>
+                  <i className="fa-solid fa-location-dot contact-icon" aria-hidden="true"></i>
                   <strong>Ubicación</strong>
                 </div>
                 <p>Av. Barones, 209, Colonia Las Americas, Guadalupe, Zacatecas.</p>
               </div>
               <div className="detail-item">
                 <div className="detail-header">
-                  <i className="fa-solid fa-envelope contact-icon"></i>
+                  <i className="fa-solid fa-envelope contact-icon" aria-hidden="true"></i>
                   <strong>Email</strong>
                 </div>
                 <p>
@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
               </div>
               <div className="detail-item">
                 <div className="detail-header">
-                  <i className="fa-solid fa-phone contact-icon"></i>
+                  <i className="fa-solid fa-phone contact-icon" aria-hidden="true"></i>
                   <strong>Teléfono</strong>
                 </div>
                 <p>
@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
                 <div className="form-group">
                   <label htmlFor="name">Nombre</label>
                   <div className="form-input-wrapper">
-                    <i className="fa-solid fa-user input-icon"></i>
+                    <i className="fa-solid fa-user input-icon" aria-hidden="true"></i>
                     <input
                       type="text"
                       id="name"
@@ -112,7 +112,7 @@ const Contact: React.FC = () => {
                 <div className="form-group">
                   <label htmlFor="company">Empresa</label>
                   <div className="form-input-wrapper">
-                    <i className="fa-solid fa-building input-icon"></i>
+                    <i className="fa-solid fa-building input-icon" aria-hidden="true"></i>
                     <input
                       type="text"
                       id="company"
@@ -126,7 +126,7 @@ const Contact: React.FC = () => {
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <div className="form-input-wrapper">
-                      <i className="fa-solid fa-at input-icon"></i>
+                      <i className="fa-solid fa-at input-icon" aria-hidden="true"></i>
                       <input
                         type="email"
                         id="email"
@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
                   <div className="form-group">
                     <label htmlFor="phone">Teléfono</label>
                     <div className="form-input-wrapper">
-                      <i className="fa-solid fa-phone-flip input-icon"></i>
+                      <i className="fa-solid fa-phone-flip input-icon" aria-hidden="true"></i>
                       <input type="tel" id="phone" name="phone" placeholder="(492) 942 1780" />
                     </div>
                   </div>
@@ -147,7 +147,7 @@ const Contact: React.FC = () => {
                 <div className="form-group">
                   <label htmlFor="message">Mensaje / Requerimiento</label>
                   <div className="form-input-wrapper">
-                    <i className="fa-solid fa-pen-nib input-icon textarea-icon"></i>
+                    <i className="fa-solid fa-pen-nib input-icon textarea-icon" aria-hidden="true"></i>
                     <textarea
                       id="message"
                       name="message"
