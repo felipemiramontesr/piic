@@ -40,7 +40,7 @@ const CookieBanner: React.FC = () => {
           position: fixed;
           bottom: 0;
           left: 0;
-          width: 100%;
+          right: 0;
           background-color: var(--color-accent); /* Amarillo PIIC */
           padding: 16px 24px;
           z-index: 9999;

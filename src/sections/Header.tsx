@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           position: fixed;
           top: 0;
           left: 0;
-          width: 100%;
+          right: 0;
           height: 100px;
           background-color: var(--color-primary); /* Match form header color */
           color: var(--color-white);
