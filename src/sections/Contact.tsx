@@ -199,10 +199,6 @@ const Contact: React.FC = () => {
         .detail-item {
           margin-bottom: 20px;
         }
-        .detail-item strong {
-          display: block;
-          color: var(--color-primary);
-        }
         .detail-header {
           display: flex;
           align-items: center;
@@ -213,40 +209,26 @@ const Contact: React.FC = () => {
           color: var(--color-accent);
           font-size: 18px;
         }
+        /* Page specific form layout overrides */
         .contact-form-container {
           background-color: var(--color-white);
           padding: 40px;
           border-radius: 8px;
           border: 1px solid var(--color-border);
         }
-        .form-group {
-          margin-bottom: 20px;
-        }
         .form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 20px;
         }
-        label {
-          display: block;
-          font-size: 14px;
-          font-weight: 500;
-          margin-bottom: 8px;
-          color: var(--color-text-primary);
-        }
-        input, textarea {
-          width: 100%;
-          padding: 12px 12px 12px 40px;
-          border: 1px solid var(--color-input-border);
-          border-radius: 4px;
-          font-family: var(--font-main);
-          font-size: 15px;
-          transition: all 0.3s ease;
-        }
         .form-input-wrapper {
           position: relative;
           display: flex;
           align-items: center;
+        }
+        .form-input-wrapper input,
+        .form-input-wrapper textarea {
+          padding-left: 44px;
         }
         .input-icon {
           position: absolute;
@@ -255,49 +237,18 @@ const Contact: React.FC = () => {
           opacity: 0.6;
           transition: all 0.3s ease;
           pointer-events: none;
+          z-index: 10;
         }
         .textarea-icon {
           top: 15px;
-          transform: none;
         }
         input:focus + .input-icon, 
         textarea:focus + .input-icon {
           color: var(--color-primary);
           opacity: 1;
         }
-        input:focus, textarea:focus {
-          outline: none;
-          border-color: var(--color-primary);
-          box-shadow: 0 0 0 3px rgba(15, 42, 68, 0.1);
-        }
-        .form-checkbox {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 30px;
-        }
-        .form-checkbox input {
-          width: auto;
-        }
-        .form-checkbox label {
-          margin-bottom: 0;
-          font-weight: 400;
-        }
         .submit-btn {
           width: 100%;
-          background-color: var(--color-primary);
-          color: var(--color-white);
-        }
-        .submit-btn:hover {
-          background-color: #1a4570;
-          color: var(--color-white);
-        }
-        .success-message {
-          text-align: center;
-          padding: 40px 0;
-        }
-        .success-message h3 {
-          margin-bottom: 15px;
         }
         @media (max-width: 992px) {
           .contact-grid { grid-template-columns: 1fr; }

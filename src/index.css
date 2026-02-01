@@ -117,3 +117,144 @@ button {
     font-size: 15px;
   }
 }
+
+/* --- Global Utility Classes & Components --- */
+
+.section {
+  padding: 80px 0;
+}
+
+.app-wrapper {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.section-white {
+  background-color: var(--color-white);
+}
+
+.section-dark {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.section-dark h2 {
+  color: var(--color-white);
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 32px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-color: var(--color-accent);
+}
+
+/* Standard Buttons (Legacy support for old classes) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: #d9a404;
+}
+
+.btn-outline {
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}
+
+/* --- Diamond Form System --- */
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-primary);
+}
+
+.form-input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  background-color: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background-color: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.1);
+}
+
+.form-checkbox,
+.form-radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.form-checkbox input,
+.form-radio input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.success-message {
+  text-align: center;
+  padding: 40px 0;
+}

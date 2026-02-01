@@ -28,8 +28,17 @@ jobs:
     - name: Run unit tests
       run: npm test
 
+    - name: Security audit
+      run: npm audit --audit-level=high
+
     - name: Build project
       run: npm run build
+
+    - name: Verify Build (Health Check)
+      run: |
+        if [ ! -f dist/index.html ]; then echo "Build failed: index.html missing"; exit 1; fi
+        if [ ! -d dist/assets ]; then echo "Build failed: assets directory missing"; exit 1; fi
+        echo "Build health check passed!"
 
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5

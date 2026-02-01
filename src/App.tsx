@@ -10,7 +10,6 @@ import Footer from './sections/Footer';
 import OilSkimmersForm from './pages/OilSkimmersForm';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookieBanner from './components/CookieBanner';
-import './App.css';
 
 function App() {
   return (
