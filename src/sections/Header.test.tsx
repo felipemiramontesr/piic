@@ -36,23 +36,24 @@ describe('Header Component', () => {
 
     it('renders simpleMode when prop is passed', () => {
         renderHeader({ simpleMode: true });
-        // In simple mode, it should show "Ver nuestro sitio web" or similar (check button text)
-        expect(screen.getByText(/Sitio Web/i)).toBeInTheDocument();
+        // Usamos getAllByText y verificamos que al menos uno esté presente (desktop/mobile spans)
+        const elements = screen.getAllByText(/Sitio Web/i);
+        expect(elements.length).toBeGreaterThan(0);
     });
 
     it('toggles mobile menu when trigger is clicked', () => {
-        renderHeader();
+        const { container } = renderHeader();
         const trigger = screen.getByLabelText('Menu');
 
-        // Initial state: menu presumably hidden or not "open"
-        const mobileMenu = document.querySelector('.mobile-menu');
+        // Selector más robusto para el menú móvil
+        const mobileMenu = container.querySelector('.mobile-menu');
         expect(mobileMenu).not.toHaveClass('open');
 
-        // Click trigger
+        // Click trigger para abrir
         trigger.click();
         expect(mobileMenu).toHaveClass('open');
 
-        // Click again to close
+        // Click trigger para cerrar
         trigger.click();
         expect(mobileMenu).not.toHaveClass('open');
     });
