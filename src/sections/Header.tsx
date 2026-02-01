@@ -49,7 +49,8 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           <div className="nav-simple">
             <Button href="https://piic.com.mx/" variant="primary">
               <i className="fa-solid fa-arrow-left animated-arrow"></i>
-              Ver nuestro sitio web
+              <span className="desktop-text">Ver nuestro sitio web</span>
+              <span className="mobile-text">Ver Sitio Web</span>
             </Button>
           </div>
         ) : (
@@ -301,6 +302,11 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         @media (max-width: 1024px) {
           .nav, .nav-cta { display: none; }
           .menu-trigger { display: block; }
+          .desktop-text { display: none; }
+          .mobile-text { display: inline; }
+        }
+        @media (min-width: 1025px) {
+          .mobile-text { display: none; }
         }
         @media (max-width: 480px) {
           .mobile-menu-content {
