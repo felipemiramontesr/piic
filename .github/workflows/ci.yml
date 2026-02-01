@@ -51,7 +51,7 @@ jobs:
       - name: 🖼️ Optimize Images
         uses: calibreapp/image-actions@main
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
 
       - name: Build project
