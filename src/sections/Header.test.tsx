@@ -56,4 +56,25 @@ describe('Header Component', () => {
         fireEvent.click(trigger);
         expect(mobileMenu).not.toHaveClass('open');
     });
+
+    it('closes mobile menu when "Solicitar cotización" is clicked', () => {
+        const { container } = renderHeader();
+        const trigger = screen.getByLabelText('Menu');
+        const mobileMenu = container.querySelector('.mobile-menu');
+
+        // Open menu
+        fireEvent.click(trigger);
+        expect(mobileMenu).toHaveClass('open');
+
+        // Find the CTA button in the mobile menu and click it
+        // There are two buttons with the same name, we want the one inside the mobile menu
+        const ctaButtons = screen.getAllByRole('link', { name: /solicitar cotización/i });
+        const mobileCta = ctaButtons.find(btn => btn.closest('.mobile-menu'));
+
+        if (!mobileCta) throw new Error('Mobile CTA button not found');
+        fireEvent.click(mobileCta);
+
+        // Verify menu is closed
+        expect(mobileMenu).not.toHaveClass('open');
+    });
 });

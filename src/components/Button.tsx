@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <a href={href} className={baseClass}>
+      <a href={href} className={baseClass} onClick={onClick}>
         {children}
       </a>
     );
