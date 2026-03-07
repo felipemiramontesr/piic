@@ -4,6 +4,7 @@ import Header from './sections/Header';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Services from './sections/Services';
+import DigitalTransformation from './sections/DigitalTransformation';
 import Features from './sections/Features';
 import Process from './sections/Process';
 import Contact from './sections/Contact';
@@ -35,6 +36,7 @@ function App() {
                 <Hero />
                 <About />
                 <Services />
+                <DigitalTransformation />
                 <Features />
                 <Process />
                 <Contact />
