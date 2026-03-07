@@ -107,66 +107,61 @@ const Services: React.FC = () => {
         
         /* Layout de 'Cinta' (Una sola fila deslizable sin romper tamaño) */
         .services-grid {
-          display: flex;
-          flex-wrap: nowrap;
-          gap: 25px;
-          overflow-x: auto;
-          padding-bottom: 20px; /* Espacio para la barra de scroll */
-          
-          /* Ocultar scrollbar visualmente en webkit para más elegancia pero permitir scroll táctil/trackpad */
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: thin;
-          scrollbar-color: var(--color-border) transparent;
-        }
-        
-        .services-grid::-webkit-scrollbar {
-          height: 6px;
-        }
-        .services-grid::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .services-grid::-webkit-scrollbar-thumb {
-          background-color: var(--color-border);
-          border-radius: 10px;
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 15px; /* Espacio mínimo para maximizar ancho de tarjeta */
         }
 
         .service-card {
-          flex: 0 0 auto; /* Importante para que no se encojan */
-          width: 320px; /* Tamaño lo suficientemente ancho */
           text-align: center;
-          height: auto;
-          padding: 40px 25px; 
-          white-space: normal;
+          height: 100%;
+          padding: 35px 15px; /* Padding vertical generoso, horizontal ajustado */
+          transition: transform 0.3s ease;
         }
 
         .service-icon {
-          font-size: 38px;
-          margin-bottom: 25px;
+          font-size: 32px;
+          margin-bottom: 20px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 80px;
-          height: 80px;
+          width: 70px;
+          height: 70px;
           background-color: var(--color-bg);
           color: var(--color-primary);
           border-radius: 50%;
         }
+
         .service-card h3 {
-          margin-bottom: 15px;
-          font-size: 19px;
-        }
-        .service-card p {
-          font-size: 15px;
-          color: var(--color-text-secondary);
-          margin-bottom: 0;
-          line-height: 1.5;
+          margin-bottom: 12px;
+          font-size: 16px; /* Lo suficientemente grande para ser legible */
         }
 
-        /* Ajustes menores si la pantalla es muy pequeña */
+        .service-card p {
+          font-size: 13px; /* Adecuado para columnas estrechas */
+          color: var(--color-text-secondary);
+          margin-bottom: 0;
+          line-height: 1.4;
+        }
+
+        /* Ajustes responsivos estrictos */
+        @media (max-width: 1200px) {
+          .services-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+          }
+        }
+        
         @media (max-width: 768px) {
-          .service-card {
-            width: 280px;
-            padding: 30px 20px;
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .services-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
