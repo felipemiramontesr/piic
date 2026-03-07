@@ -8,14 +8,15 @@ const About: React.FC = () => {
           <div className="about-text">
             <h2>Quiénes Somos</h2>
             <p>
-              PIIC es una proveedora de insumos industriales y comerciales enfocada en ofrecer
-              soluciones confiables, eficientes y oportunas para empresas del sector industrial y
-              minero.
+              PIIC es un socio integral corporativo enfocado en ofrecer soluciones confiables,
+              eficientes y oportunas. Proveemos desde insumos industriales estratégicos hasta
+              vanguardia en tecnología de la información para empresas del sector industrial y minero.
             </p>
             <p>
-              Nuestra misión es ser el aliado estratégico que sus operaciones necesitan,
-              garantizando que el flujo de suministros nunca se detenga, permitiéndoles enfocarse en
-              lo que mejor saben hacer.
+              Nuestra misión es ser el aliado definitivo que sus operaciones necesitan, garantizando
+              no solo que el flujo físico de suministros nunca se detenga, sino que su infraestructura
+              digital funcione de manera segura y eficiente, permitiendo a su empresa enfocarse en lo
+              que mejor sabe hacer.
             </p>
           </div>
           <div className="about-image">
