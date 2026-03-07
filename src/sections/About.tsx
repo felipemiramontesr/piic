@@ -54,6 +54,7 @@ const About: React.FC = () => {
         .about-text p {
           color: var(--color-text-secondary);
           margin-bottom: 20px;
+          text-align: justify;
         }
         .industrial-img {
           width: 100%;
