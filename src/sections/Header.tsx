@@ -9,6 +9,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,7 +78,13 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
               <ul className="nav-list">
                 <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
                 <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
-                <li><a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a></li>
+                <li className="dropdown">
+                  <a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios <i className="fa-solid fa-chevron-down" style={{ fontSize: '10px', marginLeft: '5px' }}></i></a>
+                  <ul className="dropdown-menu">
+                    <li><a href="#servicios">Servicios Industriales</a></li>
+                    <li><a href="#transformacion">Transformación Digital</a></li>
+                  </ul>
+                </li>
                 <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
                 <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
                 <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
@@ -108,7 +115,16 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
                   <ul className="mobile-nav-list">
                     <li><a href="#inicio" onClick={closeMenu}><i className="fa-solid fa-house"></i> Inicio</a></li>
                     <li><a href="#quienes-somos" onClick={closeMenu}><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
-                    <li><a href="#servicios" onClick={closeMenu}><i className="fa-solid fa-gears"></i> Servicios</a></li>
+                    <li className="mobile-dropdown">
+                      <div className="mobile-dropdown-header" onClick={() => setIsServicesOpen(!isServicesOpen)}>
+                        <span><i className="fa-solid fa-gears"></i> Servicios</span>
+                        <i className={`fa-solid fa-chevron-down toggle-icon ${isServicesOpen ? 'open' : ''}`}></i>
+                      </div>
+                      <ul className={`mobile-dropdown-menu ${isServicesOpen ? 'open' : ''}`}>
+                        <li><a href="#servicios" onClick={closeMenu}><i className="fa-solid fa-industry"></i> Industriales</a></li>
+                        <li><a href="#transformacion" onClick={closeMenu}><i className="fa-solid fa-microchip"></i> Digital</a></li>
+                      </ul>
+                    </li>
                     <li><a href="#por-que-piic" onClick={closeMenu}><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
                     <li><a href="#proceso" onClick={closeMenu}><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
                     <li><a href="#contacto" onClick={closeMenu}><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
@@ -204,6 +220,44 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .nav-list a:hover {
           color: var(--color-accent);
         }
+        
+        /* Desktop Dropdown Styles */
+        .dropdown {
+          position: relative;
+        }
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: var(--color-white);
+          min-width: 250px;
+          border-radius: 8px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          padding: 10px 0;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(10px);
+          transition: all 0.3s ease;
+          list-style: none;
+        }
+        .dropdown:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+        .dropdown-menu li {
+          margin: 0;
+        }
+        .dropdown-menu a {
+          color: var(--color-primary) !important;
+          padding: 12px 20px;
+          display: block;
+          font-weight: 500;
+        }
+        .dropdown-menu a:hover {
+          background-color: rgba(242, 183, 5, 0.1);
+          color: var(--color-primary) !important;
+        }
         .header-actions {
           display: flex;
           align-items: center;
@@ -292,6 +346,62 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         .mobile-nav-list a:hover {
           color: var(--color-accent);
+        }
+        
+        /* Mobile Dropdown Styles */
+        .mobile-dropdown-header {
+          color: var(--color-white);
+          font-size: 20px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-right: 20px;
+          cursor: pointer;
+          transition: color 0.3s ease;
+        }
+        .mobile-dropdown-header span {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+        .mobile-dropdown-header span i {
+          color: var(--color-accent);
+          width: 25px;
+          text-align: center;
+        }
+        .mobile-dropdown-header:hover {
+          color: var(--color-accent);
+        }
+        .toggle-icon {
+          font-size: 16px !important;
+          transition: transform 0.3s ease;
+          color: var(--color-white);
+        }
+        .toggle-icon.open {
+          transform: rotate(180deg);
+        }
+        .mobile-dropdown-menu {
+          list-style: none;
+          padding: 0;
+          padding-left: 40px;
+          margin-top: 15px;
+          display: none;
+        }
+        .mobile-dropdown-menu.open {
+          display: block;
+        }
+        .mobile-dropdown-menu li {
+          margin-bottom: 20px !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .mobile-dropdown-menu a {
+          font-size: 17px !important;
+          font-weight: 400 !important;
+        }
+        .mobile-dropdown-menu a i {
+          width: 20px !important;
         }
         .mobile-cta {
           margin-top: auto;
