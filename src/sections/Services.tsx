@@ -134,24 +134,38 @@ const Services: React.FC = () => {
           margin-bottom: 60px; /* Reduje esto en contexto al nuevo banner */
         }
         
-        /* Estilos del Banner Digital */
+        /* Estilos del Banner Digital - Look Tecnológico & Corporativo */
         .digital-banner {
-          background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1), rgba(var(--color-primary-rgb), 0.02));
-          border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+          background: linear-gradient(135deg, var(--color-primary), #0a1c2e);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 20px;
           padding: 50px;
           margin-top: 60px;
           position: relative;
           overflow: hidden;
+          box-shadow: 0 20px 40px rgba(15, 42, 68, 0.15);
         }
         
+        /* Patrón de matriz de puntos (dot matrix) para dar look de tecnología */
         .digital-banner::before {
           content: '';
           position: absolute;
           top: 0; left: 0; right: 0; bottom: 0;
-          background: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h40v40H0V0zm20 20h20v20H20V20zM0 20h20v20H0V20z" fill="rgba(88, 166, 255, 0.03)" fill-rule="evenodd"/></svg>') repeat;
+          background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+          background-size: 20px 20px;
           z-index: 0;
-          opacity: 0.5;
+          opacity: 0.6;
+        }
+
+        /* Destello muy sutil del color de acento amarillo de la marca */
+        .digital-banner::after {
+          content: '';
+          position: absolute;
+          top: -50%; left: -50%;
+          width: 200%; height: 200%;
+          background: radial-gradient(circle at 50% 50%, rgba(242, 183, 5, 0.05) 0%, transparent 60%);
+          z-index: 0;
+          pointer-events: none;
         }
 
         .digital-banner-content {
@@ -159,69 +173,87 @@ const Services: React.FC = () => {
           z-index: 1;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 50px;
+          gap: 60px;
           align-items: center;
         }
 
         .digital-banner-text h2 {
-          font-size: 32px;
+          font-size: 36px;
           margin-bottom: 20px;
-          color: var(--color-primary);
+          color: var(--color-white);
+          letter-spacing: -0.5px;
+        }
+
+        /* Resaltado del título en color acento para romper la monotonía y enfatizar la tecnología */
+        .digital-banner-text h2 span.highlight {
+          color: var(--color-accent);
+          position: relative;
+          display: inline-block;
         }
 
         .digital-banner-text p {
           font-size: 16px;
-          color: var(--color-text-secondary);
-          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.7;
         }
 
         .digital-services {
           display: flex;
           flex-direction: column;
-          gap: 30px;
+          gap: 25px;
         }
 
         .digital-service-item {
           display: flex;
-          gap: 20px;
+          gap: 24px;
           align-items: flex-start;
-          background: rgba(255, 255, 255, 0.03); /* Ligeramente translúcido para dark mode */
-          padding: 20px;
-          border-radius: 12px;
-          border: 1px solid rgba(255,255,255, 0.1);
-          transition: transform 0.3s ease;
+          background: rgba(255, 255, 255, 0.03); 
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 24px;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .digital-service-item:hover {
-          transform: translateY(-5px);
-          background: rgba(var(--color-primary-rgb), 0.05);
-          border-color: rgba(var(--color-primary-rgb), 0.3);
+          transform: translateX(10px);
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(242, 183, 5, 0.3); /* Borde acentuado en hover */
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .digital-icon {
           font-size: 24px;
-          color: var(--color-primary);
-          width: 50px;
-          height: 50px;
+          color: var(--color-accent); /* Iconos amarillos contrastando sobre el primario oscuro */
+          width: 56px;
+          height: 56px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(var(--color-primary-rgb), 0.1);
-          border-radius: 10px;
+          background: rgba(242, 183, 5, 0.1);
+          border-radius: 12px;
           flex-shrink: 0;
+          transition: transform 0.3s ease;
+        }
+        
+        .digital-service-item:hover .digital-icon {
+          transform: scale(1.1);
+          background: rgba(242, 183, 5, 0.2);
         }
 
         .digital-info h4 {
-          font-size: 18px;
+          font-size: 19px;
           margin-bottom: 8px;
-          color: var(--color-text);
+          color: var(--color-white);
+          font-weight: 600;
         }
 
         .digital-info p {
           font-size: 14px;
-          color: var(--color-text-secondary);
+          color: rgba(255, 255, 255, 0.65);
           margin: 0;
-          line-height: 1.5;
+          line-height: 1.6;
         }
 
         @media (max-width: 900px) {
@@ -230,7 +262,11 @@ const Services: React.FC = () => {
             gap: 40px;
           }
           .digital-banner {
-            padding: 30px 20px;
+            padding: 40px 24px;
+            margin-top: 40px;
+          }
+          .digital-service-item:hover {
+            transform: translateY(-5px); /* Cambio de animación lateral a vertical en móviles */
           }
         }
       `}</style>
