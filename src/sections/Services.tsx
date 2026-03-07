@@ -104,8 +104,29 @@ const Services: React.FC = () => {
         }
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 30px;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 20px;
+        }
+
+        /* Responsive Breakpoints para que no se aplasten en pantallas pequeñas */
+        @media (max-width: 1200px) {
+          .services-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .services-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </section>
