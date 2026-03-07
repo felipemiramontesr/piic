@@ -17,27 +17,29 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
       .service-card {
         text-align: center;
         height: 100%;
+        padding: 45px 30px; /* Aumentado sustancialmente para mayor tamaño */
       }
       .service-icon {
-        font-size: 32px;
-        margin-bottom: 20px;
+        font-size: 42px; /* Icono más grande */
+        margin-bottom: 25px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
         background-color: var(--color-bg);
         color: var(--color-primary);
         border-radius: 50%;
       }
       .service-card h3 {
-        margin-bottom: 15px;
-        font-size: 18px;
+        margin-bottom: 18px;
+        font-size: 20px; /* Título más grande */
       }
       .service-card p {
-        font-size: 14px;
+        font-size: 16px; /* Texto más grande */
         color: var(--color-text-secondary);
         margin-bottom: 0;
+        line-height: 1.6;
       }
     `}</style>
   </div>
@@ -102,30 +104,69 @@ const Services: React.FC = () => {
         .section-header p {
           color: var(--color-text-secondary);
         }
+        
+        /* Layout de 'Cinta' (Una sola fila deslizable sin romper tamaño) */
         .services-grid {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          gap: 20px;
-        }
-
-        /* Responsive Breakpoints para que no se aplasten en pantallas pequeñas */
-        @media (max-width: 1200px) {
-          .services-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-          }
+          display: flex;
+          flex-wrap: nowrap;
+          gap: 25px;
+          overflow-x: auto;
+          padding-bottom: 20px; /* Espacio para la barra de scroll */
+          
+          /* Ocultar scrollbar visualmente en webkit para más elegancia pero permitir scroll táctil/trackpad */
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+          scrollbar-color: var(--color-border) transparent;
         }
         
-        @media (max-width: 768px) {
-          .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-          }
+        .services-grid::-webkit-scrollbar {
+          height: 6px;
+        }
+        .services-grid::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .services-grid::-webkit-scrollbar-thumb {
+          background-color: var(--color-border);
+          border-radius: 10px;
         }
 
-        @media (max-width: 480px) {
-          .services-grid {
-            grid-template-columns: 1fr;
+        .service-card {
+          flex: 0 0 auto; /* Importante para que no se encojan */
+          width: 320px; /* Tamaño lo suficientemente ancho */
+          text-align: center;
+          height: auto;
+          padding: 40px 25px; 
+          white-space: normal;
+        }
+
+        .service-icon {
+          font-size: 38px;
+          margin-bottom: 25px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 80px;
+          height: 80px;
+          background-color: var(--color-bg);
+          color: var(--color-primary);
+          border-radius: 50%;
+        }
+        .service-card h3 {
+          margin-bottom: 15px;
+          font-size: 19px;
+        }
+        .service-card p {
+          font-size: 15px;
+          color: var(--color-text-secondary);
+          margin-bottom: 0;
+          line-height: 1.5;
+        }
+
+        /* Ajustes menores si la pantalla es muy pequeña */
+        @media (max-width: 768px) {
+          .service-card {
+            width: 280px;
+            padding: 30px 20px;
           }
         }
       `}</style>
