@@ -79,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
                 <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
                 <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
                 <li className="dropdown">
-                  <a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios <i className="fa-solid fa-chevron-down" style={{ fontSize: '10px', marginLeft: '5px' }}></i></a>
+                  <span className="dropdown-trigger"><i className="fa-solid fa-gears"></i> Servicios <i className="fa-solid fa-chevron-down" style={{ fontSize: '10px', marginLeft: '5px' }}></i></span>
                   <ul className="dropdown-menu">
                     <li><a href="#servicios">Servicios Industriales</a></li>
                     <li><a href="#transformacion">Transformación Digital</a></li>
@@ -221,9 +221,23 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           color: var(--color-accent);
         }
         
-        /* Desktop Dropdown Styles */
         .dropdown {
           position: relative;
+        }
+        .dropdown-trigger {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--color-white);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.3s ease;
+          height: 100%;
+          line-height: normal; /* Asegura que el texto y el nav se alineen */
+        }
+        .dropdown-trigger:hover {
+          color: var(--color-accent);
         }
         .dropdown-menu {
           position: absolute;
