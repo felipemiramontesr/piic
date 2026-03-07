@@ -70,6 +70,11 @@ const Services: React.FC = () => {
       title: 'Operación y mantenimiento',
       description: 'Herramientas y refacciones críticas para sus equipos.',
     },
+    {
+      icon: 'fa-solid fa-truck-fast',
+      title: 'Suministro Automotriz',
+      description: 'Cadena de suministro de refacciones e industria del neumático.',
+    },
   ];
 
   return (
