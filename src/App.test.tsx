@@ -6,7 +6,7 @@ describe('PIIC Landing Page', () => {
   it('should render the main corporate title', () => {
     render(<App />);
     const titleElement = screen.getByText(
-      /Suministro industrial y comercial para operaciones que no pueden detenerse/i,
+      /Suministro industrial, tecnológico y comercial para operaciones que no pueden detenerse/i,
     );
     expect(titleElement).toBeInTheDocument();
   });

@@ -11,8 +11,8 @@ const Process: React.FC = () => {
     {
       number: '02',
       icon: 'fa-magnifying-glass-chart',
-      title: 'Búsqueda y cotización',
-      text: 'Localizamos los mejores insumos con proveedores certificados.',
+      title: 'Búsqueda, análisis y cotización',
+      text: 'Localizamos los mejores insumos y protocolos con proveedores certificados.',
     },
     {
       number: '03',
@@ -24,7 +24,7 @@ const Process: React.FC = () => {
       number: '04',
       icon: 'fa-truck-fast',
       title: 'Suministro y seguimiento',
-      text: 'Entregamos el material y aseguramos su satisfacción total.',
+      text: 'Entregamos los productos y servicios asegurando una satisfacción total.',
     },
   ];
 

@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
     <section id="inicio" className="hero-section">
       <div className="container hero-container">
         <div className="hero-content">
-          <h1>Suministro industrial y comercial para operaciones que no pueden detenerse</h1>
+          <h1>Suministro industrial, tecnológico y comercial para operaciones que no pueden detenerse</h1>
           <p className="hero-subtitle">
             Respuesta rápida y suministro confiable para el sector minero e industrial.
           </p>

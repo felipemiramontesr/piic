@@ -10,6 +10,7 @@ import Process from './sections/Process';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import CookieBanner from './components/CookieBanner';
+import WhatsAppPill from './components/WhatsAppPill';
 
 // Lazy loaded non-critical pages
 const OilSkimmersForm = lazy(() => import('./pages/OilSkimmersForm'));
@@ -61,6 +62,7 @@ function App() {
         } />
       </Routes>
       <CookieBanner />
+      <WhatsAppPill />
     </Router>
   );
 }
