@@ -1,47 +1,61 @@
 import React from 'react';
 
 const DigitalTransformation: React.FC = () => {
-    return (
-        <section id="transformacion" className="section digital-section">
-            <div className="container">
-                <div className="section-header tech-header">
-                    <h2>Transformación <span className="highlight">Digital</span></h2>
-                    <p>
-                        Modernizamos y protegemos la infraestructura de su organización,
-                        llevándola al siguiente nivel de eficiencia y seguridad operativa.
-                    </p>
-                </div>
+  return (
+    <section id="transformacion" className="section digital-section">
+      <div className="container">
+        <div className="section-header tech-header">
+          <h2>Transformación <span className="highlight">Digital</span></h2>
+          <p>
+            Modernizamos y protegemos la infraestructura de su organización,
+            llevándola al siguiente nivel de eficiencia y seguridad operativa.
+          </p>
+        </div>
 
-                <div className="digital-cards-grid">
-                    <div className="digital-card">
-                        <div className="digital-icon">
-                            <i className="fa-solid fa-code"></i>
-                        </div>
-                        <div className="digital-info">
-                            <h3>Desarrollo de Software a la Medida</h3>
-                            <p>
-                                Creación de plataformas web corporativas y aplicaciones móviles operativas
-                                diseñadas específicamente para optimizar, automatizar y escalar sus procesos industriales.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="digital-card">
-                        <div className="digital-icon">
-                            <i className="fa-solid fa-network-wired"></i>
-                        </div>
-                        <div className="digital-info">
-                            <h3>Ciberseguridad y Análisis Forense</h3>
-                            <p>
-                                Auditorías profundas, prevención proactiva, contención de amenazas avanzadas y
-                                capacitación especializada para blindar la información crítica de su empresa.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <div className="digital-cards-grid">
+          <div className="digital-card">
+            <div className="digital-icon">
+              <i className="fa-solid fa-code"></i>
             </div>
+            <div className="digital-info">
+              <h3>Desarrollo de Software a la Medida</h3>
+              <p>
+                Creación de plataformas web corporativas y aplicaciones móviles operativas
+                diseñadas específicamente para optimizar, automatizar y escalar sus procesos, tecnologías y estándares industriales.
+              </p>
+            </div>
+          </div>
 
-            <style>{`
+          <div className="digital-card">
+            <div className="digital-icon">
+              <i className="fa-solid fa-network-wired"></i>
+            </div>
+            <div className="digital-info">
+              <h3>Ciberseguridad y Análisis Forense</h3>
+              <p>
+                Auditorías profundas, prevención proactiva, contención de amenazas avanzadas, videovigilancia y
+                capacitación especializada para blindar la información crítica de su empresa.
+              </p>
+            </div>
+          </div>
+
+          <div className="digital-card">
+            <div className="digital-icon">
+              <i className="fa-solid fa-server"></i>
+            </div>
+            <div className="digital-info">
+              <h3>
+                Infraestructura Tecnológica <br /> y Conectividad
+              </h3>
+              <p>
+                Impulsamos la continuidad y eficiencia de su negocio mediante la provisión estratégica de hardware, sistemas de computo e impresión avanzados y redes de alta disponibilidad.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
         .digital-section {
           background: linear-gradient(135deg, var(--color-primary), #0a1c2e);
           position: relative;
@@ -101,9 +115,9 @@ const DigitalTransformation: React.FC = () => {
 
         .digital-cards-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 40px;
-          max-width: 1000px;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          max-width: 1200px; /* Ampliado para acomodar las 3 tarjetas */
           margin: 0 auto;
         }
 
@@ -111,7 +125,7 @@ const DigitalTransformation: React.FC = () => {
            background: rgba(255, 255, 255, 0.03); 
            backdrop-filter: blur(10px);
            -webkit-backdrop-filter: blur(10px);
-           padding: 40px;
+           padding: 30px 25px; /* Reducido para dar más ancho al texto central */
            border-radius: 16px;
            border: 1px solid rgba(255, 255, 255, 0.08);
            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -148,9 +162,10 @@ const DigitalTransformation: React.FC = () => {
         }
 
         .digital-info h3 {
-          font-size: 22px;
+          font-size: 20px; /* Tamaño ligeramente menor para acomodar textos largos */
           color: var(--color-white);
           margin-bottom: 15px;
+          line-height: 1.3;
         }
 
         .digital-info p {
@@ -173,8 +188,8 @@ const DigitalTransformation: React.FC = () => {
           }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default DigitalTransformation;
