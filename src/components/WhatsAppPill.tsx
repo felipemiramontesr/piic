@@ -40,7 +40,7 @@ const WhatsAppPill: React.FC = () => {
 
         .wa-icon {
           font-size: 34px;
-          color: var(--color-white); /* Ícono blanco inicial */
+          color: var(--color-primary); /* Ícono negro/operativo para homologar */
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -54,8 +54,8 @@ const WhatsAppPill: React.FC = () => {
           max-width: 0;
           opacity: 0;
           white-space: nowrap;
-          color: var(--color-bg); /* Texto oscuro corporativo que contrastará sobre amarillo cuando se abra */
-          font-weight: 700;
+          color: var(--color-primary); /* Texto negro/operativo para homologar */
+          font-weight: 500;
           font-size: 15px;
           margin-left: 0;
           transition: all 0.4s ease, color 0.4s ease;
@@ -70,7 +70,7 @@ const WhatsAppPill: React.FC = () => {
 
         .wa-pill:hover .wa-icon {
           transform: scale(1.1);
-          color: var(--color-white); /* Cambia icono a blanco */
+          color: var(--color-primary); /* Mantiene el icono negro en hover */
         }
 
         .wa-pill:hover .wa-text {
