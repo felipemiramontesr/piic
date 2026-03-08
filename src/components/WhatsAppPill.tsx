@@ -25,7 +25,7 @@ const WhatsAppPill: React.FC = () => {
         .wa-pill {
           position: fixed;
           bottom: 80px; /* Subido para evitar banner de cookies (aprox 65-70px + 10px gap) */
-          right: 30px;
+          right: 10px; /* Ajustado a 10px del borde derecho */
           background-color: var(--color-accent); /* Relleno amarillo corporativo */
           border: none; /* Los botones amarillos del sitio no tienen borde */
           border-radius: 4px; /* Mismo radio que el botón base */
@@ -83,7 +83,7 @@ const WhatsAppPill: React.FC = () => {
         @media (max-width: 768px) {
           .wa-pill {
             bottom: 110px; /* Más espacio en móvil porque el banner de cookies es más alto */
-            right: 20px;
+            right: 10px; /* Ajustado a 10px también en móvil */
           }
         }
       `}</style>
