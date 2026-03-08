@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const CookieBanner: React.FC = () => {
+interface CookieBannerProps {
+  isVisible: boolean;
+  onAccept: () => void;
+}
+
+const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
   const location = useLocation();
   const isPolicyPage = location.pathname === '/politicas';
-
-  const [isVisible, setIsVisible] = useState(() => {
-    const consent = localStorage.getItem('piic_cookie_consent');
-    return !consent;
-  });
-
-  const handleAccept = () => {
-    localStorage.setItem('piic_cookie_consent', 'true');
-    setIsVisible(false);
-  };
 
   if (!isVisible) return null;
 
@@ -30,7 +25,7 @@ const CookieBanner: React.FC = () => {
             </Link>
           )}.
         </div>
-        <button className="cookie-button" onClick={handleAccept}>
+        <button className="cookie-button" onClick={onAccept}>
           ACEPTAR
         </button>
       </div>
@@ -101,12 +96,20 @@ const CookieBanner: React.FC = () => {
         }
 
         @media (max-width: 768px) {
+          .cookie-banner {
+            padding: 12px 16px;
+          }
           .cookie-container {
             flex-direction: column;
             text-align: center;
+            gap: 10px;
+          }
+          .cookie-text {
+            font-size: 13px;
           }
           .cookie-button {
             width: 100%;
+            padding: 6px 20px;
           }
         }
       `}</style>

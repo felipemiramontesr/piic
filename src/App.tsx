@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './sections/Header';
 import Hero from './sections/Hero';
@@ -24,6 +24,18 @@ const PageLoader = () => (
 );
 
 function App() {
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem('piic_cookie_consent');
+    setShowCookieBanner(!consent);
+  }, []);
+
+  const handleAcceptCookies = () => {
+    localStorage.setItem('piic_cookie_consent', 'true');
+    setShowCookieBanner(false);
+  };
+
   return (
     <Router>
       <Routes>
@@ -61,8 +73,8 @@ function App() {
           </Suspense>
         } />
       </Routes>
-      <CookieBanner />
-      <WhatsAppPill />
+      <CookieBanner isVisible={showCookieBanner} onAccept={handleAcceptCookies} />
+      <WhatsAppPill isCookieBannerVisible={showCookieBanner} />
     </Router>
   );
 }

@@ -1,6 +1,10 @@
 import React from 'react';
 
-const WhatsAppPill: React.FC = () => {
+interface WhatsAppPillProps {
+  isCookieBannerVisible: boolean;
+}
+
+const WhatsAppPill: React.FC<WhatsAppPillProps> = ({ isCookieBannerVisible }) => {
   // Configuración de WhatsApp proporcionada
   const phoneNumber = '524929421780';
   const rawMessage = 'hola, estoy interesado en recibir ayuda acerca de los productos y servicios de PIIC.';
@@ -24,8 +28,8 @@ const WhatsAppPill: React.FC = () => {
       <style>{`
         .wa-pill {
           position: fixed;
-          bottom: 80px; /* Subido para evitar banner de cookies (aprox 65-70px + 10px gap) */
-          right: 10px; /* Ajustado a 10px del borde derecho */
+          bottom: ${isCookieBannerVisible ? '80px' : '20px'};
+          right: ${isCookieBannerVisible ? '10px' : '20px'}; /* Ajustado dinámicamente */
           background-color: var(--color-accent); /* Relleno amarillo corporativo */
           border: none; /* Los botones amarillos del sitio no tienen borde */
           border-radius: 4px; /* Mismo radio que el botón base */
@@ -36,6 +40,13 @@ const WhatsAppPill: React.FC = () => {
           z-index: 1000;
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+          .wa-pill {
+            bottom: ${isCookieBannerVisible ? '105px' : '20px'};
+            right: ${isCookieBannerVisible ? '10px' : '20px'};
+          }
         }
 
         .wa-icon {
@@ -77,14 +88,6 @@ const WhatsAppPill: React.FC = () => {
           max-width: 250px;
           opacity: 1;
           margin-left: 12px;
-        }
-
-        /* Ajustes Móvil */
-        @media (max-width: 768px) {
-          .wa-pill {
-            bottom: 110px; /* Más espacio en móvil porque el banner de cookies es más alto */
-            right: 10px; /* Ajustado a 10px también en móvil */
-          }
         }
       `}</style>
     </>
