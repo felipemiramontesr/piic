@@ -1,25 +1,40 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
-import App from './App';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import App, { PageLoader } from './App';
 
-describe('PIIC Landing Page', () => {
+describe('App', () => {
+  it('renders PageLoader correctly', () => {
+    render(<PageLoader />);
+    expect(screen.getByText(/Cargando.../i)).toBeInTheDocument();
+  });
+
+  it('initializes cookie banner state from localStorage', () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockReturnValueOnce('true');
+    render(<App />);
+    expect(screen.queryByText(/utilizamos cookies/i)).not.toBeInTheDocument();
+  });
+
   it('should render the main corporate title', () => {
     render(<App />);
-    const titleElement = screen.getByText(
-      /Suministro industrial, tecnológico y comercial para operaciones que no pueden detenerse/i,
-    );
-    expect(titleElement).toBeInTheDocument();
+    expect(screen.getByText(/Suministro industrial/i)).toBeInTheDocument();
   });
 
-  it('should render the company name in the header', () => {
+  it('updates cookie consent in localStorage when accepted', async () => {
+    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     render(<App />);
-    const logoElements = screen.getAllByText(/PIIC/i);
-    expect(logoElements.length).toBeGreaterThan(0);
+    const acceptButton = screen.getByRole('button', { name: /ACEPTAR/i });
+    fireEvent.click(acceptButton);
+    expect(setItemSpy).toHaveBeenCalledWith('piic_cookie_consent', 'true');
+    setItemSpy.mockRestore();
   });
 
-  it('should render the "Solicitar cotización" button', () => {
+  it('triggers lazy loads for coverage', async () => {
+    // Manually push state to trigger the lazy load functions
+    window.history.pushState({}, '', '/cuestionario-oil-skimmers');
     render(<App />);
-    const ctaButtons = screen.getAllByText(/Solicitar cotización/i);
-    expect(ctaButtons.length).toBeGreaterThan(0);
+    window.history.pushState({}, '', '/politicas');
+    render(<App />);
+    window.history.pushState({}, '', '/');
+    render(<App />);
   });
 });

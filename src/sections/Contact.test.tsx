@@ -66,6 +66,10 @@ describe('Contact Component', () => {
         body: expect.stringContaining('"consent":false'), // Default unchecked
       }),
     );
+
+    // Test "Send another" button (Line 90)
+    fireEvent.click(screen.getByRole('button', { name: /Enviar otro mensaje/i }));
+    expect(screen.getByLabelText(/Nombre/i)).toBeInTheDocument();
   });
 
   it('transmits consent when checkbox is checked', async () => {
@@ -125,6 +129,25 @@ describe('Contact Component', () => {
     // Check for error message
     await waitFor(() => {
       expect(screen.getByText(/Error interno del servidor/i)).toBeInTheDocument();
+    });
+  });
+
+  it('handles API errors without message correctly', async () => {
+    (globalThis.fetch as Mock).mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({ status: 'error' }),
+    });
+
+    render(<Contact />);
+    fireEvent.change(screen.getByLabelText(/Nombre/i), { target: { value: 'Test User' } });
+    fireEvent.change(screen.getByLabelText(/Empresa/i), { target: { value: 'Test Corp' } });
+    fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'test@corp.com' } });
+    fireEvent.change(screen.getByLabelText(/Mensaje/i), { target: { value: 'Testing error' } });
+    fireEvent.click(screen.getByRole('button', { name: /Enviar solicitud/i }));
+
+    await waitFor(() => {
+      // In setup.ts, 'contact.form.error_generic' resolves to its key or value
+      expect(screen.getByText(/Error al enviar el mensaje/i)).toBeInTheDocument();
     });
   });
 

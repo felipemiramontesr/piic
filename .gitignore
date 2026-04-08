@@ -25,3 +25,6 @@ dist-ssr
 
 # Security
 public/config.php
+
+*storybook.log
+storybook-static

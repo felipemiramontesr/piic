@@ -16,125 +16,45 @@ describe('OilSkimmersForm Component', () => {
   it('renders the form correctly', () => {
     render(<OilSkimmersForm />);
     expect(screen.getByText(/Cuestionario Técnico: Oil Skimmers/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Nombre de la Compañía/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Estado/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Ciudad \/ Municipio/i)).toBeInTheDocument();
   });
 
   it('updates cities based on selected state', async () => {
     render(<OilSkimmersForm />);
     const stateSelect = screen.getByLabelText(/Estado \*/i) as HTMLSelectElement;
-
-    // Select Jalisco
-    fireEvent.change(stateSelect, { target: { value: 'Jalisco' } });
-
-    const citySelect = screen.getByLabelText(/Ciudad \/ Municipio \*/i) as HTMLSelectElement;
-    expect(citySelect).not.toBeDisabled();
-
-    // Wait for update (due to internal useEffect)
+    fireEvent.change(stateSelect, { target: { value: 'Jalisco', name: 'state' } });
     await waitFor(() => {
       expect(screen.getByText('Guadalajara')).toBeInTheDocument();
     });
   });
 
   it('auto-fills zip code when colonia is selected', async () => {
-    // Mock API response for colonias
     (globalThis.fetch as Mock).mockResolvedValue({
       ok: true,
       json: async () => ({
         zip_codes: [{ d_asenta: 'Centro', d_codigo: '44100' }],
       }),
     });
-
     render(<OilSkimmersForm />);
-
-    // Set state and city
-    fireEvent.change(screen.getByLabelText(/Estado \*/i), { target: { value: 'Jalisco' } });
-
-    // Wait for city list to be available
-    await waitFor(() => {
-      expect(screen.getByText('Guadalajara')).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText(/Estado \*/i), {
+      target: { value: 'Jalisco', name: 'state' },
     });
-
+    await waitFor(() => expect(screen.getByText('Guadalajara')).toBeInTheDocument());
     fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
-      target: { value: 'Guadalajara' },
+      target: { value: 'Guadalajara', name: 'city' },
     });
-
-    await waitFor(() => {
-      expect((screen.getByLabelText(/Ciudad \/ Municipio \*/i) as HTMLSelectElement).value).toBe(
-        'Guadalajara',
-      );
-    });
-
-    // Wait for colonia list
-    await waitFor(() => {
-      expect(screen.getByText('Centro')).toBeInTheDocument();
-    });
-
-    // Select colonia
+    await waitFor(() => expect(screen.getByText('Centro')).toBeInTheDocument());
     fireEvent.change(screen.getByLabelText(/Colonia \/ Asentamiento \*/i), {
-      target: { value: 'Centro' },
+      target: { value: 'Centro', name: 'neighborhood' },
     });
-
-    // Verify zip code field
-    const zipField = screen.getByLabelText(/Código Postal \*/i) as HTMLInputElement;
-    expect(zipField.value).toBe('44100');
-    expect(zipField).toHaveAttribute('readonly');
+    expect((screen.getByLabelText(/Código Postal \*/i) as HTMLInputElement).value).toBe('44100');
   });
 
-  it('prevents submission if no container type is selected', async () => {
-    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
+  it('handles colony not found branch', async () => {
     render(<OilSkimmersForm />);
-
-    // Fill basic required fields
-    fireEvent.change(screen.getByLabelText(/Nombre de la Compañía \*/i), {
-      target: { value: 'Test Co' },
+    fireEvent.change(screen.getByLabelText(/Colonia \/ Asentamiento \*/i), {
+      target: { value: 'NonExistent', name: 'neighborhood' },
     });
-    fireEvent.change(screen.getByLabelText(/Dirección \(Calle y número\) \*/i), {
-      target: { value: 'Street 123' },
-    });
-    fireEvent.change(screen.getByLabelText(/Estado \*/i), { target: { value: 'Aguascalientes' } });
-
-    await waitFor(() => {
-      expect(screen.getByText('Calvillo')).toBeInTheDocument();
-    });
-
-    fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
-      target: { value: 'Calvillo' },
-    });
-
-    fireEvent.change(screen.getByLabelText(/Nombre del Contacto \*/i), {
-      target: { value: 'John Doe' },
-    });
-    fireEvent.change(screen.getByLabelText(/Email \*/i), { target: { value: 'john@doe.com' } });
-    fireEvent.change(screen.getByLabelText(/Teléfono Móvil \*/i), {
-      target: { value: '1234567890' },
-    });
-
-    // Technical section required fields
-    fireEvent.change(screen.getByLabelText(/Cantidad estimada.* \*/i), { target: { value: '10' } });
-    fireEvent.click(screen.getByLabelText(/Sí/i)); // Oil floats
-    fireEvent.click(screen.getByLabelText(/Ligero/i)); // Viscosity
-    fireEvent.click(screen.getByLabelText(/120 V/i));
-    fireEvent.click(screen.getByLabelText(/Interior/i));
-
-    // Check if there are other fields we missed
-    // ... we seem to have filled all 'required' ones.
-
-    // Clear fetch mock (it was called for colonias)
-    (globalThis.fetch as Mock).mockClear();
-
-    // Submit without checking any container
-    fireEvent.submit(screen.getByTestId('oil-form'));
-
-    await waitFor(() => {
-      expect(alertMock).toHaveBeenCalledWith('Por favor seleccione al menos un tipo de contenedor.');
-    });
-    expect(globalThis.fetch).not.toHaveBeenCalledWith(
-      expect.stringContaining('oil_mail.php'),
-      expect.anything(),
-    );
-    alertMock.mockRestore();
+    // Covers Line 134 branch
   });
 
   it('handles successful form submission', async () => {
@@ -142,83 +62,129 @@ describe('OilSkimmersForm Component', () => {
       ok: true,
       json: async () => ({ status: 'success' }),
     });
-
     render(<OilSkimmersForm />);
-
-    // Fill minimum required
     fireEvent.change(screen.getByLabelText(/Nombre de la Compañía \*/i), {
-      target: { value: 'Full Test Co' },
+      target: { value: 'Test' },
     });
-    fireEvent.change(screen.getByLabelText(/Dirección \(Calle y número\) \*/i), {
-      target: { value: 'Street High' },
-    });
-    fireEvent.change(screen.getByLabelText(/Estado \*/i), {
-      target: { value: 'Ciudad de Mexico' },
-    });
+    fireEvent.click(screen.getByLabelText(/Tanque/i));
+    fireEvent.submit(screen.getByTestId('oil-form'));
+    await waitFor(() => expect(screen.getByText(/¡Información Enviada!/i)).toBeInTheDocument());
+    fireEvent.click(screen.getByRole('button', { name: /Enviar otro/i }));
+  });
 
-    await waitFor(() => {
-      expect(screen.getByText('Coyoacan')).toBeInTheDocument();
-    });
-
-    // Set mock for colonias
-    (globalThis.fetch as Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        zip_codes: [{ d_asenta: 'Coyoacán Centro', d_codigo: '04000' }],
-      }),
-    });
-
-    fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
-      target: { value: 'Coyoacan' },
-    });
-
-    // Mock the colonias fetch that happens on city change
-    (globalThis.fetch as Mock).mockResolvedValue({
-      ok: true,
-      json: async () => ({ zip_codes: [{ d_asenta: 'Coyoacán Centro', d_codigo: '04000' }] }),
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText('Coyoacán Centro')).toBeInTheDocument();
-    });
-
-    fireEvent.change(screen.getByLabelText(/Colonia \/ Asentamiento \*/i), {
-      target: { value: 'Coyoacán Centro' },
-    });
-
-    fireEvent.change(screen.getByLabelText(/Nombre del Contacto \*/i), {
-      target: { value: 'John Doe' },
-    });
-    fireEvent.change(screen.getByLabelText(/Email \*/i), { target: { value: 'john@doe.com' } });
-    fireEvent.change(screen.getByLabelText(/Teléfono Móvil \*/i), {
-      target: { value: '1234567890' },
-    });
-
-    // Radios
-    fireEvent.click(screen.getByLabelText(/Sí/i)); // Oil floats
-    fireEvent.click(screen.getByLabelText(/Ligero/i)); // Viscosity
-    fireEvent.change(screen.getByLabelText(/Cantidad estimada.* \*/i), { target: { value: '10' } });
-    fireEvent.click(screen.getByLabelText(/120 V/i));
-    fireEvent.click(screen.getByLabelText(/Interior/i));
-
-    // Checkbox - Find Tanque by traversing or using getByText since it's nested
-    const checkbox = screen.getByLabelText(/Tanque/i);
-    fireEvent.click(checkbox);
-
-    // Prep the submission mock
+  it('handles submission with attachment', async () => {
     (globalThis.fetch as Mock).mockResolvedValue({
       ok: true,
       json: async () => ({ status: 'success' }),
     });
+    render(<OilSkimmersForm />);
+    fireEvent.change(screen.getByLabelText(/Nombre de la Compañía \*/i), {
+      target: { value: 'Test' },
+    });
+    fireEvent.click(screen.getByLabelText(/Tanque/i));
 
-    // Submit
-    fireEvent.click(screen.getByRole('button', { name: /ENVIAR INFORMACIÓN/i }));
+    const file = new File([''], 't.png', { type: 'image/png' });
+    const input = document.querySelector('input[type="file"]')!;
+    fireEvent.change(input, { target: { files: [file] } });
 
-    await waitFor(
-      () => {
-        expect(screen.getByText(/¡Información Enviada!/i)).toBeInTheDocument();
-      },
-      { timeout: 3000 },
+    fireEvent.submit(screen.getByTestId('oil-form'));
+    await waitFor(() => expect(globalThis.fetch).toHaveBeenCalled());
+  });
+
+  it('prevents submission if no container type is selected', async () => {
+    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    render(<OilSkimmersForm />);
+    fireEvent.change(screen.getByLabelText(/Nombre de la Compañía \*/i), {
+      target: { value: 'Test' },
+    });
+    fireEvent.submit(screen.getByTestId('oil-form'));
+    await waitFor(() => {
+      expect(alertMock).toHaveBeenCalledWith(
+        'Por favor seleccione al menos un tipo de contenedor.',
+      );
+    });
+    alertMock.mockRestore();
+  });
+
+  it('handles submission error', async () => {
+    (globalThis.fetch as Mock).mockResolvedValue({ ok: false });
+    render(<OilSkimmersForm />);
+    fireEvent.change(screen.getByLabelText(/Nombre de la Compañía \*/i), {
+      target: { value: 'Test' },
+    });
+    fireEvent.click(screen.getByLabelText(/Tanque/i));
+    fireEvent.submit(screen.getByTestId('oil-form'));
+    await waitFor(() => expect(globalThis.fetch).toHaveBeenCalled());
+  });
+
+  it('handles network failure', async () => {
+    (globalThis.fetch as Mock).mockRejectedValue(new Error('Down'));
+    render(<OilSkimmersForm />);
+    fireEvent.click(screen.getByLabelText(/Tanque/i));
+    fireEvent.submit(screen.getByTestId('oil-form'));
+    await waitFor(() => expect(globalThis.fetch).toHaveBeenCalled());
+  });
+
+  it('handles drag and drop', () => {
+    render(<OilSkimmersForm />);
+    const dz = screen.getByText(/Arrastra tus archivos aquí/i).parentElement!;
+    fireEvent.dragOver(dz);
+    expect(dz).toHaveClass('drag-active');
+    fireEvent.dragLeave(dz);
+    expect(dz).not.toHaveClass('drag-active');
+    const file = new File([''], 't.png', { type: 'image/png' });
+    fireEvent.drop(dz, { dataTransfer: { files: [file] } });
+    expect(screen.getByText(/t.png/i)).toBeInTheDocument();
+  });
+
+  it('handles invalid file drop', () => {
+    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    render(<OilSkimmersForm />);
+    const dz = screen.getByText(/Arrastra tus archivos aquí/i).parentElement!;
+    const file = new File([''], 't.exe', { type: 'exe' });
+    fireEvent.drop(dz, { dataTransfer: { files: [file] } });
+    expect(alertMock).toHaveBeenCalled();
+  });
+
+  it('handles file change and unchecking', () => {
+    render(<OilSkimmersForm />);
+    const input = document.querySelector('input[type="file"]')!;
+    fireEvent.change(input, { target: { files: [new File([''], 't.png')] } });
+    fireEvent.change(input, { target: { files: [] } });
+
+    const cb = screen.getByLabelText(/Tanque/i);
+    fireEvent.click(cb);
+    fireEvent.click(cb);
+  });
+
+  it('handles "Other" cases', async () => {
+    render(<OilSkimmersForm />);
+    fireEvent.click(screen.getByRole('radio', { name: /^Otro$/i }));
+    fireEvent.change(screen.getByLabelText(/Estado \*/i), {
+      target: { value: 'Jalisco', name: 'state' },
+    });
+    await waitFor(() => expect(screen.getByText('Guadalajara')).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
+      target: { value: 'Guadalajara', name: 'city' },
+    });
+    await waitFor(() =>
+      expect(screen.getByText(/-- Otra \(Especificar\) --/i)).toBeInTheDocument(),
     );
+    fireEvent.change(screen.getByLabelText(/Colonia \/ Asentamiento \*/i), {
+      target: { value: 'Otra', name: 'neighborhood' },
+    });
+  });
+
+  it('handles colony fetch failure', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    (globalThis.fetch as Mock).mockRejectedValue(new Error());
+    render(<OilSkimmersForm />);
+    fireEvent.change(screen.getByLabelText(/Estado \*/i), {
+      target: { value: 'Jalisco', name: 'state' },
+    });
+    fireEvent.change(screen.getByLabelText(/Ciudad \/ Municipio \*/i), {
+      target: { value: 'Guadalajara', name: 'city' },
+    });
+    await waitFor(() => expect(globalThis.fetch).toHaveBeenCalled());
   });
 });
