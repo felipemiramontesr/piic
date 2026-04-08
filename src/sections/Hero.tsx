@@ -1,21 +1,23 @@
 import React from 'react';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section id="inicio" className="hero-section">
       <div className="container hero-container">
         <div className="hero-content">
-          <h1>Suministro industrial, tecnológico y comercial para operaciones que no pueden detenerse</h1>
+          <h1>{t('hero.title')}</h1>
           <p className="hero-subtitle">
-            Respuesta rápida y suministro confiable para el sector minero e industrial.
+            {t('hero.subtitle')}
           </p>
           <div className="hero-actions">
             <Button href="#contacto" className="hero-btn">
-              Solicitar cotización
+              {t('hero.cta_quote')}
             </Button>
             <Button href="#servicios" variant="outline" className="hero-btn">
-              Ver servicios
+              {t('hero.cta_services')}
             </Button>
           </div>
         </div>

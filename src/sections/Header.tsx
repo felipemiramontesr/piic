@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 interface HeaderProps {
   showCta?: boolean;
@@ -7,6 +9,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -76,25 +79,26 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           <>
             <nav className="nav">
               <ul className="nav-list">
-                <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
+                <li><a href="#inicio"><i className="fa-solid fa-house"></i> {t('nav.home')}</a></li>
+                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> {t('nav.about')}</a></li>
                 <li className="dropdown">
-                  <span className="dropdown-trigger"><i className="fa-solid fa-gears"></i> Servicios <i className="fa-solid fa-chevron-down" style={{ fontSize: '10px', marginLeft: '5px' }}></i></span>
+                  <span className="dropdown-trigger"><i className="fa-solid fa-gears"></i> {t('nav.services')} <i className="fa-solid fa-chevron-down" style={{ fontSize: '10px', marginLeft: '5px' }}></i></span>
                   <ul className="dropdown-menu">
                     <li><a href="#servicios">Servicios Industriales</a></li>
                     <li><a href="#transformacion">Transformación Digital</a></li>
                   </ul>
                 </li>
                 <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
-                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
-                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
+                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> {t('nav.proceso', 'Proceso')}</a></li>
+                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}</a></li>
               </ul>
             </nav>
 
             <div className="header-actions">
+              <LanguageSwitcher />
               {showCta && (
                 <div className="nav-cta">
-                  <Button href="#contacto">Solicitar cotización</Button>
+                  <Button href="#contacto">{t('hero.cta_quote')}</Button>
                 </div>
               )}
 
@@ -113,11 +117,11 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
               <div className="mobile-menu-content">
                 <nav className="mobile-nav">
                   <ul className="mobile-nav-list">
-                    <li><a href="#inicio" onClick={closeMenu}><i className="fa-solid fa-house"></i> Inicio</a></li>
-                    <li><a href="#quienes-somos" onClick={closeMenu}><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
+                    <li><a href="#inicio" onClick={closeMenu}><i className="fa-solid fa-house"></i> {t('nav.home')}</a></li>
+                    <li><a href="#quienes-somos" onClick={closeMenu}><i className="fa-solid fa-users-gear"></i> {t('nav.about')}</a></li>
                     <li className="mobile-dropdown">
                       <div className="mobile-dropdown-header" onClick={() => setIsServicesOpen(!isServicesOpen)}>
-                        <span><i className="fa-solid fa-gears"></i> Servicios</span>
+                        <span><i className="fa-solid fa-gears"></i> {t('nav.services')}</span>
                         <i className={`fa-solid fa-chevron-down toggle-icon ${isServicesOpen ? 'open' : ''}`}></i>
                       </div>
                       <ul className={`mobile-dropdown-menu ${isServicesOpen ? 'open' : ''}`}>
@@ -126,14 +130,14 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
                       </ul>
                     </li>
                     <li><a href="#por-que-piic" onClick={closeMenu}><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
-                    <li><a href="#proceso" onClick={closeMenu}><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
-                    <li><a href="#contacto" onClick={closeMenu}><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
+                    <li><a href="#proceso" onClick={closeMenu}><i className="fa-solid fa-diagram-next"></i> {t('nav.proceso', 'Proceso')}</a></li>
+                    <li><a href="#contacto" onClick={closeMenu}><i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}</a></li>
                   </ul>
                 </nav>
                 {showCta && (
                   <div className="mobile-cta">
                     <Button href="#contacto" onClick={closeMenu} fullWidth>
-                      Solicitar cotización
+                      {t('hero.cta_quote')}
                     </Button>
                   </div>
                 )}

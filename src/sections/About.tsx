@@ -1,22 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const About: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section id="quienes-somos" className="section section-white">
       <div className="container">
         <div className="about-grid">
           <div className="about-text">
-            <h2>Quiénes Somos</h2>
+            <h2>{t('about.title')}</h2>
             <p>
-              PIIC es un socio integral corporativo enfocado en ofrecer soluciones confiables,
-              eficientes y oportunas. Proveemos desde insumos industriales estratégicos hasta
-              vanguardia en tecnología de la información para empresas del sector industrial y minero.
+              {t('about.p1')}
             </p>
             <p>
-              Nuestra misión es ser el aliado definitivo que sus operaciones necesitan, garantizando
-              no solo que el flujo físico de suministros nunca se detenga, sino que su infraestructura
-              digital funcione de manera segura y eficiente, permitiendo a su empresa enfocarse en lo
-              que mejor sabe hacer.
+              {t('about.p2')}
             </p>
           </div>
           <div className="about-image">

@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "title": "Suministro industrial, tecnológico y comercial para operaciones que no pueden detenerse",
+    "subtitle": "Respuesta rápida y suministro confiable para el sector minero e industrial.",
+    "cta_quote": "Solicitar cotización",
+    "cta_services": "Ver servicios"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "services": "Servicios",
+    "contact": "Contacto"
+  },
+  "about": {
+    "title": "Quiénes Somos",
+    "p1": "PIIC es un socio integral corporativo enfocado en ofrecer soluciones confiables, eficientes y oportunas. Proveemos desde insumos industriales estratégicos hasta vanguardia en tecnología de la información para empresas del sector industrial y minero.",
+    "p2": "Nuestra misión es ser el aliado definitivo que sus operaciones necesitan, garantizando no solo que el flujo físico de suministros nunca se detenga, sino que su infraestructura digital funcione de manera segura y eficiente, permitiendo a su empresa enfocarse en lo que mejor sabe hacer."
+  }
+}

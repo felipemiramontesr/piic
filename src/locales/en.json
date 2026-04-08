@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "title": "Industrial, technological, and commercial supply for operations that cannot stop",
+    "subtitle": "Fast response and reliable supply for the mining and industrial sectors.",
+    "cta_quote": "Request a quote",
+    "cta_services": "View services"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "Who We Are",
+    "p1": "PIIC is an integrated corporate partner focused on offering reliable, efficient, and timely solutions. We provide everything from strategic industrial supplies to cutting-edge information technology for companies in the industrial and mining sectors.",
+    "p2": "Our mission is to be the ultimate ally your operations need, ensuring not only that the physical flow of supplies never stops but also that your digital infrastructure functions securely and efficiently, allowing your company to focus on what it does best."
+  }
+}
