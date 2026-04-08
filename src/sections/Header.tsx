@@ -95,12 +95,12 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             </nav>
 
             <div className="header-actions">
-              <LanguageSwitcher />
               {showCta && (
                 <div className="nav-cta">
                   <Button href="#contacto">{t('hero.cta_quote')}</Button>
                 </div>
               )}
+              <LanguageSwitcher />
 
               {/* Hamburger Trigger */}
               <button
