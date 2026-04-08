@@ -1,15 +1,15 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const DigitalTransformation: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="transformacion" className="section digital-section">
       <div className="container">
         <div className="section-header tech-header">
-          <h2>Transformación <span className="highlight">Digital</span></h2>
-          <p>
-            Modernizamos y protegemos la infraestructura de su organización,
-            llevándola al siguiente nivel de eficiencia y seguridad operativa.
-          </p>
+          <h2>{t('digital.title')} <span className="highlight">{t('digital.highlight')}</span></h2>
+          <p>{t('digital.subtitle')}</p>
         </div>
 
         <div className="digital-cards-grid">
@@ -18,11 +18,8 @@ const DigitalTransformation: React.FC = () => {
               <i className="fa-solid fa-code"></i>
             </div>
             <div className="digital-info">
-              <h3>Desarrollo de Software a la Medida</h3>
-              <p>
-                Creación de plataformas web corporativas y aplicaciones móviles operativas
-                diseñadas específicamente para optimizar, automatizar y escalar sus procesos, tecnologías y estándares industriales.
-              </p>
+              <h3>{t('digital.cards.software.title')}</h3>
+              <p>{t('digital.cards.software.description')}</p>
             </div>
           </div>
 
@@ -31,11 +28,8 @@ const DigitalTransformation: React.FC = () => {
               <i className="fa-solid fa-network-wired"></i>
             </div>
             <div className="digital-info">
-              <h3>Ciberseguridad y Análisis Forense</h3>
-              <p>
-                Auditorías profundas, prevención proactiva, contención de amenazas avanzadas, videovigilancia y
-                capacitación especializada para blindar la información crítica de su empresa.
-              </p>
+              <h3>{t('digital.cards.cybersecurity.title')}</h3>
+              <p>{t('digital.cards.cybersecurity.description')}</p>
             </div>
           </div>
 
@@ -44,12 +38,8 @@ const DigitalTransformation: React.FC = () => {
               <i className="fa-solid fa-server"></i>
             </div>
             <div className="digital-info">
-              <h3>
-                Infraestructura Tecnológica <br /> y Conectividad
-              </h3>
-              <p>
-                Impulsamos la continuidad y eficiencia de su negocio mediante la provisión estratégica de hardware, sistemas de computo e impresión avanzados y redes de alta disponibilidad.
-              </p>
+              <h3>{t('digital.cards.infrastructure.title')}</h3>
+              <p>{t('digital.cards.infrastructure.description')}</p>
             </div>
           </div>
         </div>
@@ -64,7 +54,6 @@ const DigitalTransformation: React.FC = () => {
           color: var(--color-white);
         }
         
-        /* Matriz de Puntos Visual */
         .digital-section::before {
           content: '';
           position: absolute;
@@ -75,7 +64,6 @@ const DigitalTransformation: React.FC = () => {
           opacity: 0.6;
         }
 
-        /* Iluminación Acentuada */
         .digital-section::after {
           content: '';
           position: absolute;
@@ -117,7 +105,7 @@ const DigitalTransformation: React.FC = () => {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 25px;
-          max-width: 1200px; /* Ampliado para acomodar las 3 tarjetas */
+          max-width: 1200px;
           margin: 0 auto;
         }
 
@@ -125,7 +113,7 @@ const DigitalTransformation: React.FC = () => {
            background: rgba(255, 255, 255, 0.03); 
            backdrop-filter: blur(10px);
            -webkit-backdrop-filter: blur(10px);
-           padding: 30px 25px; /* Reducido para dar más ancho al texto central */
+           padding: 30px 25px;
            border-radius: 16px;
            border: 1px solid rgba(255, 255, 255, 0.08);
            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -162,7 +150,7 @@ const DigitalTransformation: React.FC = () => {
         }
 
         .digital-info h3 {
-          font-size: 20px; /* Tamaño ligeramente menor para acomodar textos largos */
+          font-size: 20px;
           color: var(--color-white);
           margin-bottom: 15px;
           line-height: 1.3;

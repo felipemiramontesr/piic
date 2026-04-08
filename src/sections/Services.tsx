@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ServiceCardProps {
   icon: string;
@@ -17,10 +18,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
       .service-card {
         text-align: center;
         height: 100%;
-        padding: 45px 30px; /* Aumentado sustancialmente para mayor tamaño */
+        padding: 45px 30px;
       }
       .service-icon {
-        font-size: 42px; /* Icono más grande */
+        font-size: 42px;
         margin-bottom: 25px;
         display: inline-flex;
         align-items: center;
@@ -33,10 +34,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
       }
       .service-card h3 {
         margin-bottom: 18px;
-        font-size: 20px; /* Título más grande */
+        font-size: 20px;
       }
       .service-card p {
-        font-size: 16px; /* Texto más grande */
+        font-size: 16px;
         color: var(--color-text-secondary);
         margin-bottom: 0;
         line-height: 1.6;
@@ -46,36 +47,38 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) =
 );
 
 const Services: React.FC = () => {
+  const { t } = useTranslation();
+
   const serviceList = [
     {
       icon: 'fa-solid fa-shield-halved',
-      title: 'Seguridad industrial',
-      description: 'Equipos de protección personal y sistemas de seguridad vial.',
+      title: t('services.list.industrial_safety.title'),
+      description: t('services.list.industrial_safety.description'),
     },
     {
       icon: 'fa-solid fa-broom',
-      title: 'Limpieza y sanitización',
-      description: 'Productos químicos y herramientas para mantenimiento de higiene.',
+      title: t('services.list.cleaning.title'),
+      description: t('services.list.cleaning.description'),
     },
     {
       icon: 'fa-solid fa-folder-open',
-      title: 'Papelería y suministros de oficina',
-      description: 'Todo lo necesario para la administración diaria.',
+      title: t('services.list.stationery.title'),
+      description: t('services.list.stationery.description'),
     },
     {
       icon: 'fa-solid fa-briefcase',
-      title: 'Insumos comerciales',
-      description: 'Materiales diversos para la operación comercial.',
+      title: t('services.list.commercial.title'),
+      description: t('services.list.commercial.description'),
     },
     {
       icon: 'fa-solid fa-screwdriver-wrench',
-      title: 'Operación y mantenimiento',
-      description: 'Herramientas y refacciones críticas para sus equipos.',
+      title: t('services.list.operation.title'),
+      description: t('services.list.operation.description'),
     },
     {
       icon: 'fa-solid fa-truck-fast',
-      title: 'Suministro Automotriz',
-      description: 'Cadena de suministro de refacciones e industria del neumático.',
+      title: t('services.list.automotive.title'),
+      description: t('services.list.automotive.description'),
     },
   ];
 
@@ -83,8 +86,8 @@ const Services: React.FC = () => {
     <section id="servicios" className="section">
       <div className="container">
         <div className="section-header">
-          <h2>Servicios Industriales</h2>
-          <p>Soluciones integrales diseñadas para el rigor y operación de su empresa.</p>
+          <h2>{t('services.title')}</h2>
+          <p>{t('services.subtitle')}</p>
         </div>
         <div className="services-grid">
           {serviceList.map((service, index) => (
@@ -105,17 +108,16 @@ const Services: React.FC = () => {
           color: var(--color-text-secondary);
         }
         
-        /* Layout de 'Cinta' (Una sola fila deslizable sin romper tamaño) */
         .services-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          gap: 15px; /* Espacio mínimo para maximizar ancho de tarjeta */
+          gap: 15px;
         }
 
         .service-card {
           text-align: center;
           height: 100%;
-          padding: 35px 15px; /* Padding vertical generoso, horizontal ajustado */
+          padding: 35px 15px;
           transition: transform 0.3s ease;
         }
 
@@ -134,17 +136,16 @@ const Services: React.FC = () => {
 
         .service-card h3 {
           margin-bottom: 12px;
-          font-size: 16px; /* Lo suficientemente grande para ser legible */
+          font-size: 16px;
         }
 
         .service-card p {
-          font-size: 13px; /* Adecuado para columnas estrechas */
+          font-size: 13px;
           color: var(--color-text-secondary);
           margin-bottom: 0;
           line-height: 1.4;
         }
 
-        /* Ajustes responsivos estrictos */
         @media (max-width: 1200px) {
           .services-grid {
             grid-template-columns: repeat(3, 1fr);

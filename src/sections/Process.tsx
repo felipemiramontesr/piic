@@ -1,30 +1,33 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Process: React.FC = () => {
+  const { t } = useTranslation();
+
   const steps = [
     {
       number: '01',
       icon: 'fa-file-invoice',
-      title: 'Recepción de requerimiento',
-      text: 'Analizamos sus necesidades específicas de suministro.',
+      title: t('process.steps.step1.title'),
+      text: t('process.steps.step1.text'),
     },
     {
       number: '02',
       icon: 'fa-magnifying-glass-chart',
-      title: 'Búsqueda, análisis y cotización',
-      text: 'Localizamos los mejores insumos y protocolos con proveedores certificados.',
+      title: t('process.steps.step2.title'),
+      text: t('process.steps.step2.text'),
     },
     {
       number: '03',
       icon: 'fa-handshake',
-      title: 'Presentación de opciones',
-      text: 'Entregamos una propuesta competitiva en tiempo record.',
+      title: t('process.steps.step3.title'),
+      text: t('process.steps.step3.text'),
     },
     {
       number: '04',
       icon: 'fa-truck-fast',
-      title: 'Suministro y seguimiento',
-      text: 'Entregamos los productos y servicios asegurando una satisfacción total.',
+      title: t('process.steps.step4.title'),
+      text: t('process.steps.step4.text'),
     },
   ];
 
@@ -32,8 +35,8 @@ const Process: React.FC = () => {
     <section id="proceso" className="section section-white">
       <div className="container">
         <div className="section-header">
-          <h2>Nuestro Proceso</h2>
-          <p>Un flujo de trabajo optimizado para garantizar su operación.</p>
+          <h2>{t('process.title')}</h2>
+          <p>{t('process.subtitle')}</p>
         </div>
         <div className="process-grid">
           {steps.map((step, index) => (

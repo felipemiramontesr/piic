@@ -1,19 +1,153 @@
 {
   "hero": {
-    "title": "Industrial, technological, and commercial supply for operations that cannot stop",
-    "subtitle": "Fast response and reliable supply for the mining and industrial sectors.",
+    "title": "Industrial, technological and commercial supply for operations that cannot stop",
+    "subtitle": "Fast response and reliable supply for the mining and industrial sector.",
     "cta_quote": "Request a quote",
-    "cta_services": "View services"
+    "cta_services": "See services"
   },
   "nav": {
     "home": "Home",
     "about": "About Us",
     "services": "Services",
-    "contact": "Contact"
+    "contact": "Contact",
+    "why_us": "Why PIIC",
+    "process": "Process",
+    "navigation_title": "Navigation"
   },
   "about": {
-    "title": "Who We Are",
-    "p1": "PIIC is an integrated corporate partner focused on offering reliable, efficient, and timely solutions. We provide everything from strategic industrial supplies to cutting-edge information technology for companies in the industrial and mining sectors.",
-    "p2": "Our mission is to be the ultimate ally your operations need, ensuring not only that the physical flow of supplies never stops but also that your digital infrastructure functions securely and efficiently, allowing your company to focus on what it does best."
+    "title": "About Us",
+    "p1": "PIIC is a corporate comprehensive partner focused on offering reliable, efficient, and timely solutions. We provide everything from strategic industrial supplies to cutting-edge information technology for companies in the industrial and mining sector.",
+    "p2": "Our mission is to be the ultimate ally your operations need, guaranteeing not only that the physical flow of supplies never stops, but that your digital infrastructure functions securely and efficiently, allowing your company to focus on what it does best."
+  },
+  "services": {
+    "title": "Industrial Services",
+    "subtitle": "Comprehensive solutions designed for the rigor and operation of your company.",
+    "list": {
+      "industrial_safety": {
+        "title": "Industrial Safety",
+        "description": "Personal protective equipment and road safety systems."
+      },
+      "cleaning": {
+        "title": "Cleaning and Sanitization",
+        "description": "Chemical products and tools for hygiene maintenance."
+      },
+      "stationery": {
+        "title": "Stationery and Office Supplies",
+        "description": "Everything needed for daily administration."
+      },
+      "commercial": {
+        "title": "Commercial Supplies",
+        "description": "Diverse materials for commercial operations."
+      },
+      "operation": {
+        "title": "Operations and Maintenance",
+        "description": "Critical tools and spare parts for your equipment."
+      },
+      "automotive": {
+        "title": "Automotive Supply",
+        "description": "Spare parts supply chain and tire industry."
+      }
+    }
+  },
+  "digital": {
+    "title": "Digital",
+    "highlight": "Transformation",
+    "subtitle": "We modernize and protect your organization's infrastructure, taking it to the next level of efficiency and operational security.",
+    "cards": {
+      "software": {
+        "title": "Custom Software Development",
+        "description": "Creation of corporate web platforms and operational mobile applications specifically designed to optimize, automate and scale your processes, technologies and industrial standards."
+      },
+      "cybersecurity": {
+        "title": "Cybersecurity and Forensic Analysis",
+        "description": "Deep audits, proactive prevention, containment of advanced threats, video surveillance and specialized training to shield your company's critical information."
+      },
+      "infrastructure": {
+        "title": "Technological Infrastructure and Connectivity",
+        "description": "We drive the continuity and efficiency of your business through the strategic provision of hardware, advanced computing and printing systems, and high-availability networks."
+      }
+    }
+  },
+  "features": {
+    "title": "Why choose us",
+    "list": {
+      "attention": {
+        "title": "Personalized attention",
+        "text": "We understand the specific requirements of each client."
+      },
+      "response": {
+        "title": "Fast response",
+        "text": "We know that in industry every minute counts."
+      },
+      "suppliers": {
+        "title": "Reliable suppliers",
+        "text": "We only work with proven quality brands."
+      },
+      "quality": {
+        "title": "Quality and compliance",
+        "text": "We guarantee that what we quote is what we deliver."
+      },
+      "trust": {
+        "title": "Long-term relationship",
+        "text": "We seek to be business partners, not just suppliers."
+      }
+    }
+  },
+  "process": {
+    "title": "Our Process",
+    "subtitle": "An optimized workflow to guarantee your operation.",
+    "steps": {
+      "step1": {
+        "title": "Requirement reception",
+        "text": "We analyze your specific supply needs."
+      },
+      "step2": {
+        "title": "Search, analysis and quotation",
+        "text": "We locate the best supplies and protocols with certified suppliers."
+      },
+      "step3": {
+        "title": "Presentation of options",
+        "text": "We deliver a competitive proposal in record time."
+      },
+      "step4": {
+        "title": "Supply and follow-up",
+        "text": "We deliver products and services ensuring total satisfaction."
+      }
+    }
+  },
+  "contact": {
+    "title": "Let's talk about your next project",
+    "subtitle": "We are ready to attend to your company's needs with professionalism and speed.",
+    "location": "Location",
+    "email": "Email",
+    "phone": "Phone",
+    "success_title": "Message sent successfully!",
+    "success_text": "We will get in touch with you as soon as possible.",
+    "send_another": "Send another message",
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Your full name",
+      "company": "Company",
+      "company_placeholder": "Your company name",
+      "email_placeholder": "email@company.com",
+      "phone_placeholder": "(492) 942 1780",
+      "message": "Message / Requirement",
+      "message_placeholder": "Detail your request here...",
+      "consent": "I wish to be contacted for a quote",
+      "submit": "Send request",
+      "submitting": "Sending...",
+      "error_generic": "Error sending the message.",
+      "error_connection": "There was a connection problem. Please try again."
+    }
+  },
+  "footer": {
+    "description": "Provider of Industrial and Commercial Supplies",
+    "rights": "All rights reserved.",
+    "policy": "Use Policy, Information Processing and Cookies Policy"
+  },
+  "cookies": {
+    "text": "We use our own and third-party cookies. By continuing to browse, you accept our use policy, information processing and cookies policy.",
+    "accept": "ACCEPT",
+    "policy_link_text": "use policy, information processing and cookies policy"
   }
 }

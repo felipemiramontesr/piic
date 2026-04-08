@@ -9,11 +9,145 @@
     "home": "Inicio",
     "about": "Nosotros",
     "services": "Servicios",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "why_us": "Por Qué PIIC",
+    "process": "Proceso",
+    "navigation_title": "Navegación"
   },
   "about": {
     "title": "Quiénes Somos",
     "p1": "PIIC es un socio integral corporativo enfocado en ofrecer soluciones confiables, eficientes y oportunas. Proveemos desde insumos industriales estratégicos hasta vanguardia en tecnología de la información para empresas del sector industrial y minero.",
     "p2": "Nuestra misión es ser el aliado definitivo que sus operaciones necesitan, garantizando no solo que el flujo físico de suministros nunca se detenga, sino que su infraestructura digital funcione de manera segura y eficiente, permitiendo a su empresa enfocarse en lo que mejor sabe hacer."
+  },
+  "services": {
+    "title": "Servicios Industriales",
+    "subtitle": "Soluciones integrales diseñadas para el rigor y operación de su empresa.",
+    "list": {
+      "industrial_safety": {
+        "title": "Seguridad industrial",
+        "description": "Equipos de protección personal y sistemas de seguridad vial."
+      },
+      "cleaning": {
+        "title": "Limpieza y sanitización",
+        "description": "Productos químicos y herramientas para mantenimiento de higiene."
+      },
+      "stationery": {
+        "title": "Papelería y suministros de oficina",
+        "description": "Todo lo necesario para la administración diaria."
+      },
+      "commercial": {
+        "title": "Insumos comerciales",
+        "description": "Materiales diversos para la operación comercial."
+      },
+      "operation": {
+        "title": "Operación y mantenimiento",
+        "description": "Herramientas y refacciones críticas para sus equipos."
+      },
+      "automotive": {
+        "title": "Suministro Automotriz",
+        "description": "Cadena de suministro de refacciones e industria del neumático."
+      }
+    }
+  },
+  "digital": {
+    "title": "Transformación",
+    "highlight": "Digital",
+    "subtitle": "Modernizamos y protegemos la infraestructura de su organización, llevándola al siguiente nivel de eficiencia y seguridad operativa.",
+    "cards": {
+      "software": {
+        "title": "Desarrollo de Software a la Medida",
+        "description": "Creación de plataformas web corporativas y aplicaciones móviles operativas diseñadas específicamente para optimizar, automatizar y escalar sus procesos, tecnologías y estándares industriales."
+      },
+      "cybersecurity": {
+        "title": "Ciberseguridad y Análisis Forense",
+        "description": "Auditorías profundas, prevención proactiva, contención de amenazas avanzadas, videovigilancia y capacitación especializada para blindar la información crítica de su empresa."
+      },
+      "infrastructure": {
+        "title": "Infraestructura Tecnológica y Conectividad",
+        "description": "Impulsamos la continuidad y eficiencia de su negocio mediante la provisión estratégica de hardware, sistemas de computo e impresión avanzados y redes de alta disponibilidad."
+      }
+    }
+  },
+  "features": {
+    "title": "Por qué elegirnos",
+    "list": {
+      "attention": {
+        "title": "Atención personalizada",
+        "text": "Entendemos los requerimientos específicos de cada cliente."
+      },
+      "response": {
+        "title": "Respuesta rápida",
+        "text": "Sabemos que en la industria cada minuto cuenta."
+      },
+      "suppliers": {
+        "title": "Proveedores confiables",
+        "text": "Solo trabajamos con marcas de calidad comprobada."
+      },
+      "quality": {
+        "title": "Calidad y cumplimiento",
+        "text": "Garantizamos que lo que cotizamos es lo que entregamos."
+      },
+      "trust": {
+        "title": "Relación a largo plazo",
+        "text": "Buscamos ser socios comerciales, no solo proveedores."
+      }
+    }
+  },
+  "process": {
+    "title": "Nuestro Proceso",
+    "subtitle": "Un flujo de trabajo optimizado para garantizar su operación.",
+    "steps": {
+      "step1": {
+        "title": "Recepción de requerimiento",
+        "text": "Analizamos sus necesidades específicas de suministro."
+      },
+      "step2": {
+        "title": "Búsqueda, análisis y cotización",
+        "text": "Localizamos los mejores insumos y protocolos con proveedores certificados."
+      },
+      "step3": {
+        "title": "Presentación de opciones",
+        "text": "Entregamos una propuesta competitiva en tiempo record."
+      },
+      "step4": {
+        "title": "Suministro y seguimiento",
+        "text": "Entregamos los productos y servicios asegurando una satisfacción total."
+      }
+    }
+  },
+  "contact": {
+    "title": "Hablemos de su próximo proyecto",
+    "subtitle": "Estamos listos para atender las necesidades de su empresa con profesionalismo y rapidez.",
+    "location": "Ubicación",
+    "email": "Email",
+    "phone": "Teléfono",
+    "success_title": "¡Mensaje enviado con éxito!",
+    "success_text": "Nos pondremos en contacto con usted a la brevedad posible.",
+    "send_another": "Enviar otro mensaje",
+    "form": {
+      "name": "Nombre",
+      "name_placeholder": "Su nombre completo",
+      "company": "Empresa",
+      "company_placeholder": "Nombre de su empresa",
+      "email_placeholder": "correo@empresa.com",
+      "phone_placeholder": "(492) 942 1780",
+      "message": "Mensaje / Requerimiento",
+      "message_placeholder": "Detalle su solicitud aquí...",
+      "consent": "Deseo que me contacten para cotización",
+      "submit": "Enviar solicitud",
+      "submitting": "Enviando...",
+      "error_generic": "Error al enviar el mensaje.",
+      "error_connection": "Hubo un problema de conexión. Intente nuevamente."
+    }
+  },
+  "footer": {
+    "description": "Proveedora de Insumos Industriales y Comerciales",
+    "rights": "Todos los derechos reservados.",
+    "policy": "Política de Uso, Tratamiento de Información y Cookies"
+  },
+  "cookies": {
+    "text": "Utilizamos cookies propias y de terceros. Al continuar navegando, acepta esta política de uso, tratamiento de información y cookies.",
+    "accept": "ACEPTAR",
+    "policy_link_text": "política de uso, tratamiento de información y cookies"
   }
 }

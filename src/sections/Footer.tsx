@@ -1,8 +1,13 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 interface FooterProps {
   hideNavigation?: boolean;
 }
 
 const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
+  const { t } = useTranslation();
+
   return (
     <footer className="footer">
       <div className="container">
@@ -24,23 +29,23 @@ const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
               </svg>
               <h2 className="footer-logo">PIIC</h2>
             </div>
-            <p className="footer-description">Proveedora de Insumos Industriales y Comerciales</p>
+            <p className="footer-description">{t('footer.description')}</p>
           </div>
           {!hideNavigation && (
             <div className="footer-nav">
-              <h3>Navegación</h3>
+              <h3>{t('nav.navigation_title')}</h3>
               <ul className="footer-nav-list">
-                <li><a href="#inicio"><i className="fa-solid fa-house"></i> Inicio</a></li>
-                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> Quiénes Somos</a></li>
-                <li><a href="#servicios"><i className="fa-solid fa-gears"></i> Servicios</a></li>
-                <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
-                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> Proceso</a></li>
-                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> Contacto</a></li>
+                <li><a href="#inicio"><i className="fa-solid fa-house"></i> {t('nav.home')}</a></li>
+                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> {t('nav.about')}</a></li>
+                <li><a href="#servicios"><i className="fa-solid fa-gears"></i> {t('nav.services')}</a></li>
+                <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> {t('nav.why_us')}</a></li>
+                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> {t('nav.process')}</a></li>
+                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}</a></li>
               </ul>
             </div>
           )}
           <div className="footer-contact">
-            <h3>Contacto</h3>
+            <h3>{t('contact.email')}</h3>
             <p>
               <a href="mailto:contacto@piic.com.mx">
                 <i className="fa-solid fa-envelope"></i> contacto@piic.com.mx
@@ -55,10 +60,10 @@ const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} PIIC. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} PIIC. {t('footer.rights')}</p>
           <p style={{ marginTop: '10px' }}>
             <a href="/politicas" className="footer-policy-link">
-              Política de Uso, Tratamiento de Información y Cookies
+              {t('footer.policy')}
             </a>
           </p>
         </div>

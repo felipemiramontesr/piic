@@ -1,31 +1,34 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Features: React.FC = () => {
+  const { t } = useTranslation();
+
   const featureList = [
     {
       icon: 'fa-solid fa-user-tie',
-      title: 'Atención personalizada',
-      text: 'Entendemos los requerimientos específicos de cada cliente.',
+      title: t('features.list.attention.title'),
+      text: t('features.list.attention.text'),
     },
     {
       icon: 'fa-solid fa-clock-rotate-left',
-      title: 'Respuesta rápida',
-      text: 'Sabemos que en la industria cada minuto cuenta.',
+      title: t('features.list.response.title'),
+      text: t('features.list.response.text'),
     },
     {
       icon: 'fa-solid fa-building-shield',
-      title: 'Proveedores confiables',
-      text: 'Solo trabajamos con marcas de calidad comprobada.',
+      title: t('features.list.suppliers.title'),
+      text: t('features.list.suppliers.text'),
     },
     {
       icon: 'fa-solid fa-clipboard-check',
-      title: 'Calidad y cumplimiento',
-      text: 'Garantizamos que lo que cotizamos es lo que entregamos.',
+      title: t('features.list.quality.title'),
+      text: t('features.list.quality.text'),
     },
     {
       icon: 'fa-solid fa-handshake-angle',
-      title: 'Relación a largo plazo',
-      text: 'Buscamos ser socios comerciales, no solo proveedores.',
+      title: t('features.list.trust.title'),
+      text: t('features.list.trust.text'),
     },
   ];
 
@@ -33,7 +36,7 @@ const Features: React.FC = () => {
     <section id="por-que-piic" className="section section-dark">
       <div className="container">
         <div className="section-header-dark">
-          <h2>Por qué elegirnos</h2>
+          <h2>{t('features.title')}</h2>
         </div>
         <div className="features-grid">
           {featureList.map((feature, index) => (

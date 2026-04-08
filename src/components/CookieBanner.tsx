@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface CookieBannerProps {
   isVisible: boolean;
@@ -7,6 +8,7 @@ interface CookieBannerProps {
 }
 
 const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const isPolicyPage = location.pathname === '/politicas';
 
@@ -16,17 +18,18 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
     <div className="cookie-banner">
       <div className="cookie-container">
         <div className="cookie-text">
-          Utilizamos cookies propias y de terceros. Al continuar navegando, acepta {isPolicyPage ? 'esta' : 'nuestra'}{' '}
+          {t('cookies.text').split(t('cookies.policy_link_text'))[0]}
           {isPolicyPage ? (
-            <span className="cookie-copy-text">política de uso, tratamiento de información y cookies</span>
+            <span className="cookie-copy-text">{t('cookies.policy_link_text')}</span>
           ) : (
             <Link to="/politicas" className="cookie-link">
-              política de uso, tratamiento de información y cookies
+              {t('cookies.policy_link_text')}
             </Link>
-          )}.
+          )}
+          {t('cookies.text').split(t('cookies.policy_link_text'))[1]}
         </div>
         <button className="cookie-button" onClick={onAccept}>
-          ACEPTAR
+          {t('cookies.accept')}
         </button>
       </div>
 
@@ -36,7 +39,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
           bottom: 0;
           left: 0;
           right: 0;
-          background-color: var(--color-accent); /* Amarillo PIIC */
+          background-color: var(--color-accent);
           padding: 16px 24px;
           z-index: 9999;
           box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
@@ -53,7 +56,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
         }
 
         .cookie-text {
-          color: var(--color-primary); /* Azul PIIC */
+          color: var(--color-primary);
           font-size: 14px;
           line-height: 1.4;
           font-weight: 500;
@@ -74,8 +77,8 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
         }
 
         .cookie-button {
-          background-color: var(--color-primary); /* Azul PIIC */
-          color: var(--color-accent); /* Amarillo PIIC */
+          background-color: var(--color-primary);
+          color: var(--color-accent);
           border: none;
           padding: 8px 24px;
           border-radius: 4px;

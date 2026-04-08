@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -35,11 +37,11 @@ const Contact: React.FC = () => {
         setStatus('success');
       } else {
         setStatus('error');
-        setErrorMessage(result.message || 'Error al enviar el mensaje.');
+        setErrorMessage(result.message || t('contact.form.error_generic'));
       }
     } catch {
       setStatus('error');
-      setErrorMessage('Hubo un problema de conexión. Intente nuevamente.');
+      setErrorMessage(t('contact.form.error_connection'));
     }
   };
 
@@ -48,23 +50,20 @@ const Contact: React.FC = () => {
       <div className="container">
         <div className="contact-grid">
           <div className="contact-info">
-            <h2>Hablemos de su próximo proyecto</h2>
-            <p>
-              Estamos listos para atender las necesidades de su empresa con profesionalismo y
-              rapidez.
-            </p>
+            <h2>{t('contact.title')}</h2>
+            <p>{t('contact.subtitle')}</p>
             <div className="contact-details">
               <div className="detail-item">
                 <div className="detail-header">
                   <i className="fa-solid fa-location-dot contact-icon" aria-hidden="true"></i>
-                  <strong>Ubicación</strong>
+                  <strong>{t('contact.location')}</strong>
                 </div>
                 <p>Av. Barones, 209, Colonia Las Americas, Guadalupe, Zacatecas.</p>
               </div>
               <div className="detail-item">
                 <div className="detail-header">
                   <i className="fa-solid fa-envelope contact-icon" aria-hidden="true"></i>
-                  <strong>Email</strong>
+                  <strong>{t('contact.email')}</strong>
                 </div>
                 <p>
                   <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a>
@@ -73,7 +72,7 @@ const Contact: React.FC = () => {
               <div className="detail-item">
                 <div className="detail-header">
                   <i className="fa-solid fa-phone contact-icon" aria-hidden="true"></i>
-                  <strong>Teléfono</strong>
+                  <strong>{t('contact.phone')}</strong>
                 </div>
                 <p>
                   <a href="tel:4929421780">(492) 942 1780</a>
@@ -84,20 +83,20 @@ const Contact: React.FC = () => {
           <div className="contact-form-container">
             {status === 'success' ? (
               <div className="success-message">
-                <h3>¡Mensaje enviado con éxito!</h3>
-                <p>Nos pondremos en contacto con usted a la brevedad posible.</p>
+                <h3>{t('contact.success_title')}</h3>
+                <p>{t('contact.success_text')}</p>
                 <Button
                   onClick={() => {
                     setStatus('idle');
                   }}
                 >
-                  Enviar otro mensaje
+                  {t('contact.send_another')}
                 </Button>
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="name">Nombre</label>
+                  <label htmlFor="name">{t('contact.form.name')}</label>
                   <div className="form-input-wrapper">
                     <i className="fa-solid fa-user input-icon" aria-hidden="true"></i>
                     <input
@@ -105,12 +104,12 @@ const Contact: React.FC = () => {
                       id="name"
                       name="name"
                       required
-                      placeholder="Su nombre completo"
+                      placeholder={t('contact.form.name_placeholder')}
                     />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="company">Empresa</label>
+                  <label htmlFor="company">{t('contact.form.company')}</label>
                   <div className="form-input-wrapper">
                     <i className="fa-solid fa-building input-icon" aria-hidden="true"></i>
                     <input
@@ -118,7 +117,7 @@ const Contact: React.FC = () => {
                       id="company"
                       name="company"
                       required
-                      placeholder="Nombre de su empresa"
+                      placeholder={t('contact.form.company_placeholder')}
                     />
                   </div>
                 </div>
@@ -132,34 +131,34 @@ const Contact: React.FC = () => {
                         id="email"
                         name="email"
                         required
-                        placeholder="correo@empresa.com"
+                        placeholder={t('contact.form.email_placeholder')}
                       />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="phone">Teléfono</label>
+                    <label htmlFor="phone">{t('contact.phone')}</label>
                     <div className="form-input-wrapper">
                       <i className="fa-solid fa-phone-flip input-icon" aria-hidden="true"></i>
-                      <input type="tel" id="phone" name="phone" placeholder="(492) 942 1780" />
+                      <input type="tel" id="phone" name="phone" placeholder={t('contact.form.phone_placeholder')} />
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">Mensaje / Requerimiento</label>
+                  <label htmlFor="message">{t('contact.form.message')}</label>
                   <div className="form-input-wrapper">
                     <i className="fa-solid fa-pen-nib input-icon textarea-icon" aria-hidden="true"></i>
                     <textarea
                       id="message"
                       name="message"
                       rows={4}
-                      placeholder="Detalle su solicitud aquí..."
+                      placeholder={t('contact.form.message_placeholder')}
                       required
                     ></textarea>
                   </div>
                 </div>
                 <div className="form-checkbox">
                   <input type="checkbox" id="consent" name="consent" />
-                  <label htmlFor="consent">Deseo que me contacten para cotización</label>
+                  <label htmlFor="consent">{t('contact.form.consent')}</label>
                 </div>
                 {status === 'error' && (
                   <p className="error-text" style={{ color: 'red', marginBottom: '15px' }}>
@@ -167,7 +166,7 @@ const Contact: React.FC = () => {
                   </p>
                 )}
                 <Button className="submit-btn" variant="primary">
-                  {status === 'submitting' ? 'Enviando...' : 'Enviar solicitud'}
+                  {status === 'submitting' ? t('contact.form.submitting') : t('contact.form.submit')}
                 </Button>
               </form>
             )}
