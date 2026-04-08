@@ -5,15 +5,15 @@ import esTranslations from '../locales/es.json';
 // Helper to resolve nested keys in translations
 const getTranslation = (key: string) => {
   const parts = key.split('.');
-  let value: any = esTranslations;
+  let value: unknown = esTranslations;
   for (const part of parts) {
-    if (value && typeof value === 'object') {
-      value = value[part];
+    if (value && typeof value === 'object' && part in value) {
+      value = (value as Record<string, unknown>)[part];
     } else {
       return key;
     }
   }
-  return value || key;
+  return (value as string) || key;
 };
 
 vi.mock('react-i18next', () => ({
