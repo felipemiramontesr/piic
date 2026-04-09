@@ -16,9 +16,7 @@ const PolicyCard: React.FC<PolicyCardProps> = ({ icon, title, children }) => (
       </div>
       <h2>{title}</h2>
     </div>
-    <div className="policy-body">
-      {children}
-    </div>
+    <div className="policy-body">{children}</div>
   </div>
 );
 
@@ -34,35 +32,47 @@ const PrivacyPolicy: React.FC = () => {
       <main className="privacy-container">
         <div className="privacy-hero">
           <h1>Política de uso, tratamiento de información y cookies</h1>
-          <p>Transparencia en el uso y protección de sus datos personales bajo la normativa mexicana.</p>
+          <p>
+            Transparencia en el uso y protección de sus datos personales bajo la normativa mexicana.
+          </p>
           <p className="last-update">Última actualización: Enero 2026. PIIC - Zacatecas, México.</p>
         </div>
 
         <div className="policy-grid">
           <PolicyCard icon="fa-solid fa-file-contract" title="1. Términos de Uso">
             <p>
-              Al acceder a este sitio web de PIIC (Proyectos Integrales de Ingeniería y Control), usted acepta cumplir con estos términos de servicio, todas las leyes y regulaciones aplicables.
+              Al acceder a este sitio web de PIIC (Proyectos Integrales de Ingeniería y Control),
+              usted acepta cumplir con estos términos de servicio, todas las leyes y regulaciones
+              aplicables.
             </p>
             <p>
-              Los materiales contenidos en este sitio web están protegidos por las leyes de derechos de autor y marcas comerciales aplicables. El uso no autorizado de cualquier material puede violar leyes de propiedad intelectual.
+              Los materiales contenidos en este sitio web están protegidos por las leyes de derechos
+              de autor y marcas comerciales aplicables. El uso no autorizado de cualquier material
+              puede violar leyes de propiedad intelectual.
             </p>
           </PolicyCard>
 
           <PolicyCard icon="fa-solid fa-user-shield" title="2. Aviso de Privacidad">
             <p>
-              Su privacidad es fundamental para nosotros. Es política de PIIC respetar su privacidad respecto a cualquier información que podamos recopilar en nuestro sitio web.
+              Su privacidad es fundamental para nosotros. Es política de PIIC respetar su privacidad
+              respecto a cualquier información que podamos recopilar en nuestro sitio web.
             </p>
             <p>
-              Solo solicitamos información personal cuando realmente la necesitamos para brindarle un servicio. Lo hacemos por medios justos y legales, con su conocimiento y consentimiento previo.
+              Solo solicitamos información personal cuando realmente la necesitamos para brindarle
+              un servicio. Lo hacemos por medios justos y legales, con su conocimiento y
+              consentimiento previo.
             </p>
             <p>
-              No compartimos información de identificación personal públicamente o con terceros, excepto cuando sea estrictamente requerido por la ley o para la prestación de un servicio solicitado explícitamente.
+              No compartimos información de identificación personal públicamente o con terceros,
+              excepto cuando sea estrictamente requerido por la ley o para la prestación de un
+              servicio solicitado explícitamente.
             </p>
           </PolicyCard>
 
           <PolicyCard icon="fa-solid fa-cookie-bite" title="3. Política de Cookies">
             <p>
-              Este sitio utiliza cookies para optimizar la navegación técnica. Una cookie es un pequeño archivo almacenado en su dispositivo que nos permite reconocer su sesión.
+              Este sitio utiliza cookies para optimizar la navegación técnica. Una cookie es un
+              pequeño archivo almacenado en su dispositivo que nos permite reconocer su sesión.
             </p>
             <p>Nuestras cookies se utilizan para:</p>
             <ul className="policy-list">
@@ -71,39 +81,55 @@ const PrivacyPolicy: React.FC = () => {
               <li>Asegurar la integridad de las sesiones de navegación.</li>
             </ul>
             <p>
-              Usted puede modificar la configuración de su navegador para rechazar las cookies si lo prefiere, aunque esto podría afectar la funcionalidad de algunas secciones.
+              Usted puede modificar la configuración de su navegador para rechazar las cookies si lo
+              prefiere, aunque esto podría afectar la funcionalidad de algunas secciones.
             </p>
           </PolicyCard>
 
           <PolicyCard icon="fa-solid fa-scale-balanced" title="4. Derechos ARCO (LFPDPPP)">
             <p>
-              De acuerdo con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (México), usted cuenta con los derechos ARCO:
+              De acuerdo con la Ley Federal de Protección de Datos Personales en Posesión de los
+              Particulares (México), usted cuenta con los derechos ARCO:
             </p>
             <ul className="policy-list arco-list">
-              <li><strong>Acceso:</strong> Conocer qué datos personales tenemos y para qué los utilizamos.</li>
-              <li><strong>Rectificación:</strong> Solicitar la corrección de su información en caso de que esté desactualizada o sea inexacta.</li>
-              <li><strong>Cancelación:</strong> Solicitar que eliminemos sus datos de nuestros registros cuando considere que no están siendo utilizados adecuadamente.</li>
-              <li><strong>Oposición:</strong> Oponerse al uso de sus datos personales para fines específicos.</li>
+              <li>
+                <strong>Acceso:</strong> Conocer qué datos personales tenemos y para qué los
+                utilizamos.
+              </li>
+              <li>
+                <strong>Rectificación:</strong> Solicitar la corrección de su información en caso de
+                que esté desactualizada o sea inexacta.
+              </li>
+              <li>
+                <strong>Cancelación:</strong> Solicitar que eliminemos sus datos de nuestros
+                registros cuando considere que no están siendo utilizados adecuadamente.
+              </li>
+              <li>
+                <strong>Oposición:</strong> Oponerse al uso de sus datos personales para fines
+                específicos.
+              </li>
             </ul>
             <p>
-              Para ejercer cualquiera de estos derechos, envíe una solicitud formal al correo oficial de contacto detallado abajo.
+              Para ejercer cualquiera de estos derechos, envíe una solicitud formal al correo
+              oficial de contacto detallado abajo.
             </p>
           </PolicyCard>
 
           <PolicyCard icon="fa-solid fa-envelope-open-text" title="5. Contacto Oficial">
             <p>
-              Para cualquier duda, aclaración o solicitud relacionada con sus datos personales y derechos ARCO, favor de dirigirse a:
+              Para cualquier duda, aclaración o solicitud relacionada con sus datos personales y
+              derechos ARCO, favor de dirigirse a:
             </p>
             <div className="contact-highlight">
               <i className="fa-solid fa-envelope"></i>
               <a href="mailto:contacto@piic.com.mx">contacto@piic.com.mx</a>
             </div>
             <p>
-              Atenderemos su solicitud conforme a los tiempos y procesos establecidos por la ley vigente.
+              Atenderemos su solicitud conforme a los tiempos y procesos establecidos por la ley
+              vigente.
             </p>
           </PolicyCard>
         </div>
-
       </main>
 
       <Footer hideNavigation={true} />

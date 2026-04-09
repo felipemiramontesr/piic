@@ -1,5 +1,5 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
@@ -9,12 +9,8 @@ const About: React.FC = () => {
         <div className="about-grid">
           <div className="about-text">
             <h2>{t('about.title')}</h2>
-            <p>
-              {t('about.p1')}
-            </p>
-            <p>
-              {t('about.p2')}
-            </p>
+            <p>{t('about.p1')}</p>
+            <p>{t('about.p2')}</p>
           </div>
           <div className="about-image">
             <img

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Button from '../components/Button';
-import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import Button from '../components/Button';
 
 interface HeaderProps {
   showCta?: boolean;
@@ -41,7 +41,11 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
       <div className="container header-container">
         <div className="logo">
           <a href={simpleMode ? 'https://piic.com.mx/' : '#inicio'}>
-            <svg className="logo-icon animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <svg
+              className="logo-icon animated-logo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+            >
               <defs>
                 <clipPath id="logoMask">
                   <circle cx="50" cy="50" r="45" />
@@ -52,13 +56,37 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
               <rect x="0" y="0" width="50" height="100" fill="#0F2A44" clipPath="url(#logoMask)" />
 
               {/* Capa 2: Fase 2 - Sol crece desde el centro hacia la izquierda */}
-              <rect className="sun-grow-left-v5" x="50" y="0" width="0" height="100" fill="#F2B705" clipPath="url(#logoMask)" />
+              <rect
+                className="sun-grow-left-v5"
+                x="50"
+                y="0"
+                width="0"
+                height="100"
+                fill="#F2B705"
+                clipPath="url(#logoMask)"
+              />
 
               {/* Capa 3: Fase 3 - Luna Llena entra desde la derecha */}
-              <rect className="luna-full-rl-v5" x="100" y="0" width="100" height="100" fill="#0F2A44" clipPath="url(#logoMask)" />
+              <rect
+                className="luna-full-rl-v5"
+                x="100"
+                y="0"
+                width="100"
+                height="100"
+                fill="#0F2A44"
+                clipPath="url(#logoMask)"
+              />
 
               {/* Capa 4: Fase 4 - Sol Restauración entra desde la derecha */}
-              <rect className="sol-half-rl-v5" x="100" y="0" width="50" height="100" fill="#F2B705" clipPath="url(#logoMask)" />
+              <rect
+                className="sol-half-rl-v5"
+                x="100"
+                y="0"
+                width="50"
+                height="100"
+                fill="#F2B705"
+                clipPath="url(#logoMask)"
+              />
 
               {/* Borde Amarillo (Estatico) */}
               <circle cx="50" cy="50" r="45" fill="none" stroke="#F2B705" strokeWidth="10" />
@@ -79,18 +107,48 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           <>
             <nav className="nav">
               <ul className="nav-list">
-                <li><a href="#inicio"><i className="fa-solid fa-house"></i> {t('nav.home')}</a></li>
-                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> {t('nav.about')}</a></li>
+                <li>
+                  <a href="#inicio">
+                    <i className="fa-solid fa-house"></i> {t('nav.home')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#quienes-somos">
+                    <i className="fa-solid fa-users-gear"></i> {t('nav.about')}
+                  </a>
+                </li>
                 <li className="dropdown">
-                  <span className="dropdown-trigger"><i className="fa-solid fa-gears"></i> {t('nav.services')} <i className="fa-solid fa-chevron-down" style={{ fontSize: '10px', marginLeft: '5px' }}></i></span>
+                  <span className="dropdown-trigger">
+                    <i className="fa-solid fa-gears"></i> {t('nav.services')}{' '}
+                    <i
+                      className="fa-solid fa-chevron-down"
+                      style={{ fontSize: '10px', marginLeft: '5px' }}
+                    ></i>
+                  </span>
                   <ul className="dropdown-menu">
-                    <li><a href="#servicios">Servicios Industriales</a></li>
-                    <li><a href="#transformacion">Transformación Digital</a></li>
+                    <li>
+                      <a href="#servicios">Servicios Industriales</a>
+                    </li>
+                    <li>
+                      <a href="#transformacion">Transformación Digital</a>
+                    </li>
                   </ul>
                 </li>
-                <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
-                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> {t('nav.proceso', 'Proceso')}</a></li>
-                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}</a></li>
+                <li>
+                  <a href="#por-que-piic">
+                    <i className="fa-solid fa-circle-question"></i> Por Qué PIIC
+                  </a>
+                </li>
+                <li>
+                  <a href="#proceso">
+                    <i className="fa-solid fa-diagram-next"></i> {t('nav.proceso', 'Proceso')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#contacto">
+                    <i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}
+                  </a>
+                </li>
               </ul>
             </nav>
 
@@ -117,21 +175,56 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
               <div className="mobile-menu-content">
                 <nav className="mobile-nav">
                   <ul className="mobile-nav-list">
-                    <li><a href="#inicio" onClick={closeMenu}><i className="fa-solid fa-house"></i> {t('nav.home')}</a></li>
-                    <li><a href="#quienes-somos" onClick={closeMenu}><i className="fa-solid fa-users-gear"></i> {t('nav.about')}</a></li>
+                    <li>
+                      <a href="#inicio" onClick={closeMenu}>
+                        <i className="fa-solid fa-house"></i> {t('nav.home')}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#quienes-somos" onClick={closeMenu}>
+                        <i className="fa-solid fa-users-gear"></i> {t('nav.about')}
+                      </a>
+                    </li>
                     <li className="mobile-dropdown">
-                      <div className="mobile-dropdown-header" onClick={() => setIsServicesOpen(!isServicesOpen)}>
-                        <span><i className="fa-solid fa-gears"></i> {t('nav.services')}</span>
-                        <i className={`fa-solid fa-chevron-down toggle-icon ${isServicesOpen ? 'open' : ''}`}></i>
+                      <div
+                        className="mobile-dropdown-header"
+                        onClick={() => setIsServicesOpen(!isServicesOpen)}
+                      >
+                        <span>
+                          <i className="fa-solid fa-gears"></i> {t('nav.services')}
+                        </span>
+                        <i
+                          className={`fa-solid fa-chevron-down toggle-icon ${isServicesOpen ? 'open' : ''}`}
+                        ></i>
                       </div>
                       <ul className={`mobile-dropdown-menu ${isServicesOpen ? 'open' : ''}`}>
-                        <li><a href="#servicios" onClick={closeMenu}><i className="fa-solid fa-industry"></i> Industriales</a></li>
-                        <li><a href="#transformacion" onClick={closeMenu}><i className="fa-solid fa-microchip"></i> Digital</a></li>
+                        <li>
+                          <a href="#servicios" onClick={closeMenu}>
+                            <i className="fa-solid fa-industry"></i> Industriales
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#transformacion" onClick={closeMenu}>
+                            <i className="fa-solid fa-microchip"></i> Digital
+                          </a>
+                        </li>
                       </ul>
                     </li>
-                    <li><a href="#por-que-piic" onClick={closeMenu}><i className="fa-solid fa-circle-question"></i> Por Qué PIIC</a></li>
-                    <li><a href="#proceso" onClick={closeMenu}><i className="fa-solid fa-diagram-next"></i> {t('nav.proceso', 'Proceso')}</a></li>
-                    <li><a href="#contacto" onClick={closeMenu}><i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}</a></li>
+                    <li>
+                      <a href="#por-que-piic" onClick={closeMenu}>
+                        <i className="fa-solid fa-circle-question"></i> Por Qué PIIC
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#proceso" onClick={closeMenu}>
+                        <i className="fa-solid fa-diagram-next"></i> {t('nav.proceso', 'Proceso')}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#contacto" onClick={closeMenu}>
+                        <i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}
+                      </a>
+                    </li>
                   </ul>
                 </nav>
                 {showCta && (

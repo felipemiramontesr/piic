@@ -1,5 +1,5 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 interface FooterProps {
   hideNavigation?: boolean;
@@ -14,16 +14,34 @@ const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
         <div className="footer-grid">
           <div className="footer-info">
             <div className="footer-logo-wrapper">
-              <svg className="footer-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <svg
+                className="footer-logo-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+              >
                 <defs>
                   <clipPath id="footerLogoMask">
                     <circle cx="50" cy="50" r="45" />
                   </clipPath>
                 </defs>
                 {/* Fondo Amarillo */}
-                <rect x="0" y="0" width="100" height="100" fill="#F2B705" clipPath="url(#footerLogoMask)" />
+                <rect
+                  x="0"
+                  y="0"
+                  width="100"
+                  height="100"
+                  fill="#F2B705"
+                  clipPath="url(#footerLogoMask)"
+                />
                 {/* Mitad Izquierda Azul */}
-                <rect x="0" y="0" width="50" height="100" fill="#0F2A44" clipPath="url(#footerLogoMask)" />
+                <rect
+                  x="0"
+                  y="0"
+                  width="50"
+                  height="100"
+                  fill="#0F2A44"
+                  clipPath="url(#footerLogoMask)"
+                />
                 {/* Borde Amarillo */}
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#F2B705" strokeWidth="10" />
               </svg>
@@ -35,12 +53,36 @@ const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
             <div className="footer-nav">
               <h3>{t('nav.navigation_title')}</h3>
               <ul className="footer-nav-list">
-                <li><a href="#inicio"><i className="fa-solid fa-house"></i> {t('nav.home')}</a></li>
-                <li><a href="#quienes-somos"><i className="fa-solid fa-users-gear"></i> {t('nav.about')}</a></li>
-                <li><a href="#servicios"><i className="fa-solid fa-gears"></i> {t('nav.services')}</a></li>
-                <li><a href="#por-que-piic"><i className="fa-solid fa-circle-question"></i> {t('nav.why_us')}</a></li>
-                <li><a href="#proceso"><i className="fa-solid fa-diagram-next"></i> {t('nav.process')}</a></li>
-                <li><a href="#contacto"><i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}</a></li>
+                <li>
+                  <a href="#inicio">
+                    <i className="fa-solid fa-house"></i> {t('nav.home')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#quienes-somos">
+                    <i className="fa-solid fa-users-gear"></i> {t('nav.about')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#servicios">
+                    <i className="fa-solid fa-gears"></i> {t('nav.services')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#por-que-piic">
+                    <i className="fa-solid fa-circle-question"></i> {t('nav.why_us')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#proceso">
+                    <i className="fa-solid fa-diagram-next"></i> {t('nav.process')}
+                  </a>
+                </li>
+                <li>
+                  <a href="#contacto">
+                    <i className="fa-solid fa-envelope-open-text"></i> {t('nav.contact')}
+                  </a>
+                </li>
               </ul>
             </div>
           )}
@@ -56,11 +98,15 @@ const Footer: React.FC<FooterProps> = ({ hideNavigation = false }) => {
                 <i className="fa-solid fa-phone"></i> (492) 942 1780
               </a>
             </p>
-            <p className="footer-address">Av. Barones, 209, Colonia Las Americas, Guadalupe, Zacatecas.</p>
+            <p className="footer-address">
+              Av. Barones, 209, Colonia Las Americas, Guadalupe, Zacatecas.
+            </p>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} PIIC. {t('footer.rights')}</p>
+          <p>
+            &copy; {new Date().getFullYear()} PIIC. {t('footer.rights')}
+          </p>
           <p style={{ marginTop: '10px' }}>
             <a href="/politicas" className="footer-policy-link">
               {t('footer.policy')}

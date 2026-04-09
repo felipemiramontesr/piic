@@ -28,3 +28,7 @@ public/config.php
 
 *storybook.log
 storybook-static
+
+# Coverage
+coverage
+coverage/

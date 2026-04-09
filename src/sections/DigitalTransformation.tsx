@@ -1,5 +1,5 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const DigitalTransformation: React.FC = () => {
   const { t } = useTranslation();
@@ -8,7 +8,9 @@ const DigitalTransformation: React.FC = () => {
     <section id="transformacion" className="section digital-section">
       <div className="container">
         <div className="section-header tech-header">
-          <h2>{t('digital.title')} <span className="highlight">{t('digital.highlight')}</span></h2>
+          <h2>
+            {t('digital.title')} <span className="highlight">{t('digital.highlight')}</span>
+          </h2>
           <p>{t('digital.subtitle')}</p>
         </div>
 

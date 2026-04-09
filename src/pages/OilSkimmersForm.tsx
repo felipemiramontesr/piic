@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
+import mexicoData from '../data/mexico.json';
+import { useState, useEffect } from 'react';
 import Header from '../sections/Header';
 import Footer from '../sections/Footer';
-import mexicoData from '../data/mexico.json';
 import './OilSkimmersForm.css';
 
 const MEXICAN_STATES = Object.keys(mexicoData);
@@ -63,14 +63,14 @@ const initialFormState: FormData = {
 
 /**
  * OilSkimmersForm Component
- * 
+ *
  * A comprehensive technical questionnaire for industrial oil skimmer applications.
  * Features:
  * - Integration with SEPOMEX API for address validation.
  * - Dynamic state/city/neighborhood dependency logic.
  * - File upload handling (Drag & Drop + File Picker).
  * - Multi-step technical parameter collection.
- * 
+ *
  * @returns {JSX.Element} The rendered form component.
  */
 export default function OilSkimmersForm() {
@@ -265,7 +265,8 @@ export default function OilSkimmersForm() {
             {/* 1. Datos de la Empresa */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-building section-icon" aria-hidden="true"></i>1. Datos de la Empresa
+                <i className="fa-solid fa-building section-icon" aria-hidden="true"></i>1. Datos de
+                la Empresa
               </h3>
               <div className="form-grid">
                 <div className="form-group col-span-2">
@@ -400,7 +401,8 @@ export default function OilSkimmersForm() {
             {/* 2. Datos de Contacto */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-user-tie section-icon" aria-hidden="true"></i>2. Datos de Contacto
+                <i className="fa-solid fa-user-tie section-icon" aria-hidden="true"></i>2. Datos de
+                Contacto
               </h3>
               <div className="form-grid">
                 <div className="form-group col-span-2">
@@ -456,7 +458,8 @@ export default function OilSkimmersForm() {
             {/* 3. Información del Aceite */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-droplet section-icon" aria-hidden="true"></i>3. Información del Aceite
+                <i className="fa-solid fa-droplet section-icon" aria-hidden="true"></i>3.
+                Información del Aceite
               </h3>
               <div className="form-grid">
                 <div className="form-group col-span-2">
@@ -551,8 +554,8 @@ export default function OilSkimmersForm() {
             <div className="form-grid">
               <section className="form-section">
                 <h3>
-                  <i className="fa-solid fa-plug-circle-bolt section-icon" aria-hidden="true"></i>4. Información
-                  Eléctrica
+                  <i className="fa-solid fa-plug-circle-bolt section-icon" aria-hidden="true"></i>4.
+                  Información Eléctrica
                 </h3>
                 <div className="form-group">
                   <label>Voltaje disponible *</label>
@@ -585,7 +588,8 @@ export default function OilSkimmersForm() {
 
               <section className="form-section">
                 <h3>
-                  <i className="fa-solid fa-map-location-dot section-icon" aria-hidden="true"></i>5. Ubicación
+                  <i className="fa-solid fa-map-location-dot section-icon" aria-hidden="true"></i>5.
+                  Ubicación
                 </h3>
                 <div className="form-group">
                   <label>Entorno *</label>
@@ -620,7 +624,8 @@ export default function OilSkimmersForm() {
             {/* 6. Tipo de Contenedor */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-industry section-icon" aria-hidden="true"></i>6. Tipo de Contenedor *
+                <i className="fa-solid fa-industry section-icon" aria-hidden="true"></i>6. Tipo de
+                Contenedor *
               </h3>
               <div className="form-radio-group">
                 {['Laguna', 'Tanque', 'Acequia', 'Cisterna'].map((type) => (
@@ -660,7 +665,8 @@ export default function OilSkimmersForm() {
             {/* 7. Archivos */}
             <section className="form-section">
               <h3>
-                <i className="fa-solid fa-file-lines section-icon" aria-hidden="true"></i>7. Archivos de Apoyo
+                <i className="fa-solid fa-file-lines section-icon" aria-hidden="true"></i>7.
+                Archivos de Apoyo
               </h3>
               <p className="form-section-description">
                 Adjuntar planos, dibujos o fotografías de su proyecto actual nos ayudará a

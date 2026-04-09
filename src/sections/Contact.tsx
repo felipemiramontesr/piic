@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
+import React, { useState } from 'react';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -139,14 +139,22 @@ const Contact: React.FC = () => {
                     <label htmlFor="phone">{t('contact.phone')}</label>
                     <div className="form-input-wrapper">
                       <i className="fa-solid fa-phone-flip input-icon" aria-hidden="true"></i>
-                      <input type="tel" id="phone" name="phone" placeholder={t('contact.form.phone_placeholder')} />
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder={t('contact.form.phone_placeholder')}
+                      />
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="message">{t('contact.form.message')}</label>
                   <div className="form-input-wrapper">
-                    <i className="fa-solid fa-pen-nib input-icon textarea-icon" aria-hidden="true"></i>
+                    <i
+                      className="fa-solid fa-pen-nib input-icon textarea-icon"
+                      aria-hidden="true"
+                    ></i>
                     <textarea
                       id="message"
                       name="message"
@@ -166,7 +174,9 @@ const Contact: React.FC = () => {
                   </p>
                 )}
                 <Button className="submit-btn" variant="primary">
-                  {status === 'submitting' ? t('contact.form.submitting') : t('contact.form.submit')}
+                  {status === 'submitting'
+                    ? t('contact.form.submitting')
+                    : t('contact.form.submit')}
                 </Button>
               </form>
             )}

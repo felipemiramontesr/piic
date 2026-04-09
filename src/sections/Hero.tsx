@@ -1,6 +1,6 @@
-import React from 'react';
-import Button from '../components/Button';
 import { useTranslation } from 'react-i18next';
+import Button from '../components/Button';
+import React from 'react';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -9,9 +9,7 @@ const Hero: React.FC = () => {
       <div className="container hero-container">
         <div className="hero-content">
           <h1>{t('hero.title')}</h1>
-          <p className="hero-subtitle">
-            {t('hero.subtitle')}
-          </p>
+          <p className="hero-subtitle">{t('hero.subtitle')}</p>
           <div className="hero-actions">
             <Button href="#contacto" className="hero-btn">
               {t('hero.cta_quote')}

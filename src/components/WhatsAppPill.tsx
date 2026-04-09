@@ -7,7 +7,8 @@ interface WhatsAppPillProps {
 const WhatsAppPill: React.FC<WhatsAppPillProps> = ({ isCookieBannerVisible }) => {
   // Configuración de WhatsApp proporcionada
   const phoneNumber = '524929421780';
-  const rawMessage = 'hola, estoy interesado en recibir ayuda acerca de los productos y servicios de PIIC.';
+  const rawMessage =
+    'hola, estoy interesado en recibir ayuda acerca de los productos y servicios de PIIC.';
   const message = encodeURIComponent(rawMessage);
 
   const waLink = `https://wa.me/${phoneNumber}?text=${message}`;

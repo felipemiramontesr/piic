@@ -1,6 +1,6 @@
+import esTranslations from '../locales/es.json';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
-import esTranslations from '../locales/es.json';
 
 // Helper to resolve nested keys in translations
 const getTranslation = (key: string) => {

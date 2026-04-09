@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -8,11 +8,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          vendor: ['react', 'react-dom', 'react-router-dom'],
           'oil-skimmers': ['./src/pages/OilSkimmersForm.tsx'],
-        }
-      }
+        },
+      },
     },
-    chunkSizeWarningLimit: 600
-  }
-})
+    chunkSizeWarningLimit: 600,
+  },
+});

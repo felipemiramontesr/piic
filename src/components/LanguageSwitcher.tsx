@@ -1,5 +1,5 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
@@ -15,7 +15,7 @@ const LanguageSwitcher: React.FC = () => {
     <button className="lang-switcher" onClick={toggleLanguage} aria-label="Toggle Language">
       <i className="fa-solid fa-globe"></i>
       <span className="lang-text">{currentLang === 'es' ? 'EN' : 'ES'}</span>
-      
+
       <style>{`
         .lang-switcher {
           background: rgba(255, 255, 255, 0.1);
