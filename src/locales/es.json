@@ -148,6 +148,7 @@
   "cookies": {
     "text": "Utilizamos cookies propias y de terceros. Al continuar navegando, acepta esta política de uso, tratamiento de información y cookies.",
     "accept": "ACEPTAR",
+    "reject": "RECHAZAR",
     "policy_link_text": "política de uso, tratamiento de información y cookies"
   }
 }

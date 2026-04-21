@@ -148,6 +148,7 @@
   "cookies": {
     "text": "We use our own and third-party cookies. By continuing to browse, you accept our use policy, information processing and cookies policy.",
     "accept": "ACCEPT",
+    "reject": "REJECT",
     "policy_link_text": "use policy, information processing and cookies policy"
   }
 }

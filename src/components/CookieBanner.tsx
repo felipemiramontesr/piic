@@ -16,7 +16,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
 
   return (
     <div className="cookie-banner">
-      <div className="cookie-container">
+      <div className="container cookie-container">
         <div className="cookie-text">
           {t('cookies.text').split(t('cookies.policy_link_text'))[0]}
           {isPolicyPage ? (
@@ -28,9 +28,14 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
           )}
           {t('cookies.text').split(t('cookies.policy_link_text'))[1]}
         </div>
-        <button className="cookie-button" onClick={onAccept}>
-          {t('cookies.accept')}
-        </button>
+        <div className="cookie-buttons">
+          <button className="cookie-button cookie-button-secondary" onClick={onAccept}>
+            {t('cookies.reject')}
+          </button>
+          <button className="cookie-button cookie-button-primary" onClick={onAccept}>
+            {t('cookies.accept')}
+          </button>
+        </div>
       </div>
 
       <style>{`
@@ -40,57 +45,81 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
           left: 0;
           right: 0;
           background-color: var(--color-accent);
-          padding: 16px 24px;
+          border-top: 2px solid var(--color-primary);
+          padding: 20px 0;
           z-index: 9999;
-          box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-          animation: slideUp 0.5s ease-out;
+          box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+          animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cookie-container {
-          max-width: var(--container-max-width);
-          margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 20px;
+          gap: 40px;
         }
 
         .cookie-text {
           color: var(--color-primary);
           font-size: 14px;
-          line-height: 1.4;
+          line-height: 1.5;
           font-weight: 500;
+          max-width: 800px;
         }
 
         .cookie-link {
           color: var(--color-primary);
           text-decoration: underline;
-          font-weight: 700;
+          text-underline-offset: 2px;
+          font-weight: 600;
+          transition: opacity 0.3s ease;
         }
 
         .cookie-link:hover {
-          opacity: 0.8;
+          opacity: 0.7;
         }
         
         .cookie-copy-text {
-          font-weight: 700;
+          font-weight: 600;
+        }
+
+        .cookie-buttons {
+          display: flex;
+          gap: 12px;
+          align-items: center;
         }
 
         .cookie-button {
-          background-color: var(--color-primary);
-          color: var(--color-accent);
-          border: none;
-          padding: 8px 24px;
+          padding: 10px 24px;
           border-radius: 4px;
-          font-weight: 700;
+          font-weight: 800;
           font-size: 14px;
+          letter-spacing: 1px;
           transition: all 0.3s ease;
           white-space: nowrap;
+          text-transform: uppercase;
         }
 
-        .cookie-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .cookie-button-primary {
+          background-color: var(--color-primary);
+          color: var(--color-white);
+          border: 2px solid var(--color-primary);
+        }
+
+        .cookie-button-primary:hover {
+          background-color: transparent;
+          color: var(--color-primary);
+        }
+
+        .cookie-button-secondary {
+          background-color: var(--color-accent);
+          color: var(--color-primary);
+          border: 2px solid var(--color-primary);
+        }
+
+        .cookie-button-secondary:hover {
+          background-color: var(--color-primary);
+          color: var(--color-white);
         }
 
         @keyframes slideUp {
@@ -98,21 +127,32 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
           to { transform: translateY(0); }
         }
 
+        @media (max-width: 1024px) {
+          .cookie-container {
+            gap: 20px;
+          }
+        }
+
         @media (max-width: 768px) {
           .cookie-banner {
-            padding: 12px 16px;
+            padding: 16px 0;
           }
           .cookie-container {
             flex-direction: column;
             text-align: center;
-            gap: 10px;
+            gap: 16px;
           }
           .cookie-text {
             font-size: 13px;
           }
+          .cookie-buttons {
+            width: 100%;
+            flex-direction: column;
+            gap: 8px;
+          }
           .cookie-button {
             width: 100%;
-            padding: 6px 20px;
+            padding: 12px 20px;
           }
         }
       `}</style>
