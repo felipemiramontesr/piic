@@ -29,8 +29,8 @@ const WhatsAppPill: React.FC<WhatsAppPillProps> = ({ isCookieBannerVisible }) =>
       <style>{`
         .wa-pill {
           position: fixed;
-          bottom: ${isCookieBannerVisible ? '80px' : '20px'};
-          right: ${isCookieBannerVisible ? '10px' : '20px'}; /* Ajustado dinámicamente */
+          bottom: ${isCookieBannerVisible ? '140px' : '20px'};
+          right: 20px;
           background-color: var(--color-accent); /* Relleno amarillo corporativo */
           border: none; /* Los botones amarillos del sitio no tienen borde */
           border-radius: 4px; /* Mismo radio que el botón base */
@@ -45,8 +45,8 @@ const WhatsAppPill: React.FC<WhatsAppPillProps> = ({ isCookieBannerVisible }) =>
 
         @media (max-width: 768px) {
           .wa-pill {
-            bottom: ${isCookieBannerVisible ? '105px' : '20px'};
-            right: ${isCookieBannerVisible ? '10px' : '20px'};
+            bottom: ${isCookieBannerVisible ? '180px' : '20px'};
+            right: 20px;
           }
         }
 
