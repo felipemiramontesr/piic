@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
 
   return (
     <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
-      <div className="container header-container">
+      <div className="header-container">
         <div className="logo">
           <a href={simpleMode ? 'https://piic.com.mx/' : '#inicio'}>
             <svg
@@ -153,12 +153,12 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
             </nav>
 
             <div className="header-actions">
+              <LanguageSwitcher />
               {showCta && (
                 <div className="nav-cta">
                   <Button href="#contacto">{t('hero.cta_quote')}</Button>
                 </div>
               )}
-              <LanguageSwitcher />
 
               {/* Hamburger Trigger */}
               <button
@@ -260,9 +260,11 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
           background-color: #12304d;
         }
         .header-container {
+          width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: 0 40px;
           position: relative;
         }
         .logo {
