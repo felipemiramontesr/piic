@@ -304,7 +304,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         }
         .nav-list {
           display: flex;
-          gap: 32px;
+          gap: 48px;
         }
         .nav-list a {
           font-size: 15px;
@@ -374,7 +374,7 @@ const Header: React.FC<HeaderProps> = ({ showCta = true, simpleMode = false }) =
         .header-actions {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 32px;
         }
         .menu-trigger {
           display: none;
