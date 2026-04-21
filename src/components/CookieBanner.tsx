@@ -16,7 +16,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
 
   return (
     <div className="cookie-banner">
-      <div className="container cookie-container">
+      <div className="cookie-container">
         <div className="cookie-text-wrapper">
           <div className="cookie-text">
             {t('cookies.text').split(t('cookies.policy_link_text'))[0]}
@@ -47,7 +47,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
           left: 0;
           right: 0;
           background-color: var(--color-accent);
-          border-top: 4px solid var(--color-primary);
+          border-top: 1px solid var(--color-primary);
           padding: 24px 0;
           z-index: 9999;
           box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.2);
@@ -55,9 +55,11 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
         }
 
         .cookie-container {
+          width: 100%;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          padding: 0 40px;
           gap: 60px;
         }
 
@@ -142,6 +144,7 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ isVisible, onAccept }) => {
           }
            .cookie-container {
             gap: 30px;
+            padding: 0 24px;
           }
         }
 
