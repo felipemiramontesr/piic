@@ -4,12 +4,12 @@ import React from 'react';
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
 
+  const currentLang = (i18n.language || 'es').split('-')[0];
+
   const toggleLanguage = () => {
-    const newLang = i18n.language === 'es' ? 'en' : 'es';
+    const newLang = currentLang === 'es' ? 'en' : 'es';
     i18n.changeLanguage(newLang);
   };
-
-  const currentLang = (i18n.language || 'es').split('-')[0]; // Handle cases like 'es-ES'
 
   return (
     <button className="lang-switcher" onClick={toggleLanguage} aria-label="Toggle Language">
