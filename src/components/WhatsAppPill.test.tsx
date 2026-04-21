@@ -21,7 +21,7 @@ describe('WhatsAppPill', () => {
     // In a world-class repo, we might use a CSS-in-JS library that allows better testing,
     // but here we check for the link's existence.
     expect(screen.getByLabelText('Contactar por WhatsApp')).toBeInTheDocument();
-    expect(style?.textContent).toContain('bottom: 80px');
+    expect(style?.textContent).toContain('bottom: 140px');
   });
 
   it('renders with default position when cookie banner is hidden', () => {
