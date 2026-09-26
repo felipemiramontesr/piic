@@ -13,6 +13,13 @@
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 require_once 'config.php';
 require_once 'SimpleSMTP.php';
@@ -21,6 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
     exit;
+}
+
+$raw_input = file_get_contents('php://input');
+if (!empty($raw_input)) {
+    $json = json_decode($raw_input, true);
+    if (is_array($json)) {
+        $_POST = array_merge($_POST, $json);
+    }
 }
 
 // 1. Capture Form Fields

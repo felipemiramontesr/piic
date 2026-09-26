@@ -12,6 +12,13 @@
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 require_once 'config.php';
 require_once 'SimpleSMTP.php';
@@ -23,15 +30,34 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // 1. Capture and Sanitize
-$name = htmlspecialchars($_POST['name'] ?? '');
-$company = htmlspecialchars($_POST['company'] ?? '');
-$email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
-$phone = htmlspecialchars($_POST['phone'] ?? '');
-$message_content = htmlspecialchars($_POST['message'] ?? '');
+// Handle both JSON payload (application/json) and FormData/URL-encoded ($_POST)
+$data = $_POST;
+$raw_input = file_get_contents('php://input');
+if (!empty($raw_input)) {
+    $json = json_decode($raw_input, true);
+    if (is_array($json)) {
+        $data = array_merge($data, $json);
+    }
+}
+
+$name = htmlspecialchars(trim($data['name'] ?? ''));
+$company = htmlspecialchars(trim($data['company'] ?? ''));
+$email = filter_var(trim($data['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+$phone = htmlspecialchars(trim($data['phone'] ?? ''));
+$message_content = htmlspecialchars(trim($data['message'] ?? ''));
+
+$consent_val = $data['consent'] ?? false;
+$consent_str = ($consent_val === true || $consent_val === 'true' || $consent_val === 'on' || $consent_val === '1' || $consent_val === 1) ? 'Sí' : 'No';
 
 if (empty($name) || empty($email) || empty($message_content)) {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Missing required fields']);
+    exit;
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid email address']);
     exit;
 }
 
@@ -57,6 +83,7 @@ $html_body = "
                 <tr><td style='padding: 10px 0; border-bottom: 1px solid #eee;'><strong>Empresa:</strong></td><td style='padding: 10px 0; border-bottom: 1px solid #eee;'>$company</td></tr>
                 <tr><td style='padding: 10px 0; border-bottom: 1px solid #eee;'><strong>Email:</strong></td><td style='padding: 10px 0; border-bottom: 1px solid #eee;'>$email</td></tr>
                 <tr><td style='padding: 10px 0; border-bottom: 1px solid #eee;'><strong>Teléfono:</strong></td><td style='padding: 10px 0; border-bottom: 1px solid #eee;'>$phone</td></tr>
+                <tr><td style='padding: 10px 0; border-bottom: 1px solid #eee;'><strong>¿Solicita cotización?:</strong></td><td style='padding: 10px 0; border-bottom: 1px solid #eee;'>$consent_str</td></tr>
             </table>
             <div style='margin-top: 20px; padding: 15px; background-color: #f8fafc; border-radius: 4px;'>
                 <strong style='display: block; margin-bottom: 10px;'>Mensaje:</strong>
